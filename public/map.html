@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- TITLE -->
+    <title>APP</title>
+    <!-- ENCODING -->
+    <meta charset="utf-8" />
+    <!-- DOCUMENT AREA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- DESCRIPTION -->
+    <meta name=" description"
+        content="Aplicação para auxiliar a identificação e localização de animais em situação de risco">
+    <!-- KEYWORDS -->
+    <meta name="keywords"
+        content="animais, abandonados, aplicativo, ONGs, protetores, identificação, localização, resgate">
+    <!-- DEFAULT DOCUMENT -->
+    <meta name="robots" content="index, follow">
+    <!-- AUTHOR -->
+    <meta name="author" content="Ana Carolina e Diego">
+    <!-- THEME COLOR -->
+    <meta name="theme-color" content="#424242" />
+    <!-- MATERIAL DESIGN LITE FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- ROBOTO FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- MATERIAL DESIGN LITE CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/material.min.css" />
+    <!-- APP CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/app.css" />
+    <!-- HERE -->
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1549984893" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-clustering.js"></script>
+    <!-- ICON -->
+    <link rel="apple-touch-icon" sizes="72x72" href="fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png">
+    <link rel="mask-icon" href="fav/safari-pinned-tab.svg" color="#424242">
+    <meta name="msapplication-TileColor" content="#424242">
+    <!-- MANIFEST -->
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        .pet_list {
+            margin: 5%;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body style="background-color: #eee">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+    mdl-layout--fixed-tabs">
+        <!-- TOOLBAR -->
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- TITLE -->
+                <span class="mdl-layout-title">Pet Resgate</span>
+                <div class="mdl-layout-spacer"></div>
+                <!-- CLUSTER BUTTON => app_cluster -->
+                <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 10px;">
+                    <i class="material-icons" id="app_cluster">group_work</i>
+                </button>
+                <!-- FILTER BUTTON => app_filter -->
+                <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 10px;">
+                    <i class="material-icons" id="app_filter">filter_list</i>
+                </button>
+                <!-- HELP BUTTON => app_help -->
+                <button class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons" id="app_help">help</i>
+                </button>
+            </div>
+            <!-- TABS -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a id="tab_map" href="#fixed-tab-1" class="mdl-layout__tab is-active">Mapa</a>
+                <a id="tab_list" href="#fixed-tab-2" class="mdl-layout__tab">Lista</a>
+                <a id="tab_add" href="#fixed-tab-3" class="mdl-layout__tab">Adicionar</a>
+            </div>
+        </header>
+        <!-- MENU -->
+        <div class="mdl-layout__drawer">
+            <!-- TITLE -->
+            <span class="mdl-layout-title">MENU</span>
+            <!-- ITEMS -->
+            <nav class="mdl-navigation">
+                <p class="mdl-navigation__link">Perfil</p>
+                <p class="mdl-navigation__link">Créditos</p>
+                <p class="mdl-navigation__link">Sair</p>
+            </nav>
+        </div>
+        <!-- MAIN CONTENT -->
+        <main class="mdl-layout__content">
+            <!-- MAP SECTION -->
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                <div class="page-content">
+                    <div id="map" style="position: fixed; width: 100%; height: calc(100% - 104px); background: #eee">
+                    </div>
+                </div>
+            </section>
+            <!-- LIST SECTION -->
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2" style="display: none;">
+                <div class="page-content">
+                    <!-- LOGIN CARD -->
+                    <div id="list_content" class="app-card-wide mdl-card mdl-shadow--4dp"
+                        style="margin: 5%; width: 90%;">
+                        <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
+                            <!-- PET LIST TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
+                                Lista ordenada conforme a data em que os animais foram adicionados:
+                            </div>
+                            <ul class="pet_list mdl-list">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ADD ANIMAL SECTION -->
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3" style="display: none;">
+                <div class=" page-content">
+                    <div id="add_content" class="app-card-wide mdl-card mdl-shadow--4dp"
+                        style="margin: 5%; width: 90%;">
+                        <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
+                            <!-- PET NAME TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Favor informar o nome que o animal atende ou um novo nome de sua preferência *:
+                            </div>
+                            <!-- PET NAME INPUT => pet_nickname -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                                style="width: 70%; align-self: center;">
+                                <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="15">
+                                <label class="mdl-textfield__label" for="user_name">Nome ou apelido</label>
+                            </div>
+                            <!-- PET TYPE TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Favor informar o tipo do animal *:
+                            </div>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type1"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="pet_type1" class="mdl-radio__button" name="pet_type"
+                                    value="Cachorro" checked>
+                                <span class="mdl-radio__label">Cachorro</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type2"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="pet_type2" class="mdl-radio__button" name="pet_type"
+                                    value="Gato">
+                                <span class="mdl-radio__label">Gato</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type3"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="pet_type3" class="mdl-radio__button" name="pet_type"
+                                    value="Outro">
+                                <span class="mdl-radio__label">Outro</span>
+                            </label>
+                            <!-- PET COLOR TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                Favor informar as cores do animal *:
+                            </div>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color1"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color1" class="mdl-checkbox__input" name="pet_color"
+                                    value="branco">
+                                <span class="mdl-checkbox__label">Branco</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color2"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color2" class="mdl-checkbox__input" name="pet_color"
+                                    value="cinza">
+                                <span class="mdl-checkbox__label">Cinza</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color3"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color3" class="mdl-checkbox__input" name="pet_color"
+                                    value="preto">
+                                <span class="mdl-checkbox__label">Preto</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color4"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color4" class="mdl-checkbox__input" name="pet_color"
+                                    value="marrom">
+                                <span class="mdl-checkbox__label">Marrom</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color5"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color5" class="mdl-checkbox__input" name="pet_color"
+                                    value="amarelo">
+                                <span class="mdl-checkbox__label">Amarelo</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color6"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color6" class="mdl-checkbox__input" name="pet_color"
+                                    value="laranja">
+                                <span class="mdl-checkbox__label">Laranja</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color7"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color7" class="mdl-checkbox__input" name="pet_color"
+                                    value="verde">
+                                <span class="mdl-checkbox__label">Verde</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color8"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="pet_color8" class="mdl-checkbox__input" name="pet_color"
+                                    value="azul">
+                                <span class="mdl-checkbox__label">Azul</span>
+                            </label>
+                            <!-- PET CONDITION TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Favor informar as condições do animal (Marcar se a resposta for sim):
+                            </div>
+                            <!-- PET INJURED -->
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_injured"
+                                style="width: 70%; align-self: center; margin-bottom: 16px; height: auto">
+                                <input type="checkbox" id="pet_injured" class="mdl-checkbox__input"
+                                    name="pet_condition">
+                                <span class="mdl-checkbox__label">O animal parece estar machucado?</span>
+                            </label>
+                            <!-- PET SICK -->
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_sick"
+                                style="width: 70%; align-self: center; margin-bottom: 16px; height: auto">
+                                <input type="checkbox" id="pet_sick" class="mdl-checkbox__input" name="pet_condition">
+                                <span class=" mdl-checkbox__label">O animal parece estar doente?</span>
+                            </label>
+                            <!-- PET FED -->
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_fed"
+                                style="width: 70%; align-self: center; margin-bottom: 16px; height: auto">
+                                <input type="checkbox" id="pet_fed" class="mdl-checkbox__input" name="pet_condition">
+                                <span class=" mdl-checkbox__label">O animal parece estar mal alimentado?</span>
+                            </label>
+                            <!-- PET DESCRIPTION TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
+                                Favor fazer uma breve descrição do animal e do local onde ele se encontra *:
+                            </div>
+                            <!-- PET DESCRIPTION TEXT AREA => pet_description -->
+                            <div class="mdl-textfield mdl-js-textfield" style="width: 70%; align-self: center;">
+                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="pet_description"
+                                    style="resize: none; height: 80px;"></textarea>
+                                <label class="mdl-textfield__label" for="pet_description">Descrição</label>
+                            </div>
+                            <!-- PET PICTURE TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                Favor tirar uma foto do animal *:
+                            </div>
+                            <!-- PET PICTURE => pet_picture -->
+                            <label for="pet_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                <input type="file" accept="image/*" capture="camera" id="pet_picture"
+                                    style="display: none;">
+                                <i class="material-icons">photo</i>
+                            </label>
+                            <canvas id="pet_frame"
+                                style="width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 2px solid #757575"></canvas>
+                            <!-- PET ADDRESS TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
+                                Endereço aproximado (O endereço é preenchido automaticamente):
+                            </div>
+                            <!-- PET ADDRESS TEXT AREA => pet_address -->
+                            <div id="div_address" class="mdl-textfield mdl-js-textfield"
+                                style="width: 70%; align-self: center;">
+                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="pet_address"
+                                    style="resize: none; height: 80px;" disabled></textarea>
+                                <label class="mdl-textfield__label" for="pet_address">Endereço</label>
+                            </div>
+                            <!-- REGISTER BUTTON => app_register -->
+                            <button id="app_register"
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                style="width: 45%; align-self: center; margin-bottom: 16px;">
+                                Cadastrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- SNACKBAR -->
+    <div id="app_snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action"></button>
+    </div>
+
+    <!-- DIALOG -->
+    <div id="app_dialog" class="flex_box dialog_background">
+        <div class="flex_box box_shadow">
+            <h1 class="unselected">Title</h1>
+            <div class="flex_box">
+                <p class="unselected">Message</p>
+            </div>
+            <div class="flex_box"></div>
+        </div>
+    </div>
+
+    <!-- LOADING -->
+    <div id="app_loading" class="flex_box loading_background">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner"></div>
+    </div>
+
+    <!-- FLOAT BUTTON -->
+    <button id="app_float"
+        class="float_button dl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+        <i class="material-icons">keyboard_arrow_down</i>
+    </button>
+
+    <!-- FILTER -->
+    <div id="app_divFilter" class="flex_box dialog_background">
+        <div class="flex_box box_shadow">
+            <h1 class="unselected">Filtro</h1>
+            <div style="height: 230px; display: flex; flex-direction: column;">
+                <p style="margin-bottom: 16px">Tipo de animal:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_divType1"
+                    style="width: 70%; align-self: center; margin-bottom: 16px;">
+                    <input type="radio" id="pet_divType1" class="mdl-radio__button" name="pet_typeF" value="Cachorro"
+                        checked>
+                    <span class="mdl-radio__label">Cachorro</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_divType2"
+                    style="width: 70%; align-self: center; margin-bottom: 16px;">
+                    <input type="radio" id="pet_divType2" class="mdl-radio__button" name="pet_typeF" value="Gato">
+                    <span class="mdl-radio__label">Gato</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_divType3"
+                    style="width: 70%; align-self: center; margin-bottom: 16px;">
+                    <input type="radio" id="pet_divType3" class="mdl-radio__button" name="pet_typeF" value="Outro">
+                    <span class="mdl-radio__label">Outro</span>
+                </label>
+                <p style="margin-bottom: 16px">Distância (m):</p>
+                <span style="width: 70%; align-self: center; display: flex; justify-content: center;">
+                    <button style="margin: 0 20px; font-size: 1.5em">+</button>
+                    <p>100</p>
+                    <button style="margin: 0 20px; font-size: 1.5em">-</button>
+                </span>
+
+            </div>
+            <div class="flex_box">
+                <button>CANCELAR</button>
+                <button>OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MATERIAL DESIGN LITE SCRIPT -->
+    <script src="scripts/material.min.js"></script>
+    <!-- APP SCRIPT -->
+    <script src="scripts/app.js"></script>
+    <!-- HERE SCRIPT -->
+    <script src="scripts/here.js"></script>
+    <!-- MAP SCRIPT -->
+    <script src="scripts/map.js"></script>
+</body>
+
+</html>

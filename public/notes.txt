@@ -1,0 +1,272 @@
+// showDialog({
+//     element: dialog,
+//     title: 'Ajuda',
+//     message: 'Favor preencher corretamente todos os campos marcados como obrigatório (*).\n\nPara preencher o campo Endereço deve-se informar um CEP conhecido e clicar na opção OBTER ENDEREÇO POR CEP ou clicar na opção OBTER ENDEREÇO POR LOCALIZAÇÃO para preencher o campo com a localização atual.',
+//     btn_ok() { hideDialog(dialog) },
+//     btn_no() { alert('não') },
+//     btn_yes() { alert('sim') }
+// });
+
+
+GEOLOCATION CODE
+https://gist.github.com/varmais/74586ec1854fe288d393
+
+PERMISSIONS API
+https://developers.google.com/web/updates/2015/04/permissions-api-for-the-web
+https://developer.mozilla.org/en-US/docs/Web/API/Permissions/query
+
+
+CODELABS
+https://codelabs.developers.google.com/?cat=Web
+
+RETRIEVE LOCATION HERE
+https://developer.here.com/api-explorer/rest/geocoding_suggestions
+
+AUTOCOMPLETE LIST
+https://www.w3schools.com/howto/howto_js_autocomplete.asp
+
+LIST OF EVENTS LISTERNERS
+https://www.w3schools.com/jsref/dom_obj_event.asp
+
+HERE JAVASCRIPT API
+https://www.npmjs.com/package/here-js-api
+
+HERE GITHUB
+https://github.com/acolin/node-heremaps
+https://github.com/heremaps/
+
+NODEJS EXPRESS EXAMPLE
+https://medium.freecodecamp.org/building-a-simple-node-js-api-in-under-30-minutes-a07ea9e390d2
+
+Colocar no banco uma coluna para verificar se o usuário está logado assim quando ele logar uma vez pode-se manter ele logado sem risco dele logar
+em outro app e deletar a conta, se ele logar em outro lugar perguntar se ele quer deslogar se sim, ao entrar novamente no app que estava logado
+deve-se solicitar novamente o login e verificar se está logado em outro lugar.
+Ao logar uma vez pode-se guardar o status e ao entrar novamente pode-se verificar no banco o status e direcionar para o mapa diretamente.
+
+
+SE DER TEMPO FAZER UM AVALIE ESSE APP COM UM SPINNER QUE VAI DE 1 A 5 E A MEDIDA Q O VALOR MUDAR FAZER APARECER ESTRELINHAS
+COLOCAR UM BOTÃO OK E UM CANCEL NO DIALOG
+FAZER UMA TABELA PARA RECEBER OS VOTOS E MARCAR OS ID DOS USUÁRIOS. GUARDAR A AVALIAÇÃO DO USUÁRIO E SE O MESMO JA TIVER 
+AVALIADO MOSTRAR NO SNACK UMA MENSAGEM QUE JA VOTOU
+
+
+https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+https://medium.com/@thihenos/node-salvando-imagens-em-banco-de-dados-e-convertendo-em-imagens-novamente-1a304880f285
+http://pgdocptbr.sourceforge.net/pg74/jdbc-binary-data.html
+
+
+ theme: {
+        getClusterPresentation: function (markerCluster) {
+
+            // Use cluster weight to change icon size:
+            var svgString = clusterSvgTemplate.replace('{radius}', markerCluster.getWeight() * 5);
+            svgString = svgString.replace('{text}', + markerCluster.getWeight());
+
+            var w, h;
+            var weight = markerCluster.getWeight();
+
+            //Set cluster size depending on the weight
+            if (weight <= 6)
+            {
+                w = 35;
+                h = 35;
+            }
+            else if (weight <= 12) {
+                w = 50;
+                h = 50;
+            }
+            else {
+                w = 75;
+                h = 75;
+            }
+
+            var clusterIcon = new H.map.Icon(svgString, {
+                size: { w: w, h: h },
+                anchor: { x: (w/2), y: (h/2) }
+            });
+
+            // Create a marker for clusters:
+            var clusterMarker = new H.map.Marker(markerCluster.getPosition(), {
+                icon: clusterIcon,
+                // Set min/max zoom with values from the cluster, otherwise
+                // clusters will be shown at all zoom levels:
+                min: markerCluster.getMinZoom(),
+                max: markerCluster.getMaxZoom()
+            });
+
+            // Bind cluster data to the marker:
+            clusterMarker.setData(markerCluster);
+
+            clusterMarker.addEventListener("pointerenter", function (event) {
+
+                var point = event.target.getPosition(),
+                    screenPosition = map.geoToScreen(point),
+                    t = event.target,
+                    data = t.getData(),
+                    tooltipContent = ""; 
+                data.forEachEntry(
+                    function(p) 
+                    { 
+                        tooltipContent += p.getPosition().lat + " " + p.getPosition().lng + "</br>";
+                    }
+                ); 
+                infoBubble = new H.ui.InfoBubble(map.screenToGeo(screenPosition.x, screenPosition.y), { content: tooltipContent });
+                ui.addBubble(infoBubble);
+            });
+
+            clusterMarker.addEventListener("pointerleave", function (event) { 
+                if(infoBubble)
+                {
+                    ui.removeBubble(infoBubble);
+                    infoBubble = null;
+                }
+            });             
+
+            return clusterMarker;
+        },
+        getNoisePresentation: function (noisePoint) {
+
+            // Create a marker for noise points:
+            var noiseMarker = new H.map.Marker(noisePoint.getPosition(), {
+                icon: noiseIcon,
+
+                // Use min zoom from a noise point to show it correctly at certain
+                // zoom levels:
+                min: noisePoint.getMinZoom(),
+                max: 20
+            });
+
+            // Bind cluster data to the marker:
+            noiseMarker.setData(noisePoint);
+
+            noiseMarker.addEventListener("pointerenter", function (event) { 
+
+                var point = event.target.getPosition();
+                var tooltipContent = ["Latitude: ", point.lat, ", Longitude: ", point.lng].join("");
+
+                var screenPosition = map.geoToScreen(point);
+
+                infoBubble = new H.ui.InfoBubble(map.screenToGeo(screenPosition.x, screenPosition.y), { content: tooltipContent });
+                ui.addBubble(infoBubble);
+
+            });
+            noiseMarker.addEventListener("pointerleave", function (event) { 
+                if(infoBubble)
+                {
+                    ui.removeBubble(infoBubble);
+                    infoBubble = null;
+                }
+            });
+
+
+            return noiseMarker;
+        }
+    }
+
+
+FAZER A CONSULTA DA LISTA RETORNAR OS PETS EM ORDEM DA DATA DE CADASTRO, ASSIM É POSSÍVEL VERIFICAR OS ANIMAIS QUE ESTÃO A MAIS TEMPO
+NAS RUAS
+
+let scroll_img = document.createElement('img'),
+                    status = true;
+                scroll_img.src = 'img/scrollDown.png';
+                this.float_div.append(scroll_img);
+                let float_button = (document.querySelector('.float_button').children)[0];
+                let section = document.querySelector('.section_unfixed');
+                // WINDOW > FLOAT BUTTON ON SCROLL EVENT
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY === 0) {
+                        float_button.src = 'img/scrollDown.png';
+                        status = true;
+                    }
+                    else {
+                        float_button.src = 'img/scrollUp.png';
+                        status = false;
+                    }
+                });
+                // FLOAT BUTTON ON CLICK EVENT
+                float_button.addEventListener('click', () => {
+                    if (status === true) {
+                        window.scroll({ top: document.documentElement.scrollHeight, left: 0, behavior: 'smooth' });
+                    }
+                    else {
+                        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                    }
+                });
+
+
+                https://www.w3schools.com/jsref/dom_obj_event.asp
+
+
+                CSS SCALE OBJECTS transform: scale(.9);
+
+TIRAR UMA FOTO OU ESCOLHER UM ARQUIVO 
+<input id="camera" type="file" accept="image/*;capture=camera">    
+
+TIRAR UMA FOTO
+<input type="file" accept="image/*" capture="camera" id="camera">
+
+// var reader = new FileReader();
+// reader.onload = function () {
+
+//     let arrayBuffer = this.result,
+//         array = new Uint8Array(arrayBuffer);
+//     binaryString = String.fromCharCode.apply(null, array);
+// }
+// reader.readAsArrayBuffer(file);
+
+ARRAY BUFFER TO STRING
+function ab2str(buf) {
+  return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+
+STRING TO ARRAY BUFFER
+function str2ab(str) {
+  var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i = 0, strLen = str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}
+
+
+CODE
+            var buf = new ArrayBuffer(binaryString.length * 2); // 2 bytes for each char
+            var bufView = new Uint8Array(buf);
+            for (var i = 0, strLen = binaryString.length; i < strLen; i++) {
+                bufView[i] = binaryString.charCodeAt(i);
+            }
+
+            var a = new Blob([binaryString]);
+            fra_picture.src = URL.createObjectURL(a);
+
+
+
+*******************
+            fetch(`/pet/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${obj_auth.token}`
+                }
+            })
+                .then(result => { return result.json() })
+                .then(data => {
+                    // DATA ARRAYBUFFER TO BASE 64 STRING
+                    let base64String = String.fromCharCode.apply(null, new Uint16Array(data.respTemplate.picture.data)),
+                        // CREATES A IMAGE
+                        img = new Image();
+                    img.src = base64String;
+                    // RESIZE THE IMAGE
+                    img.onload = () => {
+                        ctx.clearRect(0, 0, can_width, can_height);
+                        com_canvas.width = can_width;
+                        com_canvas.height = can_height;
+                        // DRAW THE IMAGE ON CANVAS
+                        ctx.drawImage(img, 0, 0, can_width, can_height);
+                    },
+                        img.onerror = err => console.error(err.message);
+                })
+                .catch(err => {
+                    console.error(err.message);
+                })

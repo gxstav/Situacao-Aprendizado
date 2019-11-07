@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- TITLE -->
+    <title>CADASTRAR</title>
+    <!-- ENCODING -->
+    <meta charset="utf-8" />
+    <!-- DOCUMENT AREA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- DESCRIPTION -->
+    <meta name=" description"
+        content="Aplicação para auxiliar a identificação e localização de animais em situação de risco">
+    <!-- KEYWORDS -->
+    <meta name="keywords"
+        content="animais, abandonados, aplicativo, ONGs, protetores, identificação, localização, resgate">
+    <!-- DEFAULT DOCUMENT -->
+    <meta name="robots" content="index, follow">
+    <!-- AUTHOR -->
+    <meta name="author" content="Ana Carolina e Diego">
+    <!-- THEME COLOR -->
+    <meta name="theme-color" content="#424242" />
+    <!-- MATERIAL DESIGN LITE FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- ROBOTO FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- MATERIAL DESIGN LITE CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/material.min.css" />
+    <!-- APP CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/app.css" />
+    <!-- HERE -->
+    <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <!-- ICON -->
+    <link rel="apple-touch-icon" sizes="72x72" href="fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png">
+    <link rel="mask-icon" href="fav/safari-pinned-tab.svg" color="#424242">
+    <meta name="msapplication-TileColor" content="#424242">
+    <!-- MANIFEST -->
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        .app-card-wide>.mdl-card__title {
+            color: #fff;
+            height: 176px;
+            background: url('images/card.png') center / cover;
+        }
+    </style>
+</head>
+
+<body style="background-color: #eee">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <!-- TOOLBAR -->
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row" style="padding-left: 16px;">
+                <!-- RETURN BUTTON => app_return -->
+                <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 24px;">
+                    <i class="material-icons" id="app_return">arrow_back</i>
+                </button>
+                <!-- TITLE -->
+                <span class="mdl-layout-title">Pet Resgate</span>
+                <div class="mdl-layout-spacer"></div>
+                <!-- HELP BUTTON => app_help -->
+                <button class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons" id="app_help">help</i>
+                </button>
+        </header>
+        <!-- MAIN CONTENT -->
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <!-- LOGIN CARD -->
+                <div id="app_content" class="app-card-wide mdl-card mdl-shadow--4dp" style="margin: 5%; width: 90%;">
+                    <!-- LOGIN TITLE -->
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text" style="font-weight: 500;">Cadastrar</h2>
+                    </div>
+                    <!-- LOGIN ACTIONS -->
+                    <div class="mdl-card__actions"
+                        style="width: 100%; display: flex; flex-direction: column; padding-bottom: 0px;">
+                        <!-- USER NAME INPUT => user_name -->
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="text" id="user_name" maxlength="15">
+                            <label class="mdl-textfield__label" for="user_name">Nome de usuário *</label>
+                        </div>
+                        <!-- USER PASSWORD INPUT => user_password -->
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="text" id="user_password" maxlength="8">
+                            <label class="mdl-textfield__label" for="user_password">Senha *</label>
+                        </div>
+                        <!-- USER E-MAIL INPUT => user_email -->
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="email" id="user_email" maxlength="50">
+                            <label class="mdl-textfield__label" for="user_email">e-mail *</label>
+                        </div>
+                        <!-- USER CEP INPUT => app_cep -->
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="text" inputmode="numeric" id="app_cep"
+                                maxlength="8">
+                            <label class="mdl-textfield__label" for="app_cep">CEP</label>
+                        </div>
+                        <!-- USER ADDRESS TEXT AREA => user_address -->
+                        <div class="autocomplete" style="width: 70%;  align-self: center;">
+                            <div class="mdl-textfield mdl-js-textfield" style="width: 100%;">
+                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="user_address"
+                                    style="resize: none; height: 80px;"></textarea>
+                                <label class="mdl-textfield__label" for="user_address">Endereço *<br>(Rua, Cidade,
+                                    Estado, CEP)</label>
+                            </div>
+                            <ul class="autocomplete-items box_shadow">
+                            </ul>
+                        </div>
+                        <!-- REGISTER BUTTON => app_register -->
+                        <button id="app_register"
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                            style="width: 40%; align-self: center; margin-bottom: 16px;">
+                            Cadastrar
+                        </button>
+                    </div>
+                    <!-- LOGIN ACTIONS BORDER -->
+                    <div class="mdl-card__actions mdl-card--border">
+                        <!-- ADDRESS BY CEP LINK => app_addressByCep -->
+                        <a id="app_addressByCep"
+                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Endereço por CEP
+                        </a>
+                        <!-- ADDRESS BY LOCATION LINK => app_addressByLocation -->
+                        <a id="app_addressByLocation"
+                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Endereço por localização
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- SNACKBAR -->
+    <div id="app_snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action"></button>
+    </div>
+
+    <!-- DIALOG -->
+    <div id="app_dialog" class="flex_box dialog_background">
+        <div class="flex_box box_shadow">
+            <h1 class="unselected">Title</h1>
+            <div class="flex_box">
+                <p class="unselected">Message</p>
+            </div>
+            <div class="flex_box"></div>
+        </div>
+    </div>
+
+    <!-- LOADING -->
+    <div id="app_loading" class="flex_box loading_background">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner"></div>
+    </div>
+
+    <!-- MATERIAL DESIGN LITE SCRIPT -->
+    <script src="scripts/material.min.js"></script>
+    <!-- APP SCRIPT -->
+    <script src="scripts/app.js"></script>
+    <!-- HERE SCRIPT -->
+    <script src="scripts/here.js"></script>
+    <!-- REGISTER SCRIPT -->
+    <script src="scripts/register.js"></script>
+</body>
+
+</html>

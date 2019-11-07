@@ -1,0 +1,283 @@
+/* COLORS */
+
+:root {
+    --primary_color: #FF9800;
+    --secondary_color: #546EFD;
+}
+
+/*RESET*/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* FLEX-BOX */
+
+.flex_box {
+    display: flex;
+}
+
+/* UNSELECTED TEXT */
+
+.unselected {
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE/Edge */
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+}
+
+/* BOX SHADOW */
+
+.box_shadow {
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* DIALOG */
+
+.dialog_background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    display: none;
+}
+
+.dialog_background>div {
+    background-color: #fff;
+    width: 80%;
+    border-radius: 4px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.dialog_background>div>h1 {
+    margin: 0px;
+    padding: 20px 25px 15px 25px;
+    font-weight: 500;
+    font-size: 1.3em;
+    flex-basis: 100%;
+    color: #424242;
+}
+
+.dialog_background div div {
+    width: 100%;
+    height: 120px;
+    overflow: auto;
+}
+
+.dialog_background div div p {
+    padding: 0 25px;
+    margin: 0;
+    font-size: 1.1em;
+    text-align: justify;
+}
+
+.dialog_background div div:last-child {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    justify-content: flex-end;
+}
+
+.dialog_background div div button {
+    margin: 15px 25px 20px 15px;
+    background-color: #fff;
+    color: var(--primary_color);
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+/* AUTOCOMPLETE DIV */
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border-radius: 4px;
+    background-color: #fff;
+    z-index: 99;
+    bottom: 110px;
+    left: 0;
+    right: 0;
+    list-style-type: none;
+    word-wrap: break-word;
+}
+
+.autocomplete-items li {
+    padding: 6px;
+    font-size: 1em;
+    text-align: justify;
+}
+
+/* LOADING */
+
+.loading_background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    display: none;
+}
+
+/* FLOAT BUTTON */
+
+.float_button {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 2;
+    display: none;
+}
+
+/* ----------------------------------- */
+
+/* EXTRA SMALL DEVICES == SMARTPHONES ----------- */
+
+/* @media only screen and (min-width: 320px) {
+} */
+
+/* SMALLL DEVICES == TABLETS ----------- */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    #app_content {
+        width: 60% !important;
+        margin: 5% 20% 0 20% !important;
+    }
+    #list_content {
+        width: 60% !important;
+        margin: 5% 20% 0 20% !important;
+    }
+    #add_content {
+        width: 60% !important;
+        margin: 5% 20% 0 20% !important;
+    }
+    #app_login {
+        width: 35% !important;
+    }
+    #app_register {
+        width: 35% !important;
+    }
+    #app_dialog>div {
+        width: 50%;
+    }
+    #app_divFilter>div {
+        width: 50%;
+    }
+    #app_updatePassword {
+        width: 35% !important;
+    }
+    #app_updateInfo {
+        width: 35% !important;
+    }
+    #app_recover {
+        width: 35% !important;
+    }
+}
+
+/* MEDIUM DEVICES == DESKTOP AND NOTEBOOKS ----------- */
+
+@media only screen and (min-width: 1024px) and (max-width: 1824px) {
+    #app_content {
+        width: 50% !important;
+        margin: 5% 25% 0 25% !important;
+    }
+    #list_content {
+        width: 50% !important;
+        margin: 5% 25% 0 25% !important;
+    }
+    #add_content {
+        width: 50% !important;
+        margin: 5% 25% 0 25% !important;
+    }
+    #app_login {
+        width: 30% !important;
+    }
+    #app_register {
+        width: 30% !important;
+    }
+    #app_dialog>div {
+        width: 40%;
+    }
+    #app_divFilter>div {
+        width: 40%;
+    }
+    #app_updatePassword {
+        width: 30% !important;
+    }
+    #app_updateInfo {
+        width: 30% !important;
+    }
+    #app_recover {
+        width: 30% !important;
+    }
+}
+
+/* LARGE DEVICES == DESKTOP ----------- */
+
+@media only screen and (min-width: 1824px) {
+    #app_content {
+        width: 40% !important;
+        margin: 5% 30% 0 30% !important;
+    }
+    #list_content {
+        width: 40% !important;
+        margin: 5% 30% 0 30% !important;
+    }
+    #add_content {
+        width: 40% !important;
+        margin: 5% 30% 0 30% !important;
+    }
+    #app_login {
+        width: 25% !important;
+    }
+    #app_register {
+        width: 25% !important;
+    }
+    #app_dialog>div {
+        width: 30%;
+    }
+    #app_divFilter>div {
+        width: 30%;
+    }
+    #app_updatePassword {
+        width: 25% !important;
+    }
+    #app_updateInfo {
+        width: 25% !important;
+    }
+    #app_recover {
+        width: 25% !important;
+    }
+}
