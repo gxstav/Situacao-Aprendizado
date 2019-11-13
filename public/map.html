@@ -125,13 +125,53 @@
                     <div id="add_content" class="app-card-wide mdl-card mdl-shadow--4dp"
                         style="margin: 5%; width: 90%;">
                         <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
-                            <!-- NOME DO pet TEXT -->
+                            <!-- Titulo -->
+                                <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Informe o titulo do anúncio*:
+                            </div>
+                            
+                            <!--veiculo nome INPUT => veiculo_nome -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                                style="width: 70%; align-self: center;">
+                                <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="30">
+                                <label class="mdl-textfield__label" for="user_name"></label>
+                            </div>
+                            <!-- NOME DO veiculo TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Informar o nome do veículo*:
                             </div>
                             
                             <!--veiculo nome INPUT => veiculo_nome -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                                style="width: 70%; align-self: center;">
+                                <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="25">
+                                <label class="mdl-textfield__label" for="user_name"></label>
+                            </div>
+                            <!--Marca-->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Informar a marca do veículo*:
+                            </div>
+                            
+                            <!--veiculo marca INPUT => veiculo_nome -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                                style="width: 70%; align-self: center;">
+                                <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="25">
+                                <label class="mdl-textfield__label" for="user_name"></label>
+                            </div>
+
+
+                            <!--Modelo-->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Informar o Modelo do veículo*:
+                            </div>
+                            
+                         
+                            
+                            <!--veiculo modelo INPUT => veiculo_nome -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                                 style="width: 70%; align-self: center;">
                                 <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="25">
@@ -184,7 +224,7 @@
                             </div>
                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="veiculo_color1" class="mdl-checkbox__input" name="veiculo_color"
+                                <input type="color" id="veiculo_color1" class="mdl-checkbox__input" name="veiculo_color"
                                     value="branco">
                                 <span class="mdl-checkbox__label">Branco</span>
                             </label>
@@ -226,27 +266,13 @@
                             </label>
                             <!-- ANO DO VEÍCULO -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px;margin-bottom: 0;">
                                 Favor informar o ano do veículo:
                             </div>
                             <div class="mdl-textfield mdl-js-textfield "
                                 style="width: 70%; align-self: center;height:0px">
                                 <input class="mdl-textfield__input" type="text" id="veiculo_ano" maxlength="4">
-                                <label class="mdl-textfield__label" for="user_name"></label> </div>
-                            <!-- MARCA DO VEÍCULO -->
-                            <div class="mdl-textfield mdl-js-textfield"
-                                style="width: 70%; align-self: center; padding: 16px 0;">
-                                Favor informar a marca do Veículo:<br>
-                                
-                                <select id="marcas">
-                                    <option value="Não informado"></option>
-                                    <option value="Fiat">Fiat</option>
-                                    <option value="Ford">Ford</option>
-                                    <option value="Volkswagen">Volkswagen</option>
-                                    <option value="BMW">BMW</option>
-                                    <option value="Hyundai">Hyundai</option>
-                                    <option value="Audi">Audi</option>
-                               
+                                <label class="mdl-textfield__label" for="user_name">Digite o ano do veículo</label> </div>
                             </select>
                             </div>
                            
