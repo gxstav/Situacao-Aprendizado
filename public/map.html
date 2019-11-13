@@ -108,7 +108,7 @@
                     <div id="list_content" class="app-card-wide mdl-card mdl-shadow--4dp"
                         style="margin: 5%; width: 90%;">
                         <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
-                            <!-- PET LIST TEXT -->
+                            <!-- pet LIST TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
                                 Lista ordenada conforme a data em que os animais foram adicionados:
@@ -119,140 +119,186 @@
                     </div>
                 </div>
             </section>
-            <!-- ADD ANIMAL SECTION -->
+            <!-- ADD CAR SECTION -->
             <section class="mdl-layout__tab-panel" id="fixed-tab-3" style="display: none;">
                 <div class=" page-content">
                     <div id="add_content" class="app-card-wide mdl-card mdl-shadow--4dp"
                         style="margin: 5%; width: 90%;">
                         <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
-                            <!-- PET NAME TEXT -->
+                            <!-- NOME DO pet TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
-                                Favor informar o nome que o animal atende ou um novo nome de sua preferência *:
+                                Informar o nome do veículo*:
                             </div>
-                            <!-- PET NAME INPUT => pet_nickname -->
+                            
+                            <!--veiculo nome INPUT => veiculo_nome -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                                 style="width: 70%; align-self: center;">
-                                <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="15">
-                                <label class="mdl-textfield__label" for="user_name">Nome ou apelido</label>
+                                <input class="mdl-textfield__input" type="text" id="pet_nickname" maxlength="25">
+                                <label class="mdl-textfield__label" for="user_name"></label>
                             </div>
-                            <!-- PET TYPE TEXT -->
+                            <!-- Valor do veiculo TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
-                                Favor informar o tipo do animal *:
+                                Informar o o valor do veículo*:
+                            </div>
+                            <!-- veiculo valor INPUT => valor_veiculo -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="text" id="veiculo_valor" maxlength="10">
+                            <label class="mdl-textfield__label" for="user_name">R$</label>
+                        </div>
+                            <!-- veiculo TYPE TEXT -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Favor informar o tipo do veículo *:
                             </div>
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="pet_type1" class="mdl-radio__button" name="pet_type"
                                     value="Cachorro" checked>
-                                <span class="mdl-radio__label">Cachorro</span>
+                                <span class="mdl-radio__label">Carro</span>
                             </label>
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type2"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="pet_type2" class="mdl-radio__button" name="pet_type"
                                     value="Gato">
-                                <span class="mdl-radio__label">Gato</span>
+                                <span class="mdl-radio__label">Moto</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type2"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="pet_type2" class="mdl-radio__button" name="pet_type"
+                                    value="Gato">
+                                <span class="mdl-radio__label">Ônibus</span>                              
                             </label>
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_type3"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="pet_type3" class="mdl-radio__button" name="pet_type"
                                     value="Outro">
-                                <span class="mdl-radio__label">Outro</span>
+                                <span class="mdl-radio__label">Caminhão</span>
                             </label>
-                            <!-- PET COLOR TEXT -->
+                            <!-- veiculo COLOR TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0;">
-                                Favor informar as cores do animal *:
+                                Favor informar a cor do Veículo *:
                             </div>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color1"
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color1" class="mdl-checkbox__input" name="pet_color"
+                                <input type="checkbox" id="veiculo_color1" class="mdl-checkbox__input" name="veiculo_color"
                                     value="branco">
                                 <span class="mdl-checkbox__label">Branco</span>
                             </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color2"
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color2"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color2" class="mdl-checkbox__input" name="pet_color"
+                                <input type="checkbox" id="veiculo_color2" class="mdl-checkbox__input" name="veiculo_color"
                                     value="cinza">
-                                <span class="mdl-checkbox__label">Cinza</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color3"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color3" class="mdl-checkbox__input" name="pet_color"
-                                    value="preto">
                                 <span class="mdl-checkbox__label">Preto</span>
                             </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color4"
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color3"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color4" class="mdl-checkbox__input" name="pet_color"
+                                <input type="checkbox" id="veiculo_color3" class="mdl-checkbox__input" name="veiculo_color"
+                                    value="preto">
+                                <span class="mdl-checkbox__label">Vermelho</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color4"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="veiculo_color4" class="mdl-checkbox__input" name="veiculo_color"
                                     value="marrom">
-                                <span class="mdl-checkbox__label">Marrom</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color5"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color5" class="mdl-checkbox__input" name="pet_color"
-                                    value="amarelo">
-                                <span class="mdl-checkbox__label">Amarelo</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color6"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color6" class="mdl-checkbox__input" name="pet_color"
-                                    value="laranja">
-                                <span class="mdl-checkbox__label">Laranja</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color7"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color7" class="mdl-checkbox__input" name="pet_color"
-                                    value="verde">
-                                <span class="mdl-checkbox__label">Verde</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_color8"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="checkbox" id="pet_color8" class="mdl-checkbox__input" name="pet_color"
-                                    value="azul">
                                 <span class="mdl-checkbox__label">Azul</span>
                             </label>
-                            <!-- PET CONDITION TEXT -->
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color5"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="veiculo_color5" class="mdl-checkbox__input" name="veiculo_color"
+                                    value="amarelo">
+                                <span class="mdl-checkbox__label">Prata</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color6"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="veiculo_color6" class="mdl-checkbox__input" name="veiculo_color"
+                                    value="laranja">
+                                <span class="mdl-checkbox__label">Bege</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="veiculo_color7"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="checkbox" id="veiculo_color7" class="mdl-checkbox__input" name="veiculo_color"
+                                    value="verde">
+                                <span class="mdl-checkbox__label">Outro</span>
+                            </label>
+                            <!-- ANO DO VEÍCULO -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
-                                Favor informar as condições do animal (Marcar se a resposta for sim):
+                                Favor informar o ano do veículo:
                             </div>
-                            <!-- PET INJURED -->
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_injured"
-                                style="width: 70%; align-self: center; margin-bottom: 16px; height: auto">
-                                <input type="checkbox" id="pet_injured" class="mdl-checkbox__input"
-                                    name="pet_condition">
-                                <span class="mdl-checkbox__label">O animal parece estar machucado?</span>
-                            </label>
-                            <!-- PET SICK -->
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_sick"
-                                style="width: 70%; align-self: center; margin-bottom: 16px; height: auto">
-                                <input type="checkbox" id="pet_sick" class="mdl-checkbox__input" name="pet_condition">
-                                <span class=" mdl-checkbox__label">O animal parece estar doente?</span>
-                            </label>
-                            <!-- PET FED -->
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="pet_fed"
-                                style="width: 70%; align-self: center; margin-bottom: 16px; height: auto">
-                                <input type="checkbox" id="pet_fed" class="mdl-checkbox__input" name="pet_condition">
-                                <span class=" mdl-checkbox__label">O animal parece estar mal alimentado?</span>
-                            </label>
-                            <!-- PET DESCRIPTION TEXT -->
+                            <div class="mdl-textfield mdl-js-textfield "
+                                style="width: 70%; align-self: center;height:0px">
+                                <input class="mdl-textfield__input" type="text" id="veiculo_ano" maxlength="4">
+                                <label class="mdl-textfield__label" for="user_name"></label> </div>
+                            <!-- MARCA DO VEÍCULO -->
+                            <div class="mdl-textfield mdl-js-textfield"
+                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                Favor informar a marca do Veículo:<br>
+                                
+                                <select id="marcas">
+                                    <option value="Não informado"></option>
+                                    <option value="Fiat">Fiat</option>
+                                    <option value="Ford">Ford</option>
+                                    <option value="Volkswagen">Volkswagen</option>
+                                    <option value="BMW">BMW</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Audi">Audi</option>
+                               
+                            </select>
+                            </div>
+                           
+                            <!-- QUILOMETRAGEM => auxiliar -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
-                                Favor fazer uma breve descrição do animal e do local onde ele se encontra *:
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px">
+                                Informar a quilometragem do veículo*:
                             </div>
-                            <!-- PET DESCRIPTION TEXT AREA => pet_description -->
+
+                            <!-- QUILOMETRAGEM => quilometragem_input -->
                             <div class="mdl-textfield mdl-js-textfield" style="width: 70%; align-self: center;">
-                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="pet_description"
-                                    style="resize: none; height: 80px;"></textarea>
-                                <label class="mdl-textfield__label" for="pet_description">Descrição</label>
+                                <textarea class=" mdl-textfield__input" type="text" maxlength="6" id="veiculo_quilometragem"
+                                    style="resize: none; height: 25px;"></textarea>
+                                    
+                                <label class="mdl-textfield__label" for="veiculo_quilometragem">quilometragem</label>
+                                
                             </div>
-                            <!-- PET PICTURE TEXT -->
+                            
+                            <!-- TIPO DE COMBUSTIVEL -->
+                            <div class="mdl-textfield mdl-js-textfield"
+                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                Favor informar o tipo de Combustivel:<br>
+                                <select id="appearance-select"> 
+                                    <option value="Não informado"></option>
+                                    <option value="Gasolina">Gasolina</option>
+                                    <option value="Alcool">Alcool</option>
+                                    <option value="Flex">Flex</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="GNV">GNV</option>
+                                    <option value="Elétrico">Elétrico</option>
+                                  </select>
+                            </div>
+                            <!-- descrição / pre-->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Digite a descrição do seu anuncio:
+                            </div>
+                            <!-- descrição -->
+                            <div class="mdl-textfield mdl-js-textfield" style="width: 70%; align-self: center;">
+                                <textarea class=" mdl-__input" type="text" maxlength="150" id="veiculo_description"
+                                    style="resize: none; height: 169px;
+                                    width: 500px;"></textarea>
+                                <label class="mdl-textfield__label" for="veiculo_description"></label>
+                                
+                            </div>
+
+                            <!-- TEXTO DA FOTO PARA O VEÍCULO -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0;">
-                                Favor tirar uma foto do animal *:
+                                Inserir uma foto do Veículo:
                             </div>
-                            <!-- PET PICTURE => pet_picture -->
+                            <!-- FOTO DO pet => pet_picture -->
                             <label for="pet_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;"
                                 class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                                 <input type="file" accept="image/*" capture="camera" id="pet_picture"
@@ -261,22 +307,22 @@
                             </label>
                             <canvas id="pet_frame"
                                 style="width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 2px solid #757575"></canvas>
-                            <!-- PET ADDRESS TEXT -->
+                            <!-- pet ADDRESS TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
                                 Endereço aproximado (O endereço é preenchido automaticamente):
                             </div>
-                            <!-- PET ADDRESS TEXT AREA => pet_address -->
+                            <!-- veiculo ADDRESS TEXT AREA => veiculo_address -->
                             <div id="div_address" class="mdl-textfield mdl-js-textfield"
                                 style="width: 70%; align-self: center;">
-                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="pet_address"
-                                    style="resize: none; height: 80px;" disabled></textarea>
+                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="veiculo_address"
+                                    style="resize: none; height: 30px;" disabled></textarea>
                                 <label class="mdl-textfield__label" for="pet_address">Endereço</label>
                             </div>
                             <!-- REGISTER BUTTON => app_register -->
                             <button id="app_register"
                                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                                style="width: 45%; align-self: center; margin-bottom: 16px;">
+                                style="width: 45%; align-self: center; margin-bottom: 16px;color:white">
                                 Cadastrar
                             </button>
                         </div>

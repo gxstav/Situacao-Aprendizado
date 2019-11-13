@@ -284,3 +284,39 @@ html {
         width: 25% !important;
     }
 }
+
+#marcas{   
+    -webkit-appearance: none;  
+    /* Remove estilo padrão do Chrome */  -moz-appearance: none;
+     /* Remove estilo padrão do FireFox */   appearance: none;
+    /* Imagem de fundo (Seta) */   background-position: 218px center;  
+     /* Remove estilo padrão do FireFox*/   background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-appearance.gif) no-repeat #eeeeee; 
+    /*alinhamento do texto */ text-align: center;
+    /*Posição da imagem do background*/   width: 250px;
+    /* Tamanho do select, maior que o tamanho da div "div-select" */  height:30px;
+    /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */   border:1px solid #ddd;}
+ 
+    #appearance-select{-webkit-appearance: none;  
+        /* Remove estilo padrão do Chrome */  -moz-appearance: none;
+         /* Remove estilo padrão do FireFox */   appearance: none;
+        /* Imagem de fundo (Seta) */   background-position: 218px center;  
+         /* Remove estilo padrão do FireFox*/   background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-appearance.gif) no-repeat #eeeeee; 
+        /*alinhamento do texto */ text-align: center;
+        /*Posição da imagem do background*/   width: 250px;
+        /* Tamanho do select, maior que o tamanho da div "div-select" */  height:30px;
+        /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */   border:1px solid #ddd;
+
+    }
+    #veiculo_description{
+        
+            /* a ordem dos lados é a mesma que com margens */
+            border-width: 5px 5px 5px 5px; /* aqui, cada lado possui uma borda de largura diferente */
+            border-style:solid ; /* estilos de borda diferentes para cima-baixo e esquerda-direita */
+            border-color: grey grey grey grey; /* uma cor de borda para cada lado */
+            padding: 20px;
+            height: 169px;
+            width: 500px;
+            
+            
+        }
+    
