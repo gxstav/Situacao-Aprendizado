@@ -185,9 +185,11 @@ html {
     }
     #app_login {
         width: 35% !important;
+        color : white;
     }
     #app_register {
         width: 35% !important;
+        color:white;
     }
     #app_dialog>div {
         width: 50%;
@@ -203,6 +205,7 @@ html {
     }
     #app_recover {
         width: 35% !important;
+        color:white;
     }
 }
 

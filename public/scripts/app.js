@@ -14,9 +14,11 @@ let appShowSnackBar = (element, msg) => {
         if (obj.hasOwnProperty('btn_ok')) {
             let btn_ok = document.createElement('button');
             btn_ok.innerText = 'OK';
+            btn_ok.style= "color:black";
             btn_ok.addEventListener('click', () => {
                 obj.btn_ok();
             });
+            
             // ADD DIALOG BUTTON
             obj.element.children[0].children[2].appendChild(btn_ok);
             obj.element.style.display = 'flex';
