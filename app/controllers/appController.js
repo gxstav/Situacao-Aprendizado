@@ -264,8 +264,8 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // CREATE A NEW PET FUNCTION => /addpet => post
-        createPet(req, res) {
+        // CREATE A NEW PET FUNCTION => /addveh => post
+        createVeh(req, res) {
             // USER DATA
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
@@ -275,7 +275,7 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // INSERT QUERY => CREATE A NEW USER
-                    client.query(`INSERT INTO pets (user_id, pet_nickname, pet_type, pet_color, pet_injured, pet_sick, pet_fed, pet_description, pet_address, pet_coordinates, geom, pet_date, pet_picture, pet_status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, ST_GeomFromText('Point(${latLng})',4326), NOW(), $11, $12)`, [jsonData.userId, jsonData.nickname, jsonData.type, jsonData.color, jsonData.injured, jsonData.sick, jsonData.fed, jsonData.description, jsonData.address, jsonData.coordinates, jsonData.picture, jsonData.status])
+                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_name, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, ST_GeomFromText('Point(${latLng})',4326), NOW(), $11, $12)`, [jsonData.userId, jsonData.nickname, jsonData.type, jsonData.color, jsonData.injured, jsonData.sick, jsonData.fed, jsonData.description, jsonData.address, jsonData.coordinates, jsonData.picture, jsonData.status])
                         // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Obrigado por ajudar', message: 'O animal foi cadastrado com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
