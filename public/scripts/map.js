@@ -37,9 +37,10 @@
     let obj_veh = {
         // PET INPUTS
         ipt_title: document.getElementById('vehicle_title'),
-        ipt_brand: document.getElementsByName('vehicle_brand'),
-        ipt_model: document.getElementsByName('vehicle_model'),
-        ipt_value: document.getElementsByName('vehicle_value'),
+        ipt_brand: document.getElementById('vehicle_brand'),
+        ipt_model: document.getElementById('vehicle_model'),
+        ipt_value: document.getElementById('vehicle_value'),
+        ipt_type: document.getElementsByName('veh_type'),
         ipt_color: document.getElementsByName('vehicle_color'),
         ipt_condition: document.getElementsByName('pet_condition'),
         ipt_description: document.getElementById('pet_description'),
@@ -163,10 +164,10 @@
                 item.addEventListener('click', event => {
                     // CHECK ONLINE STATE
                     if (navigator.onLine) {
-                        let obj_pet = {
+                        let obj_veh = {
                             id: event.currentTarget.id
                         },
-                            str_pet = JSON.stringify(obj_pet);
+                            str_pet = JSON.stringify(obj_veh);
                         localStorage.setItem('pet', str_pet);
                         window.location = 'pet.html';
                     }
@@ -805,7 +806,7 @@
                                 },
                                     str_template = obj_template.street + obj_template.city + obj_template.state + obj_template.postalCode;
                                 com_address.classList.add('is-dirty');
-                                obj_pet.ipt_address.value = str_template.substr(0, str_template.length - 2);
+                                obj_veh.ipt_address.value = str_template.substr(0, str_template.length - 2);
                                 appHideLoading(spinner, spinner.children[0]);
                             })
                             .catch(err => {
@@ -850,15 +851,15 @@
         }
     });
 
-    // REGISTER A PET EVENT
+    // REGISTER A VEHICLE EVENT
     btn_register.addEventListener('click', () => {
         // CHECK USER INPUTS
         let count = 0;
-        if (obj_pet.ipt_nickname.value === '' || obj_pet.ipt_description.value === '' || obj_pet.ipt_address.value === '') {
+        if (obj_veh.ipt_nickname.value === '' || obj_veh.ipt_description.value === '' || obj_veh.ipt_address.value === '') {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
             return;
         }
-        [...obj_pet.ipt_color].map(item => {
+        [...obj_veh.ipt_color].map(item => {
             if (item.checked) {
                 count++;
             }
@@ -873,14 +874,14 @@
                 obj_auth = JSON.parse(str_auth),
                 pet = {
                     userId: obj_auth.id,
-                    nickname: obj_pet.ipt_nickname.value.trim(),
-                    type: getPetType(obj_pet.ipt_type),
-                    color: getPetColor(obj_pet.ipt_color),
-                    injured: obj_pet.ipt_condition[0].checked ? true : false,
-                    sick: obj_pet.ipt_condition[1].checked ? true : false,
-                    fed: obj_pet.ipt_condition[2].checked ? true : false,
-                    description: obj_pet.ipt_description.value.trim(),
-                    address: obj_pet.ipt_address.value.trim(),
+                    nickname: obj_veh.ipt_nickname.value.trim(),
+                    type: getPetType(obj_veh.ipt_type),
+                    color: getPetColor(obj_veh.ipt_color),
+                    injured: obj_veh.ipt_condition[0].checked ? true : false,
+                    sick: obj_veh.ipt_condition[1].checked ? true : false,
+                    fed: obj_veh.ipt_condition[2].checked ? true : false,
+                    description: obj_veh.ipt_description.value.trim(),
+                    address: obj_veh.ipt_address.value.trim(),
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
