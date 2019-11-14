@@ -286,9 +286,9 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // GET PET DATA => /pet:id => get
-        getPet(req, res) {
-            // PET ID
+        // GET PET DATA => /veh:id => get
+        getVeh(req, res) {
+            // VEHICLE ID
             let id = req.params.id,
                 // RESPONSE TEMPLATE
                 respTemplate = {};
@@ -297,7 +297,7 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // SELECT QUERY
-                    client.query("SELECT * FROM pets WHERE pet_id = $1", [id])
+                    client.query("SELECT * FROM vehicles WHERE vehicle_id = $1", [id])
                         // ON SUCCESS
                         .then(result => {
                             respTemplate = {
@@ -326,7 +326,7 @@ module.exports = () => {
                 .catch(err => res.status(400).json({ message: err.message }));
         },
         // GET PETS DATA => /pets => get
-        getPets(req, res) {
+        getVehicles(req, res) {
             // RESPONSE TEMPLATE
             let respTemplate = [];
             // CONNECTING TO THE DATABASE
@@ -334,7 +334,7 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // SELECT QUERY
-                    client.query("SELECT * FROM pets WHERE pet_status[1] = 0 ORDER BY pet_date")
+                    client.query("SELECT * FROM vehicles WHERE vehicle_status[1] = 0 ORDER BY pet_date")
                         // ON SUCCESS
                         .then(result => {
                             result.rows.map(item => {
