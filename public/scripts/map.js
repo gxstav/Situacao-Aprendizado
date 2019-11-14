@@ -18,14 +18,14 @@
         console.error("Sem suporte para IndexedDB");
     }
     else {
-        request = window.indexedDB.open("petResgate", 1);
+        request = window.indexedDB.open("busCAR", 1);
         request.onerror = function (event) {
             console.error("Erro ao abrir o banco de dados", event);
         }
         request.onupgradeneeded = function (event) {
             console.log("Atualizando");
             db = event.target.result;
-            var objectStore = db.createObjectStore("pets", { keyPath: "petId" });
+            var objectStore = db.createObjectStore("vehicles", { keyPath: "vehId" });
         };
         request.onsuccess = function (event) {
             console.log("Banco de dados aberto com sucesso");
@@ -33,12 +33,14 @@
         }
     }
 
-    // PET OBJECT
-    let obj_pet = {
+    // VEHICLE OBJECT
+    let obj_veh = {
         // PET INPUTS
-        ipt_nickname: document.getElementById('pet_nickname'),
-        ipt_type: document.getElementsByName('pet_type'),
-        ipt_color: document.getElementsByName('pet_color'),
+        ipt_title: document.getElementById('vehicle_title'),
+        ipt_brand: document.getElementsByName('vehicle_brand'),
+        ipt_model: document.getElementsByName('vehicle_model'),
+        ipt_value: document.getElementsByName('vehicle_value'),
+        ipt_color: document.getElementsByName('vehicle_color'),
         ipt_condition: document.getElementsByName('pet_condition'),
         ipt_description: document.getElementById('pet_description'),
         ipt_address: document.getElementById('pet_address')
