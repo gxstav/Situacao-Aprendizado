@@ -49,13 +49,22 @@ let platform = new H.service.Platform({
                 map.setCenter(center);
             }
         });
+
         // RECT SHOWING THE BOUNDS
         map.addObject(new H.map.Rect(bounds, {
             style: {
                 fillColor: 'rgba(255, 255, 255, 0)',
-                strokeColor: 'rgba(83, 109, 254, 0.6)',
-                lineWidth: 8
+                strokeColor: 'rgba(83, 109, 254, 0.8)',
+                lineWidth: 3
             }
         }
         ));
+
+        // ADDING NEIGHBORHOOD CIRCLES ON MAP
+        let group = new H.map.Group();
+        
+        // ADDING CARS IN THE CIRCLES
+        group.addObject(new H.map.Circle({lat: -27.608849, lng: -48.521150}, 100));
+        group.addObject(new H.map.Circle({lat: -27.592373, lng: -48.549917}, 1000));
+        map.addObject(group);
     };

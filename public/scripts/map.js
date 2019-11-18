@@ -25,7 +25,7 @@
         request.onupgradeneeded = function (event) {
             console.log("Atualizando");
             db = event.target.result;
-            var objectStore = db.createObjectStore("vehicles", { keyPath: "vehId" });
+            var objectStore = db.createObjectStore("vehicles", { keyPath: "vehicleId" });
         };
         request.onsuccess = function (event) {
             console.log("Banco de dados aberto com sucesso");
@@ -34,17 +34,20 @@
     }
 
     // VEHICLE OBJECT
-    let obj_veh = {
+    let obj_vehicle = {
         // PET INPUTS
         ipt_title: document.getElementById('vehicle_title'),
         ipt_brand: document.getElementById('vehicle_brand'),
         ipt_model: document.getElementById('vehicle_model'),
         ipt_value: document.getElementById('vehicle_value'),
-        ipt_type: document.getElementsByName('veh_type'),
+        ipt_type: document.getElementsByName('vehicle_type'),
         ipt_color: document.getElementsByName('vehicle_color'),
-        ipt_condition: document.getElementsByName('pet_condition'),
-        ipt_description: document.getElementById('pet_description'),
-        ipt_address: document.getElementById('pet_address')
+        ipt_year: document.getElementById('vehicle_year'),
+        ipt_km: document.getElementById('vehicle_km'),
+        ipt_fuel: document.getElementsByName('vehicle_fuel'),
+        ipt_condition: document.getElementsByName('vehicle_condition'),
+        ipt_description: document.getElementById('vehicle_description'),
+        ipt_address: document.getElementById('vehicle_address')
     },
         obj_coordinate = null,
         // DIALOG
@@ -66,9 +69,9 @@
         btn_filter = document.getElementById('app_filter'),
         div_filter = document.getElementById('app_divFilter'),
         // PICTURE BUTTON
-        btn_picture = document.getElementById('pet_picture'),
+        btn_picture = document.getElementById('vehicle_picture'),
         // PICTURE FRAME
-        com_canvas = document.getElementById('pet_frame'),
+        com_canvas = document.getElementById('vehicle_frame'),
         binaryString = null,
         ctx = com_canvas.getContext("2d"),
         can_width = 180,
@@ -82,7 +85,7 @@
         // FLOAT BUTTON
         btn_float = document.getElementById('app_float'),
         // UL
-        ul_petList = document.querySelector('.pet_list'),
+        ul_vehicleList = document.querySelector('.vehicle_list'),
         // WINDOW CONTENT FOR MATERIAL DESIGN LITE
         windowContent = document.querySelector('.mdl-layout__content'),
         // GET PET TYPE
@@ -120,37 +123,37 @@
             el_list.innerHTML = '';
             let template = '';
             data.map(item => {
-                let pet_date = item.date.substr(0, item.date.length - 14).split('-');
+                let vehicle_date = item.date.substr(0, item.date.length - 14).split('-');
                 switch (item.type) {
-                    case 'Gato':
-                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.petId}">
+                    case 'Carro':
+                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-icon" style="color:#546EFD;">pets</i>
-                            <span>${item.nickname}</span>
+                            <i class="material-icons mdl-list__item-icon" style="color:#546EFD;">vehicles</i>
+                            <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${pet_date[2]}-${pet_date[1]}-${pet_date[0]}
+                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
                         </span>
                         </li>`;
                         break;
-                    case 'Cachorro':
-                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.petId}">
+                    case 'Moto':
+                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-icon" style="color:#FF9800;">pets</i>
-                            <span>${item.nickname}</span>
+                            <i class="material-icons mdl-list__item-icon" style="color:#FF9800;">vehicles</i>
+                            <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${pet_date[2]}-${pet_date[1]}-${pet_date[0]}
+                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
                         </span>
                         </li>`;
                         break;
                     case 'Outro':
-                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.petId}">
+                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-icon" style="color:#424242;">pets</i>
+                            <i class="material-icons mdl-list__item-icon" style="color:#424242;">vehicles</i>
                             <span>${item.nickname}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${pet_date[2]}-${pet_date[1]}-${pet_date[0]}
+                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
                         </span>
                         </li>`;
@@ -164,12 +167,12 @@
                 item.addEventListener('click', event => {
                     // CHECK ONLINE STATE
                     if (navigator.onLine) {
-                        let obj_veh = {
+                        let obj_vehicle = {
                             id: event.currentTarget.id
                         },
-                            str_pet = JSON.stringify(obj_veh);
-                        localStorage.setItem('pet', str_pet);
-                        window.location = 'pet.html';
+                            str_vehicle = JSON.stringify(obj_vehicle);
+                        localStorage.setItem('vehicle', str_vehicle);
+                        window.location = 'vehicle.html';
                     }
                     else {
                         appShowSnackBar(snackbar, 'Sem internet');
@@ -219,30 +222,30 @@
             // GROUP TO HOLD MAP BJECTS
             group = new H.map.Group();
             data.map(item => {
-                let pet_icon = null,
-                    pet_marker = null,
-                    pet_date = item.date.substr(0, item.date.length - 14).split('-'),
+                let vehicle_icon = null,
+                    vehicle_marker = null,
+                    vehicle_date = item.date.substr(0, item.date.length - 14).split('-'),
                     latLng = item.coordinates.split(',');
                 switch (item.type) {
-                    case 'Gato':
+                    case 'Carro':
                         // ICON
-                        pet_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#546EFD'), { size: { w: 24, h: 30 }, anchor: { x: 12, y: 17 } });
+                        vehicle_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#546EFD'), { size: { w: 24, h: 30 }, anchor: { x: 12, y: 17 } });
                         break;
-                    case 'Cachorro':
+                    case 'Moto':
                         // ICON
-                        pet_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#FF9800'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
+                        vehicle_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#FF9800'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
                         break;
                     case 'Outro':
                         // ICON
-                        pet_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#424242'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
+                        vehicle_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#424242'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
                         break;
                     default:
                         break;
                 };
                 // MARKER
-                pet_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: pet_icon, data: `${item.nickname}<br>${item.type}<br>${pet_date[2]}-${pet_date[1]}-${pet_date[0]}` });
+                vehicle_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: vehicle_icon, data: `${item.nickname}<br>${item.type}<br>${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}` });
                 // ADD THE MARKER TO THE GROUP  
-                group.addObject(pet_marker);
+                group.addObject(vehicle_marker);
             });
 
             // EVENT TO SHOW BUBBLE
@@ -368,7 +371,7 @@
         }
     });
 
-    let petData = null;
+    let vehicleData = null;
     // WINDOW EVENT TO CHECK AUTHENTICATION
     window.addEventListener('load', () => {
         // CHECK ONLINE STATE
@@ -396,7 +399,7 @@
                         window.location = 'index.html';
                     });
                 // NODE.JS API getPets
-                fetch('/pets', {
+                fetch('/vehicles', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${obj_auth.token}`
@@ -404,21 +407,21 @@
                 })
                     .then(result => { return result.json() })
                     .then(data => {
-                        petData = [...data.respTemplate];
+                        vehicleData = [...data.respTemplate];
                         // ADD SVG MARKER TO THE MAP
                         addSVGMarkers(map, [...data.respTemplate]);
                         // ADD ITEMS TO THE LIST
-                        createList(ul_petList, [...data.respTemplate]);
+                        createList(ul_vehicleList, [...data.respTemplate]);
 
                         // INDEXED DB
-                        var transaction = db.transaction(["pets"], "readwrite");
+                        var transaction = db.transaction(["vehicles"], "readwrite");
                         transaction.oncomplete = function (event) {
                             console.log("Sucesso");
                         };
                         transaction.onerror = function (event) {
                             console.error("Erro");
                         };
-                        var objectStore = transaction.objectStore("pets");
+                        var objectStore = transaction.objectStore("vehicles");
                         objectStore.clear();
                         [...data.respTemplate].map(item => {
                             objectStore.add(item);
@@ -444,8 +447,8 @@
             });
 
             let dbPet = [],
-                transaction = db.transaction(['pets'], 'readonly'),
-                objectStore = transaction.objectStore('pets');
+                transaction = db.transaction(['vehicles'], 'readonly'),
+                objectStore = transaction.objectStore('vehicles');
             objectStore.openCursor().onsuccess = function (event) {
                 var cursor = event.target.result;
                 if (cursor) {
@@ -456,7 +459,7 @@
                     // ADD SVG MARKER TO THE MAP
                     addSVGMarkers(map, dbPet);
                     // ADD ITEMS TO THE LIST
-                    createList(ul_petList, dbPet);
+                    createList(ul_vehicleList, dbPet);
                 }
             };
         }
@@ -495,7 +498,7 @@
                 if (navigator.onLine) {
                     map.removeLayer(clusteringLayer);
                     // ADD SVG MARKER TO THE MAP
-                    addSVGMarkers(map, petData);
+                    addSVGMarkers(map, vehicleData);
                 }
                 else {
                     appShowSnackBar(snackbar, 'Sem internet');
@@ -508,7 +511,7 @@
                 if (navigator.onLine) {
                     map.removeObject(group);
                     // ADD SVG MARKER TO THE MAP
-                    startClustering(map, petData);
+                    startClustering(map, vehicleData);
                 }
                 else {
                     appShowSnackBar(snackbar, 'Sem internet');
@@ -576,13 +579,13 @@
                         };
 
                         let dist = div_filter.children[0].children[1].children[5].children[1],
-                            petType = document.getElementsByName('pet_typeF');
+                            vehicleType = document.getElementsByName('vehicle_typeF');
 
                         let str_auth = localStorage.getItem('auth'),
                             obj_auth = JSON.parse(str_auth),
                             filter = {
                                 coordinates: `${obj_position.latitude}, ${obj_position.longitude}`,
-                                type: getPetType(petType),
+                                type: getPetType(vehicleType),
                                 distance: (parseInt(dist.innerHTML) / 1000) / 111.12
                             };
 
@@ -598,14 +601,14 @@
                         })
                             .then(result => { return result.json() })
                             .then(data => {
-                                petData = [...data.respTemplate];
+                                vehicleData = [...data.respTemplate];
 
-                                appShowSnackBar(snackbar, `Resultado: ${petData.length}`);
+                                appShowSnackBar(snackbar, `Resultado: ${vehicleData.length}`);
 
                                 // ADD SVG MARKER TO THE MAP
                                 addSVGMarkers(map, [...data.respTemplate]);
                                 // ADD ITEMS TO THE LIST
-                                createList(ul_petList, [...data.respTemplate]);
+                                createList(ul_vehicleList, [...data.respTemplate]);
 
                                 addCircleToMap(map, { lat: obj_position.latitude, lng: obj_position.longitude }, parseInt(dist.innerHTML))
 
@@ -670,7 +673,7 @@
                 obj_auth = JSON.parse(str_auth);
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API getPets
-            fetch('/pets', {
+            fetch('/vehicles', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${obj_auth.token}`
@@ -678,11 +681,11 @@
             })
                 .then(result => { return result.json() })
                 .then(data => {
-                    petData = [...data.respTemplate];
+                    vehicleData = [...data.respTemplate];
                     // ADD SVG MARKER TO THE MAP
                     addSVGMarkers(map, [...data.respTemplate]);
                     // ADD ITEMS TO THE LIST
-                    createList(ul_petList, [...data.respTemplate]);
+                    createList(ul_vehicleList, [...data.respTemplate]);
 
                     appHideLoading(spinner, spinner.children[0]);
                 })
@@ -806,7 +809,7 @@
                                 },
                                     str_template = obj_template.street + obj_template.city + obj_template.state + obj_template.postalCode;
                                 com_address.classList.add('is-dirty');
-                                obj_veh.ipt_address.value = str_template.substr(0, str_template.length - 2);
+                                obj_vehicle.ipt_address.value = str_template.substr(0, str_template.length - 2);
                                 appHideLoading(spinner, spinner.children[0]);
                             })
                             .catch(err => {
@@ -855,11 +858,11 @@
     btn_register.addEventListener('click', () => {
         // CHECK USER INPUTS
         let count = 0;
-        if (obj_veh.ipt_nickname.value === '' || obj_veh.ipt_description.value === '' || obj_veh.ipt_address.value === '') {
+        if (obj_vehicle.ipt_nickname.value === '' || obj_vehicle.ipt_description.value === '' || obj_vehicle.ipt_address.value === '') {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
             return;
         }
-        [...obj_veh.ipt_color].map(item => {
+        [...obj_vehicle.ipt_color].map(item => {
             if (item.checked) {
                 count++;
             }
@@ -872,23 +875,23 @@
         if (navigator.onLine) {
             let str_auth = localStorage.getItem('auth'),
                 obj_auth = JSON.parse(str_auth),
-                pet = {
+                vehicle = {
                     userId: obj_auth.id,
-                    nickname: obj_veh.ipt_nickname.value.trim(),
-                    type: getPetType(obj_veh.ipt_type),
-                    color: getPetColor(obj_veh.ipt_color),
-                    injured: obj_veh.ipt_condition[0].checked ? true : false,
-                    sick: obj_veh.ipt_condition[1].checked ? true : false,
-                    fed: obj_veh.ipt_condition[2].checked ? true : false,
-                    description: obj_veh.ipt_description.value.trim(),
-                    address: obj_veh.ipt_address.value.trim(),
+                    nickname: obj_vehicle.ipt_nickname.value.trim(),
+                    type: getPetType(obj_vehicle.ipt_type),
+                    color: getPetColor(obj_vehicle.ipt_color),
+                    injured: obj_vehicle.ipt_condition[0].checked ? true : false,
+                    sick: obj_vehicle.ipt_condition[1].checked ? true : false,
+                    fed: obj_vehicle.ipt_condition[2].checked ? true : false,
+                    description: obj_vehicle.ipt_description.value.trim(),
+                    address: obj_vehicle.ipt_address.value.trim(),
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
                 };
 
             appShowLoading(spinner, spinner.children[0]);
-            // NODE.JS API createPet
+            // NODE.JS API createVehicle
             fetch('/addPet', {
                 method: 'POST',
                 headers: {
@@ -896,7 +899,7 @@
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${obj_auth.token}`
                 },
-                body: JSON.stringify(pet)
+                body: JSON.stringify(vehicle)
             })
                 .then(result => { return result.json() })
                 .then(data => {

@@ -15,6 +15,13 @@ let appShowSnackBar = (element, msg) => {
             let btn_ok = document.createElement('button');
             btn_ok.innerText = 'OK';
             btn_ok.style= "color:black";
+            btn_ok.addEventListener('mouseenter', () => {
+                btn_ok.style= "color: gray";
+            });
+
+            btn_ok.addEventListener('mouseleave', () => {
+                btn_ok.style= "color: black";
+            })
             btn_ok.addEventListener('click', () => {
                 obj.btn_ok();
             });
