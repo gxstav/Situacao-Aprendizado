@@ -45,7 +45,7 @@
     <link rel="manifest" href="manifest.json">
 
     <style>
-        .veh_list {
+        .vehicle_list {
             margin: 5%;
             width: 90%;
         }
@@ -108,12 +108,12 @@
                     <div id="list_content" class="app-card-wide mdl-card mdl-shadow--4dp"
                         style="margin: 5%; width: 90%;">
                         <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
-                            <!-- pet LIST TEXT -->
+                            <!-- vehicle LIST TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
                                 Lista dos veículos da região:
                             </div>
-                            <ul class="veh_list mdl-list">
+                            <ul class="vehicle_list mdl-list">
                             </ul>
                         </div>
                     </div>
@@ -179,27 +179,27 @@
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Tipo do veículo *
                             </div>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_type1"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_type1" class="mdl-radio__button" name="veh_type"
+                                <input type="radio" id="vehicle_type1" class="mdl-radio__button" name="vehicle_type"
                                     value="carro" checked>
                                 <span class="mdl-radio__label">Carro</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_type2"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type2"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_type2" class="mdl-radio__button" name="veh_type"
+                                <input type="radio" id="vehicle_type2" class="mdl-radio__button" name="vehicle_type"
                                     value="moto">
                                 <span class="mdl-radio__label">Moto</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_type3"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type3"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_type3" class="mdl-radio__button" name="veh_type"
+                                <input type="radio" id="vehicle_type3" class="mdl-radio__button" name="vehicle_type"
                                     value="onibus">
                                 <span class="mdl-radio__label">Ônibus</span>                              
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_type4"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type4"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_type4" class="mdl-radio__button" name="veh_type"
+                                <input type="radio" id="vehicle_type4" class="mdl-radio__button" name="vehicle_type"
                                     value="caminhao">
                                 <span class="mdl-radio__label">Caminhão</span>
                             </label>
@@ -208,21 +208,21 @@
                                 style="width: 70%; align-self: center; padding: 16px 0;">
                                 Cor do Veículo *
                             </div>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_color1"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_color1" class="mdl-radio__button" name="veh_color"
+                                <input type="radio" id="vehicle_color1" class="mdl-radio__button" name="vehicle_color"
                                     value="branco" checked>
                                 <span class="mdl-radio__label">Branco</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_color2"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color2"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_color2" class="mdl-radio__button" name="veh_color"
+                                <input type="radio" id="vehicle_color2" class="mdl-radio__button" name="vehicle_color"
                                     value="preto">
                                 <span class="mdl-radio__label">Preto</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_color3"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color3"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_color3" class="mdl-radio__button" name="veh_color"
+                                <input type="radio" id="vehicle_color3" class="mdl-radio__button" name="vehicle_color"
                                     value="prata">
                                 <span class="mdl-radio__label">Prata</span>
                             </label>
@@ -257,39 +257,39 @@
                                 style="width: 70%; align-self: center; padding: 16px 0;">
                                 Combustível do veículo * 
                             </div>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_fuel1"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_fuel1" class="mdl-radio__button" name="veh_fuel"
+                                <input type="radio" id="vehicle_fuel1" class="mdl-radio__button" name="vehicle_fuel"
                                     value="alcool" checked>
                                 <span class="mdl-radio__label">Álcool</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_fuel2"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel2"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_fuel2" class="mdl-radio__button" name="veh_fuel"
+                                <input type="radio" id="vehicle_fuel2" class="mdl-radio__button" name="vehicle_fuel"
                                     value="gasolina">
                                 <span class="mdl-radio__label">Gasolina</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_fuel3"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel3"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_fuel3" class="mdl-radio__button" name="veh_fuel"
+                                <input type="radio" id="vehicle_fuel3" class="mdl-radio__button" name="vehicle_fuel"
                                     value="diesel">
                                 <span class="mdl-radio__label">Diesel</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_fuel4"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel4"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_fuel4" class="mdl-radio__button" name="veh_fuel"
+                                <input type="radio" id="vehicle_fuel4" class="mdl-radio__button" name="vehicle_fuel"
                                     value="flex">
                                 <span class="mdl-radio__label">Flex/Híbrido</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_fuel5"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel5"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_fuel5" class="mdl-radio__button" name="veh_fuel"
+                                <input type="radio" id="vehicle_fuel5" class="mdl-radio__button" name="vehicle_fuel"
                                     value="GNV">
                                 <span class="mdl-radio__label">GNV</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="veh_fuel6"
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel6"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="veh_fuel6" class="mdl-radio__button" name="veh_fuel"
+                                <input type="radio" id="vehicle_fuel6" class="mdl-radio__button" name="vehicle_fuel"
                                     value="eletrico">
                                 <span class="mdl-radio__label">Elétrico</span>
                             </label>
@@ -310,26 +310,26 @@
                                 style="width: 70%; align-self: center; padding: 16px 0;">
                                 Foto do Veículo *
                             </div>
-                            <!-- FOTO DO pet => pet_picture -->
-                            <label for="pet_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;"
+                            <!-- FOTO DO VEÍCULO => vehicle_picture -->
+                            <label for="vehicle_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;"
                                 class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-                                <input type="file" accept="image/*" capture="camera" id="pet_picture"
+                                <input type="file" accept="image/*" capture="camera" id="vehicle_picture"
                                     style="display: none;">
                                 <i class="material-icons">photo</i>
                             </label>
-                            <canvas id="pet_frame"
+                            <canvas id="vehicle_frame"
                                 style="width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 2px solid #757575"></canvas>
-                            <!-- pet ADDRESS TEXT -->
+                            <!-- VEHICLE ADDRESS TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
                                 Endereço aproximado (O endereço é preenchido automaticamente)*:
                             </div>
-                            <!-- veiculo ADDRESS TEXT AREA => veiculo_address -->
+                            <!-- VEHICLE ADDRESS TEXT AREA => vehicle_address -->
                             <div id="div_address" class="mdl-textfield mdl-js-textfield"
                                 style="width: 70%; align-self: center;">
                                 <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="veiculo_address"
                                     style="resize: none; height: 30px;" disabled></textarea>
-                                <label class="mdl-textfield__label" for="pet_address">Endereço</label>
+                                <label class="mdl-textfield__label" for="vehicle_address">Endereço</label>
                             </div>
                             <!-- REGISTER BUTTON => app_register -->
                             <button id="app_register"
@@ -378,20 +378,20 @@
             <h1 class="unselected">Filtro</h1>
             <div style="height: 230px; display: flex; flex-direction: column;">
                 <p style="margin-bottom: 16px">Tipo de animal:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_divType1"
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_divType1"
                     style="width: 70%; align-self: center; margin-bottom: 16px;">
-                    <input type="radio" id="pet_divType1" class="mdl-radio__button" name="pet_typeF" value="Cachorro"
+                    <input type="radio" id="vehicle_divType1" class="mdl-radio__button" name="vehicle_typeF" value="Cachorro"
                         checked>
                     <span class="mdl-radio__label">Cachorro</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_divType2"
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_divType2"
                     style="width: 70%; align-self: center; margin-bottom: 16px;">
-                    <input type="radio" id="pet_divType2" class="mdl-radio__button" name="pet_typeF" value="Gato">
+                    <input type="radio" id="vehicle_divType2" class="mdl-radio__button" name="vehicle_typeF" value="Gato">
                     <span class="mdl-radio__label">Gato</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pet_divType3"
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_divType3"
                     style="width: 70%; align-self: center; margin-bottom: 16px;">
-                    <input type="radio" id="pet_divType3" class="mdl-radio__button" name="pet_typeF" value="Outro">
+                    <input type="radio" id="vehicle_divType3" class="mdl-radio__button" name="vehicle_typeF" value="Outro">
                     <span class="mdl-radio__label">Outro</span>
                 </label>
                 <p style="margin-bottom: 16px">Distância (m):</p>
