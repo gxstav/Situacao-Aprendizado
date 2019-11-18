@@ -136,10 +136,10 @@ module.exports = () => {
                                 .then(result => {
                                     // E-MAIL OPTIONS
                                     let mailOptions = {
-                                        from: 'app.petresgate@gmail.com',
+                                        from: 'app.buscarfloripa@gmail.com',
                                         to: jsonData.email,
-                                        subject: 'PET RESGATE - Recuperação de Cadastro',
-                                        text: `Esta é uma mensagem automática por favor não responda.\n\nVocê solicitou uma recuperação de cadastro para o app PET RESGATE. Os dados cadastrados para este e-mail são:\n\nNome de usuário: ${result.rows[0].user_name}\nSenha: ${new_password}\n\nAtenciosamente,\nPET RESGATE`
+                                        subject: 'busCAR - Recuperação de Cadastro',
+                                        text: `Esta é uma mensagem automática por favor não responda.\n\nVocê solicitou uma recuperação de cadastro para o app busCAR. Os dados cadastrados para este e-mail são:\n\nNome de usuário: ${result.rows[0].user_name}\nSenha: ${new_password}\n\nAtenciosamente,\nbusCAR`
                                     };
                                     // E-MAIL FUNCTION
                                     transporter.sendMail(mailOptions, error => {
@@ -265,7 +265,7 @@ module.exports = () => {
                 .catch(err => res.status(400).json({ message: err.message }));
         },
         // CREATE A NEW PET FUNCTION => /addveh => post
-        createVeh(req, res) {
+        createVehicle(req, res) {
             // USER DATA
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
@@ -274,8 +274,8 @@ module.exports = () => {
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER
-                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_name, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, ST_GeomFromText('Point(${latLng})',4326), NOW(), $11, $12)`, [jsonData.userId, jsonData.nickname, jsonData.type, jsonData.color, jsonData.injured, jsonData.sick, jsonData.fed, jsonData.description, jsonData.address, jsonData.coordinates, jsonData.picture, jsonData.status])
+                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12                                                                                                                                 0                 1              2                 3             4               5              6               7              8               9              10                 11                    12                   13
+                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ST_GeomFromText('Point(${latLng})',4326), $13)`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.coordinates, jsonData.picture])
                         // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Obrigado por ajudar', message: 'O animal foi cadastrado com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
@@ -287,7 +287,7 @@ module.exports = () => {
                 .catch(err => res.status(400).json({ message: err.message }));
         },
         // GET PET DATA => /veh:id => get
-        getVeh(req, res) {
+        getVehicle(req, res) {
             // VEHICLE ID
             let id = req.params.id,
                 // RESPONSE TEMPLATE
@@ -297,22 +297,25 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // SELECT QUERY
-                    client.query("SELECT * FROM vehicles WHERE vehicle_id = $1", [id])
+                    client.query("SELECT * FROM vehicle WHERE vehicle_id = $1", [id])
                         // ON SUCCESS
                         .then(result => {
                             respTemplate = {
-                                petId: result.rows[0].pet_id,
-                                nickname: result.rows[0].pet_nickname.trim(),
-                                type: result.rows[0].pet_type.trim(),
-                                color: result.rows[0].pet_color.trim(),
-                                injured: result.rows[0].pet_injured,
-                                sick: result.rows[0].pet_sick,
-                                fed: result.rows[0].pet_fed,
-                                description: result.rows[0].pet_description.trim(),
-                                address: result.rows[0].pet_address.trim(),
-                                coordinates: result.rows[0].pet_coordinates.trim(),
-                                date: result.rows[0].pet_date,
-                                picture: result.rows[0].pet_picture
+                                vehcileId: result.rows[0].vehicle_id,
+                                brand: result.rows[0].vehicle_nickname.trim(),
+                                model: result.rows[0].vehicle_model.trim(),
+                                value: result.rows[0].vehicle_value,
+                                type: result.rows[0].vehicle_type.trim(),
+                                color: result.rows[0].vehicle_color.trim(),
+                                year: result.rows[0].vehicle_year,
+                                km: result.rows[0].vehicle_km,
+                                fuel: result.rows[0].vehicle_fuel,
+                                title: result.rows[0].vehicle_title.trim(),
+                                description: result.rows[0].vehicle_description.trim(),
+                                address: result.rows[0].vehicle_address.trim(),
+                                coordinates: result.rows[0].vehicle_coordinates.trim(),
+                                date: result.rows[0].vehicle_date,
+                                picture: result.rows[0].vehicle_picture
                             };
                             // RESPONSE OK 200
                             res.status(200).json({ respTemplate });
@@ -393,16 +396,16 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // INSERT QUERY => CREATE A NEW USER
-                    client.query(`SELECT * FROM pets WHERE pet_status[1] = 0 AND ST_Intersects(geom,ST_Buffer(ST_GeomFromText('Point(${latLng})',4326),$1)) AND pet_type = $2`, [jsonData.distance, jsonData.type])
+                    client.query(`SELECT * FROM vehicle WHERE vehicle_status[1] = 0 AND ST_Intersects(geom,ST_Buffer(ST_GeomFromText('Point(${latLng})',4326),$1)) AND vehicle_type = $2`, [jsonData.distance, jsonData.type])
                         // ON SUCCESS
                         .then(result => {
                             result.rows.map(item => {
                                 respTemplate.push({
-                                    petId: item.pet_id,
-                                    nickname: item.pet_nickname.trim(),
-                                    type: item.pet_type.trim(),
-                                    coordinates: item.pet_coordinates.trim(),
-                                    date: item.pet_date
+                                    vehicleId: item.vehicle_id,
+                                    brand: item.vehicle_brand.trim(),
+                                    type: item.vehicle_type.trim(),
+                                    coordinates: item.vehicle_coordinates.trim(),
+                                    date: item.vehicle_date
                                 });
                             });
                             // RESPONSE OK 200

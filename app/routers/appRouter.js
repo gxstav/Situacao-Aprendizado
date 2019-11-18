@@ -25,9 +25,9 @@ module.exports = app => {
         // UPDATE THE user_name, user_email AND user_address ? {'title', 'message'} : {'message'}
         .put('/data', auth.authenticate, controller.setUserData)
         // CREATE A NEW PET ? {'title', 'message'} : {'message'}
-        .post('/addveh', auth.authenticate, controller.createVeh)
+        .post('/addvehicle', auth.authenticate, controller.createVehicle)
         // GET PET BY ID ? {{respTemplate}} : {'message'}
-        .get('/veh/:id', auth.authenticate, controller.getVeh)
+        .get('/vehicle/:id', auth.authenticate, controller.getVehicle)
         // GET ALL PETS ? {{respTemplate}} : {'message'}
         .get('/vehicles', auth.authenticate, controller.getVehicles)
         // UPDATE THE pet_status ? {'title', 'message'} : {'message'}
