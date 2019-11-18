@@ -59,12 +59,4 @@ let platform = new H.service.Platform({
             }
         }
         ));
-
-        // ADDING NEIGHBORHOOD CIRCLES ON MAP
-        let group = new H.map.Group();
-        
-        // ADDING CARS IN THE CIRCLES
-        group.addObject(new H.map.Circle({lat: -27.608849, lng: -48.521150}, 100));
-        group.addObject(new H.map.Circle({lat: -27.592373, lng: -48.549917}, 1000));
-        map.addObject(group);
     };

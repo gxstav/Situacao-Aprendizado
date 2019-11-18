@@ -88,8 +88,8 @@
         ul_vehicleList = document.querySelector('.vehicle_list'),
         // WINDOW CONTENT FOR MATERIAL DESIGN LITE
         windowContent = document.querySelector('.mdl-layout__content'),
-        // GET PET TYPE
-        getPetType = el_group => {
+        // GET VEHICLE TYPE
+        getVehicleType = el_group => {
             let _type = null;
             [...el_group].map(item => {
                 if (item.checked) {
@@ -98,7 +98,7 @@
             });
             return _type;
         },
-        getPetColor = el_group => {
+        getVehicleColor = el_group => {
             let _color = [];
             [...el_group].map(item => {
                 if (item.checked) {
@@ -198,8 +198,8 @@
         // INITIALIZE MAP => CONSTRUCTOR element, baseLayer, opt_options
         map = new H.Map(target, defaultLayers.normal.map, {
             pixelRatio: pixelRatio,
-            center: { lat: - 23.271444, lng: - 45.935995 },
-            zoom: 9
+            center: { lat: -27.597476, lng: -48.549768 },
+            zoom: 15
         }),
         // MAKE THE MAP INTERACTIVE
         behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map)),
