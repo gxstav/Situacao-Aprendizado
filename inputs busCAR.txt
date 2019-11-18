@@ -1,0 +1,14 @@
+	Título - vehicle_title
+	Marca  - vehicle_brand
+	Modelo - vehicle_model
+ 	 Valor - vehicle_value
+  	  Tipo - vehicle_type
+   	   Cor - vehicle_color
+   	   Ano - vehicle_year
+    	    Km - vehicle_km
+   Combustível - vehicle_fuel
+     Descrição - vehicle_description
+  *** Telefone - vehicle_contact ***
+          Foto - vehicle_picture
+      Endereço - vehicle_address
+
