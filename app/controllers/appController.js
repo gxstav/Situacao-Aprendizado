@@ -274,10 +274,10 @@ module.exports = () => {
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12                                                                                                                                 0                 1              2                 3             4               5              6               7              8               9              10                 11                    12                   13
-                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, ST_GeomFromText('Point(${latLng})',4326), $13)`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.coordinates, jsonData.picture])
+                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12              13                14                                                                                                                                    0                 1              2                 3             4               5              6               7              8               9              10                 11                12               13                 14
+                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_title, vehicle_picture, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.title, jsonData.picture, jsonData.coordinates])
                         // ON SUCCESS => RESPONSE OK 200
-                        .then(() => res.status(200).json({ title: 'Obrigado por ajudar', message: 'O animal foi cadastrado com sucesso.' }))
+                        .then(() => res.status(200).json({ title: 'Tudo Certo!', message: 'O veículo foi cadastrado com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
                         .catch(err => res.status(400).json({ message: err.message }))
                         // DISCONNECTING TO THE DATABASE
@@ -302,15 +302,17 @@ module.exports = () => {
                         .then(result => {
                             respTemplate = {
                                 vehcileId: result.rows[0].vehicle_id,
-                                brand: result.rows[0].vehicle_nickname.trim(),
+                                userId: result.rows[0].user_id,
+                                brand: result.rows[0].vehicle_brand.trim(),
                                 model: result.rows[0].vehicle_model.trim(),
                                 value: result.rows[0].vehicle_value,
                                 type: result.rows[0].vehicle_type.trim(),
                                 color: result.rows[0].vehicle_color.trim(),
                                 year: result.rows[0].vehicle_year,
                                 km: result.rows[0].vehicle_km,
-                                fuel: result.rows[0].vehicle_fuel,
+                                fuel: result.rows[0].vehicle_fuel.trim(),
                                 title: result.rows[0].vehicle_title.trim(),
+                                status: result.rows[0].vehicle_status,
                                 description: result.rows[0].vehicle_description.trim(),
                                 address: result.rows[0].vehicle_address.trim(),
                                 coordinates: result.rows[0].vehicle_coordinates.trim(),
@@ -328,7 +330,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // GET PETS DATA => /pets => get
+        // GET VEHICLES DATA => /vehicles => get
         getVehicles(req, res) {
             // RESPONSE TEMPLATE
             let respTemplate = [];
@@ -337,16 +339,17 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // SELECT QUERY
-                    client.query("SELECT * FROM vehicles WHERE vehicle_status[1] = 0 ORDER BY pet_date")
+                    client.query("SELECT * FROM vehicle WHERE vehicle_status[1] = 0 ORDER BY vehicle_date")
                         // ON SUCCESS
                         .then(result => {
                             result.rows.map(item => {
                                 respTemplate.push({
-                                    petId: item.pet_id,
-                                    nickname: item.pet_nickname.trim(),
-                                    type: item.pet_type.trim(),
-                                    coordinates: item.pet_coordinates.trim(),
-                                    date: item.pet_date
+                                    vehicleId: item.vehicle_id,
+                                    brand: item.vehicle_brand.trim(),
+                                    model: item.vehicle_model.trim(),
+                                    type: item.vehicle_type.trim(),
+                                    coordinates: item.vehicle_coordinates.trim(),
+                                    date: item.vehicle_date
                                 });
                             });
                             // RESPONSE OK 200
@@ -360,7 +363,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // UPDATE PET STATUS => /rescue => put
+        // UPDATE VEHICLE STATUS => /rescue => put
         rescue(req, res) {
             // DATA
             let jsonData = req.body;
@@ -369,7 +372,7 @@ module.exports = () => {
                 // ON SUCCESS => CONNECTED
                 .then(client => {
                     // UPDATE QUERY
-                    client.query("UPDATE pets SET pet_status = $1 WHERE pet_id = $2", [jsonData.status, jsonData.petId])
+                    client.query("UPDATE vehicle SET vehicle_status = $1 WHERE vehicle_id = $2", [jsonData.status, jsonData.vehicleId])
                         // ON SUCCESS
                         .then(() => {
                             // RESPONSE OK 200
@@ -383,7 +386,8 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // FILTER PETS => /filter => post
+
+        // FILTER VEHICLES => /filter => post
         filter(req, res) {
             // USER DATA
             let jsonData = req.body,
@@ -403,6 +407,7 @@ module.exports = () => {
                                 respTemplate.push({
                                     vehicleId: item.vehicle_id,
                                     brand: item.vehicle_brand.trim(),
+                                    model: item.vehicle_model.trim(),
                                     type: item.vehicle_type.trim(),
                                     coordinates: item.vehicle_coordinates.trim(),
                                     date: item.vehicle_date

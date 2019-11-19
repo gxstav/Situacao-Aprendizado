@@ -1,4 +1,4 @@
-// INITIALIZE THE HERE PLATFORM OBJECT 
+// INITIALIZE THE HERE PLATFORM OBJECT
 let platform = new H.service.Platform({
     'app_id': 'LWRqikjS0dLon3ltytFO',
     'app_code': 'xmPBYm_cTeeLWIPCiINa6w',

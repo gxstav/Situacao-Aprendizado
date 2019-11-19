@@ -25,7 +25,7 @@
         request.onupgradeneeded = function (event) {
             console.log("Atualizando");
             db = event.target.result;
-            var objectStore = db.createObjectStore("vehicles", { keyPath: "vehicleId" });
+            var objectStore = db.createObjectStore("vehicle", { keyPath: "vehicleId" });
         };
         request.onsuccess = function (event) {
             console.log("Banco de dados aberto com sucesso");
@@ -35,7 +35,7 @@
 
     // VEHICLE OBJECT
     let obj_vehicle = {
-        // PET INPUTS
+        // VEHICLE INPUTS
         ipt_title: document.getElementById('vehicle_title'),
         ipt_brand: document.getElementById('vehicle_brand'),
         ipt_model: document.getElementById('vehicle_model'),
@@ -128,7 +128,7 @@
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-icon" style="color:#546EFD;">vehicles</i>
+                            <i class="material-icons mdl-list__item-icon" style="color:#546EFD;">directions_car</i>
                             <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
                               ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
@@ -139,8 +139,19 @@
                     case 'Moto':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-icon" style="color:#FF9800;">vehicles</i>
+                            <i class="material-icons mdl-list__item-icon" style="color:#FF9800;">motorcycle</i>
                             <span>${item.model}</span>
+                            <span class="mdl-list__item-sub-title">
+                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
+                            </span>
+                        </span>
+                        </li>`;
+                        break;
+                    case 'Caminhao':
+                        template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon" style="color:#424242;">directions_bus</i>
+                            <span>${item.nickname}</span>
                             <span class="mdl-list__item-sub-title">
                               ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
@@ -150,10 +161,10 @@
                     case 'Outro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-icon" style="color:#424242;">vehicles</i>
+                            <i class="material-icons mdl-list__item-icon" style="color:#121212;">directions_boat</i>
                             <span>${item.nickname}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
+                                ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
                         </span>
                         </li>`;
@@ -235,15 +246,24 @@
                         // ICON
                         vehicle_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#FF9800'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
                         break;
-                    case 'Outro':
+                    case 'Caminhao':
                         // ICON
                         vehicle_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#424242'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
+                        break;
+                    case 'Outro':
+                        // ICON
+                        vehicle_icon = new H.map.Icon(svgMarker.replace('{FILL}', '#121212'), { size: { w: 28, h: 34 }, anchor: { x: 14, y: 17 } });
                         break;
                     default:
                         break;
                 };
+
+
+///////////////////// IMPORTANTE JUNTAR OS MARKERS ABAIXO POR BAIRRO /////////////////////
+
+
                 // MARKER
-                vehicle_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: vehicle_icon, data: `${item.nickname}<br>${item.type}<br>${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}` });
+                vehicle_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: vehicle_icon, data: `${item.brand}<br>${item.model}<br>${item.type}<br>${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}` });
                 // ADD THE MARKER TO THE GROUP  
                 group.addObject(vehicle_marker);
             });
@@ -279,6 +299,10 @@
             )
             map.addObject(circle);
         },
+
+///////////////////////////////////////////////////////////////////////////////
+
+
         // FUNCTION TO CLUSTERING THE DATA
         clusteringLayer = null,
         startClustering = (map, data) => {
@@ -351,7 +375,7 @@
     // RESTRICT MAP AREA
     restrictMap(map);
     // RESTRICT MAP ZOOM
-    defaultLayers.normal.map.setMin(9);
+    defaultLayers.normal.map.setMin(10);
     // REMOVE MAPSETTINGS
     ui.removeControl('mapsettings');
     // ADD MEASURE TOOL
@@ -398,7 +422,7 @@
                         console.error(err.message);
                         window.location = 'index.html';
                     });
-                // NODE.JS API getPets
+                // NODE.JS API getVehicles
                 fetch('/vehicles', {
                     method: 'GET',
                     headers: {
@@ -414,14 +438,14 @@
                         createList(ul_vehicleList, [...data.respTemplate]);
 
                         // INDEXED DB
-                        var transaction = db.transaction(["vehicles"], "readwrite");
+                        var transaction = db.transaction(["vehicle"], "readwrite");
                         transaction.oncomplete = function (event) {
                             console.log("Sucesso");
                         };
                         transaction.onerror = function (event) {
                             console.error("Erro");
                         };
-                        var objectStore = transaction.objectStore("vehicles");
+                        var objectStore = transaction.objectStore("vehicle");
                         objectStore.clear();
                         [...data.respTemplate].map(item => {
                             objectStore.add(item);
@@ -446,20 +470,20 @@
                 btn_ok() { appHideDialog(dialog); }
             });
 
-            let dbPet = [],
-                transaction = db.transaction(['vehicles'], 'readonly'),
-                objectStore = transaction.objectStore('vehicles');
+            let dbVehicle = [],
+                transaction = db.transaction(['vehicle'], 'readonly'),
+                objectStore = transaction.objectStore('vehicle');
             objectStore.openCursor().onsuccess = function (event) {
                 var cursor = event.target.result;
                 if (cursor) {
-                    dbPet.push(cursor.value);
+                    dbVehicle.push(cursor.value);
                     cursor.continue();
                 }
                 else {
                     // ADD SVG MARKER TO THE MAP
-                    addSVGMarkers(map, dbPet);
+                    addSVGMarkers(map, dbVehicle);
                     // ADD ITEMS TO THE LIST
-                    createList(ul_vehicleList, dbPet);
+                    createList(ul_vehicleList, dbVehicle);
                 }
             };
         }
@@ -585,7 +609,7 @@
                             obj_auth = JSON.parse(str_auth),
                             filter = {
                                 coordinates: `${obj_position.latitude}, ${obj_position.longitude}`,
-                                type: getPetType(vehicleType),
+                                type: getVehicleType(vehicleType),
                                 distance: (parseInt(dist.innerHTML) / 1000) / 111.12
                             };
 
@@ -672,8 +696,8 @@
             let str_auth = localStorage.getItem('auth'),
                 obj_auth = JSON.parse(str_auth);
             appShowLoading(spinner, spinner.children[0]);
-            // NODE.JS API getPets
-            fetch('/vehicles', {
+            // NODE.JS API getVehicle
+            fetch('/vehicle', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${obj_auth.token}`
@@ -749,7 +773,7 @@
         btn_float.style.display = 'flex';
     });
 
-    // DISPLAYS ADD NEW ANIMAL CONTENT
+    // DISPLAYS ADD NEW VEHICLE CONTENT
     com_tabs[2].addEventListener('click', event => {
         displayContent(event.currentTarget.id);
         btn_float.style.display = 'none';
@@ -858,10 +882,10 @@
     btn_register.addEventListener('click', () => {
         // CHECK USER INPUTS
         let count = 0;
-        if (obj_vehicle.ipt_nickname.value === '' || obj_vehicle.ipt_description.value === '' || obj_vehicle.ipt_address.value === '') {
+        if (obj_vehicle.ipt_title.value === '' || obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_address.value === '') {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
             return;
-        }
+        }/*
         [...obj_vehicle.ipt_color].map(item => {
             if (item.checked) {
                 count++;
@@ -870,19 +894,22 @@
         if (count === 0) {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
             return;
-        }
+        }*/
         // CHECK ONLINE STATE
         if (navigator.onLine) {
             let str_auth = localStorage.getItem('auth'),
                 obj_auth = JSON.parse(str_auth),
                 vehicle = {
                     userId: obj_auth.id,
-                    nickname: obj_vehicle.ipt_nickname.value.trim(),
-                    type: getPetType(obj_vehicle.ipt_type),
-                    color: getPetColor(obj_vehicle.ipt_color),
-                    injured: obj_vehicle.ipt_condition[0].checked ? true : false,
-                    sick: obj_vehicle.ipt_condition[1].checked ? true : false,
-                    fed: obj_vehicle.ipt_condition[2].checked ? true : false,
+                    brand: obj_vehicle.ipt_brand.value.trim(),
+                    model: obj_vehicle.ipt_model.value.trim(),
+                    value: obj_vehicle.ipt_value,
+                    type: obj_vehicle.ipt_type.value.trim(),
+                    color: obj_vehicle.ipt_color.trim(),
+                    year: obj_vehicle.ipt_year,
+                    km: obj_vehicle.ipt_km,
+                    fuel: obj_vehicle.ipt_fuel.value.trim(),
+                    title: obj_vehicle.ipt_title.value.trim(),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
                     coordinates: obj_coordinate,
@@ -890,9 +917,12 @@
                     status: [0, 0]
                 };
 
+                /*type: getVehicleType(obj_vehicle.ipt_type),
+                color: getVehicleColor(obj_vehicle.ipt_color),*/
+                
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
-            fetch('/addPet', {
+            fetch('/addVehicle', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

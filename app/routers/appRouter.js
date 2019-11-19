@@ -24,14 +24,14 @@ module.exports = app => {
         .put('/password', auth.authenticate, controller.setUserPassword)
         // UPDATE THE user_name, user_email AND user_address ? {'title', 'message'} : {'message'}
         .put('/data', auth.authenticate, controller.setUserData)
-        // CREATE A NEW PET ? {'title', 'message'} : {'message'}
-        .post('/addvehicle', auth.authenticate, controller.createVehicle)
+        // CREATE A NEW VEHICLE ? {'title', 'message'} : {'message'}
+        .post('/addVehicle', auth.authenticate, controller.createVehicle)
         // GET PET BY ID ? {{respTemplate}} : {'message'}
         .get('/vehicle/:id', auth.authenticate, controller.getVehicle)
-        // GET ALL PETS ? {{respTemplate}} : {'message'}
+        // GET ALL VEHICLES ? {{respTemplate}} : {'message'}
         .get('/vehicles', auth.authenticate, controller.getVehicles)
-        // UPDATE THE pet_status ? {'title', 'message'} : {'message'}
+        // UPDATE THE vehicle_status ? {'title', 'message'} : {'message'}
         .put('/rescue', auth.authenticate, controller.rescue)
-        // GET ALL FILTERED PETS ? {{respTemplate}} : {'message'}
+        // GET ALL FILTERED VEHICLES ? {{respTemplate}} : {'message'}
         .post('/filter', auth.authenticate, controller.filter)
 };
