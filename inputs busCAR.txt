@@ -12,3 +12,39 @@
           Foto - vehicle_picture
       Endereço - vehicle_address
 
+
+EVENTOS DO MENU LATERAL maps.js:linha 727
+
+REGISTRAR VEÍCULO maps.js:linha 881
+
+
+[jsonData.userId, 		
+jsonData.brand, 		
+jsonData.model, 		
+jsonData.year, 			
+jsonData.color, 		
+jsonData.type, 			
+jsonData.value, 		
+jsonData.status, 		
+jsonData.km, 			
+jsonData.fuel, 			
+jsonData.address, 		
+jsonData.description, 	
+jsonData.coordinates, 	
+jsonData.picture]		
+
+userId: obj_auth.id,
+brand: obj_vehicle.ipt_brand.value.trim(),
+model: obj_vehicle.ipt_model.value.trim(),
+value: obj_vehicle.ipt_value.value,
+type: getVehicleType(obj_vehicle.ipt_type),
+color: getVehicleColor(obj_vehicle.ipt_color),
+year: obj_vehicle.ipt_year.value,
+km: obj_vehicle.ipt_km.value,
+fuel: obj_vehicle.ipt_fuel.value.trim(),
+title: obj_vehicle.ipt_title.trim(),
+description: obj_vehicle.ipt_description.value.trim(),
+address: obj_vehicle.ipt_address.value.trim(),
+coordinates: obj_coordinate,
+picture: binaryString,
+status: [0, 0]

@@ -130,10 +130,10 @@
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Título do anúncio *
                             </div>
-                            <!--veiculo nome INPUT => veiculo_nome -->
+                            <!--veiculo nome INPUT => veiculo_titulo -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%; align-self: center;">
-                                <input class="mdl-textfield__input" type="text" id="vehicle_title" maxlength="30">
+                                <textarea class="mdl-textfield__input" type="text" id="vehicle_title" maxlength="150">
                                 <label class="mdl-textfield__label" for="vehicle_title">Título</label>
                             </div>
                             <!--Marca-->
@@ -182,26 +182,26 @@
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="vehicle_type1" class="mdl-radio__button" name="vehicle_type"
-                                    value="carro" checked>
+                                    value="Carro" checked>
                                 <span class="mdl-radio__label">Carro</span>
                             </label>
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type2"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="vehicle_type2" class="mdl-radio__button" name="vehicle_type"
-                                    value="moto">
+                                    value="Moto">
                                 <span class="mdl-radio__label">Moto</span>
                             </label>
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type3"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="vehicle_type3" class="mdl-radio__button" name="vehicle_type"
-                                    value="onibus">
-                                <span class="mdl-radio__label">Ônibus</span>                              
+                                    value="Caminhao">
+                                <span class="mdl-radio__label">Caminhão</span>                              
                             </label>
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type4"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="vehicle_type4" class="mdl-radio__button" name="vehicle_type"
-                                    value="caminhao">
-                                <span class="mdl-radio__label">Caminhão</span>
+                                    value="Outro">
+                                <span class="mdl-radio__label">Outro</span>
                             </label>
                             <!-- veiculo COLOR TEXT -->
                             <div class="mdl-card__supporting-text"
@@ -242,7 +242,7 @@
                             <!-- QUILOMETRAGEM => auxiliar -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px">
-                                Quilometragem do veículo
+                                Quilometragem do veículo *
                             </div>
 
                             <!-- QUILOMETRAGEM => quilometragem_input -->
