@@ -48,6 +48,7 @@
                 if (localStorage.hasOwnProperty('vehicle')) {
                     let str_vehicle = localStorage.getItem('vehicle'),
                         obj_vehicle = JSON.parse(str_vehicle);
+                        console.log(obj_vehicle)
                     // NODE.JS API getvehicle
                     fetch(`/vehicle/${obj_vehicle.id}`, {
                         method: 'GET',

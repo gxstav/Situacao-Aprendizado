@@ -264,7 +264,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // CREATE A NEW VEHICLE FUNCTION => /addveh => post
+        // CREATE A NEW VEHICLE FUNCTION => /addvehicle => post
         createVehicle(req, res) {
             // USER DATA
             let jsonData = req.body,
@@ -274,8 +274,8 @@ module.exports = () => {
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12              13                14                                                                                                                                    0                 1              2                 3             4               5              6               7              8               9              10                 11                12               13                 14
-                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_title, vehicle_picture, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.title, jsonData.picture, jsonData.coordinates])
+                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12                13                                                                                                                                    0                 1              2                 3             4               5              6               7              8               9              10                 11            12               13                 
+                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_picture, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.picture, jsonData.coordinates])
                         // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Tudo Certo!', message: 'O veículo foi cadastrado com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
@@ -286,7 +286,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // GET VEHICLE DATA => /veh:id => get
+        // GET VEHICLE DATA => /vehicle:id => get
         getVehicle(req, res) {
             // VEHICLE ID
             let id = req.params.id,
@@ -311,14 +311,14 @@ module.exports = () => {
                                 year: result.rows[0].vehicle_year,
                                 km: result.rows[0].vehicle_km,
                                 fuel: result.rows[0].vehicle_fuel.trim(),
-                                title: result.rows[0].vehicle_title.trim(),
                                 status: result.rows[0].vehicle_status,
                                 description: result.rows[0].vehicle_description.trim(),
                                 address: result.rows[0].vehicle_address.trim(),
                                 coordinates: result.rows[0].vehicle_coordinates.trim(),
                                 date: result.rows[0].vehicle_date,
                                 picture: result.rows[0].vehicle_picture
-                            };
+                            }
+                            console.log(respTemplate)
                             // RESPONSE OK 200
                             res.status(200).json({ respTemplate });
                         })
