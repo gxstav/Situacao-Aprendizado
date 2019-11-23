@@ -318,7 +318,6 @@ module.exports = () => {
                                 date: result.rows[0].vehicle_date,
                                 picture: result.rows[0].vehicle_picture
                             }
-                            console.log(respTemplate)
                             // RESPONSE OK 200
                             res.status(200).json({ respTemplate });
                         })
@@ -344,12 +343,22 @@ module.exports = () => {
                         .then(result => {
                             result.rows.map(item => {
                                 respTemplate.push({
-                                    vehicleId: item.vehicle_id,
-                                    brand: item.vehicle_brand.trim(),
-                                    model: item.vehicle_model.trim(),
-                                    type: item.vehicle_type.trim(),
-                                    coordinates: item.vehicle_coordinates.trim(),
-                                    date: item.vehicle_date
+                                vehcileId: item.vehicle_id,
+                                userId: item.user_id,
+                                brand: item.vehicle_brand.trim(),
+                                model: item.vehicle_model.trim(),
+                                value: item.vehicle_value,
+                                type: item.vehicle_type.trim(),
+                                color: item.vehicle_color.trim(),
+                                year: item.vehicle_year,
+                                km: item.vehicle_km,
+                                fuel: item.vehicle_fuel.trim(),
+                                status: item.vehicle_status,
+                                description: item.vehicle_description.trim(),
+                                address: item.vehicle_address.trim(),
+                                coordinates: item.vehicle_coordinates.trim(),
+                                date: item.vehicle_date,
+                                picture: item.vehicle_picture
                                 });
                             });
                             // RESPONSE OK 200
