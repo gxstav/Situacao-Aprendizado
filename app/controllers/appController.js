@@ -264,7 +264,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // CREATE A NEW PET FUNCTION => /addveh => post
+        // CREATE A NEW VEHICLE FUNCTION => /addveh => post
         createVehicle(req, res) {
             // USER DATA
             let jsonData = req.body,
@@ -286,7 +286,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // GET PET DATA => /veh:id => get
+        // GET VEHICLE DATA => /veh:id => get
         getVehicle(req, res) {
             // VEHICLE ID
             let id = req.params.id,
