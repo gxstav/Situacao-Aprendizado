@@ -130,7 +130,7 @@
             el_list.innerHTML = '';
             let template = '';
             data.map(item => {
-                let vehicle_date = item.date.substr(0, item.date.length - 14).split('-');
+                let vehicle_date = item.date.substr(0,10).split('-');
                 switch (item.type) {
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
@@ -242,7 +242,7 @@
             data.map(item => {
                 let vehicle_icon = null,
                     vehicle_marker = null,
-                    vehicle_date = item.date.substr(0, item.date.length - 14).split('-'),
+                    vehicle_date = item.date.substr(0,10).split('-'),
                     latLng = item.coordinates.split(',');
                 switch (item.type) {
                     case 'Carro':
@@ -575,7 +575,7 @@
                     if (parseInt(dist.innerHTML) > 100 && parseInt(dist.innerHTML) <= 1500) {
                         dist.innerHTML = parseInt(dist.innerHTML) - 50;
                     }
-                });
+                });_
             }
             else {
                 appShowSnackBar(snackbar, 'Sem internet');
@@ -898,6 +898,7 @@
         if (navigator.onLine) {
             let str_auth = localStorage.getItem('auth'),
                 obj_auth = JSON.parse(str_auth),
+                time = new Date(), 
                 vehicle = {
                     userId: obj_auth.id,
                     brand: obj_vehicle.ipt_brand.value.trim(),
@@ -910,6 +911,7 @@
                     fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
+                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}}`,
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
