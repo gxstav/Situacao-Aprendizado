@@ -83,7 +83,7 @@
         // FLOAT BUTTON
         btn_float = document.getElementById('app_float'),
         // UL
-        ul_vehicleList = document.querySelector('.vehicle_list'),
+        ul_vehicleList = document.getElementById('vehicle-list'),
         // WINDOW CONTENT FOR MATERIAL DESIGN LITE
         windowContent = document.querySelector('.mdl-layout__content'),
         // GET VEHICLE TYPE
@@ -439,6 +439,7 @@
                     .then(result => { return result.json() })
                     .then(data => {
                         vehicleData = [...data.respTemplate];
+                        console.log(vehicleData)
                         // ADD SVG MARKER TO THE MAP
                         addSVGMarkers(map, [...data.respTemplate]);
                         // ADD ITEMS TO THE LIST
@@ -892,16 +893,7 @@
         if (obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_address.value === '') {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
             return;
-        }/*
-        [...obj_vehicle.ipt_color].map(item => {
-            if (item.checked) {
-                count++;
-            }
-        });
-        if (count === 0) {
-            appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
-            return;
-        }*/
+        }
         // CHECK ONLINE STATE
         if (navigator.onLine) {
             let str_auth = localStorage.getItem('auth'),
