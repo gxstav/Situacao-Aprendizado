@@ -439,7 +439,7 @@
                     .then(result => { return result.json() })
                     .then(data => {
                         vehicleData = [...data.respTemplate];
-                        console.log(vehicleData)
+                        console.log(data);
                         // ADD SVG MARKER TO THE MAP
                         addSVGMarkers(map, [...data.respTemplate]);
                         // ADD ITEMS TO THE LIST
