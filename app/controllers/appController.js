@@ -267,6 +267,7 @@ module.exports = () => {
         // CREATE A NEW VEHICLE FUNCTION => /addvehicle => post
         createVehicle(req, res) {
             // USER DATA
+            console.log(req)
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
                 latLng = `${_latLng[1]} ${_latLng[0]}`;

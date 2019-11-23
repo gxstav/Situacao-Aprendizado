@@ -130,7 +130,7 @@
             el_list.innerHTML = '';
             let template = '';
             data.map(item => {
-                let vehicle_date = item.date.substr(0,10).split('-');
+                let vehicle_date = item.date.split('-');
                 switch (item.type) {
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
@@ -242,7 +242,7 @@
             data.map(item => {
                 let vehicle_icon = null,
                     vehicle_marker = null,
-                    vehicle_date = item.date.substr(0,10).split('-'),
+                    vehicle_date = item.date.split('-'),
                     latLng = item.coordinates.split(',');
                 switch (item.type) {
                     case 'Carro':
@@ -913,7 +913,7 @@
                     fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
-                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`,
+                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`,
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
