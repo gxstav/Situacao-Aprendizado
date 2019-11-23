@@ -437,15 +437,14 @@
                     }
                 })
                     .then(result => { 
-                        console.log(result);
                         return result.json()})
                     .then(data => {
                         vehicleData = [...data.respTemplate];
-                        console.log(data);
+                        console.log(vehicleData);
                         // ADD SVG MARKER TO THE MAP
-                        addSVGMarkers(map, [...data.respTemplate]);
+                        addSVGMarkers(map, vehicleData);
                         // ADD ITEMS TO THE LIST
-                        createList(ul_vehicleList, [...data.respTemplate]);
+                        createList(ul_vehicleList, vehicleData);
 
                         // INDEXED DB
                         var transaction = db.transaction(["vehicle"], "readwrite");
@@ -838,10 +837,11 @@
                                 let obj_template = {
                                     street: address.street !== undefined ? `${address.street}, ` : '',
                                     city: address.city !== undefined ? `${address.city}, ` : '',
+                                    neighborhood: address.neighborhood !== undefined ? `${address.neighborhood}, ` : '',
                                     state: address.state !== undefined ? `${address.state}, ` : '',
                                     postalCode: address.postalCode !== undefined ? `${address.postalCode}, ` : ''
                                 },
-                                    str_template = obj_template.street + obj_template.city + obj_template.state + obj_template.postalCode;
+                                    str_template = obj_template.street + obj_template.city + obj_template.neighborhood + obj_template.state + obj_template.postalCode;
                                 com_address.classList.add('is-dirty');
                                 obj_vehicle.ipt_address.value = str_template.substr(0, str_template.length - 2);
                                 appHideLoading(spinner, spinner.children[0]);
