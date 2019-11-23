@@ -97,10 +97,10 @@
             return _type;
         },
         getVehicleColor = el_group => {
-            let _color = [];
+            let _color = null;
             [...el_group].map(item => {
                 if (item.checked) {
-                    _color.push(item.value);
+                    _color = item.value;
                 }
             });
             return _color.toString();
@@ -158,7 +158,7 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#424242;">directions_bus</i>
-                            <span>${item.nickname}</span>
+                            <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
                               ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
@@ -169,7 +169,7 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#121212;">directions_boat</i>
-                            <span>${item.nickname}</span>
+                            <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
                                 ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
@@ -276,7 +276,7 @@
             });
 
             // EVENT TO SHOW BUBBLE
-            group.addEventListener('tap', event => {
+            /*group.addEventListener('tap', event => {
                 let currentBubble = ui.getBubbles(),
                     point = event.target.getPosition(),
                     t = event.target,
@@ -288,7 +288,7 @@
             });
             // ADD THE GROUP TO THE MAP
             map.addObject(group);
-        },
+        },*/
         circle = null,
         addCircleToMap = (map, coordinates, distance) => {
             circle = new H.map.Circle(
