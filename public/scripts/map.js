@@ -105,6 +105,15 @@
             });
             return _color.toString();
         },
+        getVehicleFuel = el_group => {
+            let _fuel = null;
+            [...el_group].map(item => {
+                if (item.checked) {
+                    _fuel = item.value;
+                }
+            });
+            return _fuel;
+        }
         // DISPLAY CONTENT
         displayContent = el_id => {
             [...com_tabs].map((item, index) => {
@@ -902,20 +911,17 @@
                     brand: obj_vehicle.ipt_brand.value.trim(),
                     model: obj_vehicle.ipt_model.value.trim(),
                     value: obj_vehicle.ipt_value.valueAsNumber,
-                    type: obj_vehicle.ipt_type,
-                    color: obj_vehicle.ipt_color,
+                    type: getVehicleType(obj_vehicle.ipt_type),
+                    color: getVehicleColor(obj_vehicle.ipt_color),
                     year: obj_vehicle.ipt_year.value,
                     km: obj_vehicle.ipt_km.value,
-                    fuel: obj_vehicle.ipt_fuel,
+                    fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
                 };
-
-                /*type: getVehicleType(obj_vehicle.ipt_type),
-                color: getVehicleColor(obj_vehicle.ipt_color),*/
             console.log(vehicle)  
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
