@@ -75,13 +75,13 @@
                             },
                                 img.onerror = err => console.error(err.message);
 
-                            template = `Nome: ${data.respTemplate.nickname}<br><br>
+                            template = `Marca: ${data.respTemplate.brand}<br><br>
+                            Modelo: ${data.respTemplate.model}<br><br>
                             Tipo: ${data.respTemplate.type}<br><br>
+                            Ano: ${data.respTemplate.year}<br><br>
                             Cores: ${data.respTemplate.color}<br><br>
                             Data de Cadastro:  ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}<br><br>
-                            Parece estar machucado: ${data.respTemplate.injured ? 'Sim' : 'Não'}<br><br>
-                            Parece estar doente: ${data.respTemplate.sick ? 'Sim' : 'Não'}<br><br>
-                            Parece estar mal alimentado: ${data.respTemplate.fed ? 'Sim' : 'Não'}<br><br>
+                            R$ ${data.respTemplate.value}<br><br>
                             Localização: ${data.respTemplate.address}<br>${data.respTemplate.coordinates}<br><br>
                             Descrição: ${data.respTemplate.description}`;
 
