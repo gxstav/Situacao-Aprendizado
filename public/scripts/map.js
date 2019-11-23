@@ -36,7 +36,6 @@
     // VEHICLE OBJECT
     let obj_vehicle = {
         // VEHICLE INPUTS
-        ipt_title: document.getElementById('vehicle_title'),
         ipt_brand: document.getElementById('vehicle_brand'),
         ipt_model: document.getElementById('vehicle_model'),
         ipt_value: document.getElementById('vehicle_value'),
@@ -45,7 +44,6 @@
         ipt_year: document.getElementById('vehicle_year'),
         ipt_km: document.getElementById('vehicle_km'),
         ipt_fuel: document.getElementsByName('vehicle_fuel'),
-        ipt_condition: document.getElementsByName('vehicle_condition'),
         ipt_description: document.getElementById('vehicle_description'),
         ipt_address: document.getElementById('vehicle_address')
     },
