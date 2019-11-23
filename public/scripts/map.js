@@ -113,7 +113,7 @@
                 }
             });
             return _fuel;
-        }
+        },
         // DISPLAY CONTENT
         displayContent = el_id => {
             [...com_tabs].map((item, index) => {
@@ -921,8 +921,7 @@
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
-                };
-            console.log(vehicle)  
+                }; 
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
             fetch('/addVehicle', {
