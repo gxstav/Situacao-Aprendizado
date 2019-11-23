@@ -276,7 +276,7 @@
             });
 
             // EVENT TO SHOW BUBBLE
-            /*group.addEventListener('tap', event => {
+            group.addEventListener('tap', event => {
                 let currentBubble = ui.getBubbles(),
                     point = event.target.getPosition(),
                     t = event.target,
@@ -288,7 +288,7 @@
             });
             // ADD THE GROUP TO THE MAP
             map.addObject(group);
-        },*/
+        },
         circle = null,
         addCircleToMap = (map, coordinates, distance) => {
             circle = new H.map.Circle(
@@ -886,7 +886,7 @@
     });
 
     // REGISTER A VEHICLE EVENT
-    btn_register.addEventListener('click', () => {
+    btn_register.addEventListener('click', () =>{ 
         // CHECK USER INPUTS
         let count = 0;
         if (obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_address.value === '') {
