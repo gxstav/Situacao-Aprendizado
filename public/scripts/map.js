@@ -436,7 +436,9 @@
                         'Authorization': `Bearer ${obj_auth.token}`
                     }
                 })
-                    .then(result => { return result.json() })
+                    .then(result => { 
+                        console.log(result);
+                        return result.json()})
                     .then(data => {
                         vehicleData = [...data.respTemplate];
                         console.log(data);
@@ -911,7 +913,7 @@
                     fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
-                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}}`,
+                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`,
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
