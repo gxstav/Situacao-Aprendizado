@@ -903,9 +903,9 @@
                     model: obj_vehicle.ipt_model.value.trim(),
                     value: obj_vehicle.ipt_value,
                     type: obj_vehicle.ipt_type.value,
-                    color: obj_vehicle.ipt_color,
-                    year: obj_vehicle.ipt_year,
-                    km: obj_vehicle.ipt_km,
+                    color: obj_vehicle.ipt_color.value,
+                    year: obj_vehicle.ipt_year.value,
+                    km: obj_vehicle.ipt_km.value,
                     fuel: obj_vehicle.ipt_fuel.value,
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
@@ -916,7 +916,7 @@
 
                 /*type: getVehicleType(obj_vehicle.ipt_type),
                 color: getVehicleColor(obj_vehicle.ipt_color),*/
-                
+            console.log(vehicle)  
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
             fetch('/addVehicle', {
