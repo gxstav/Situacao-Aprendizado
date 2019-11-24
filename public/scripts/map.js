@@ -246,10 +246,11 @@
         addSVGMarkers = (map, data) => {
             // GROUP TO HOLD MAP BJECTS
             group = new H.map.Group();
+            console.log(data)
             data.map(item => {
                 let vehicle_icon = null,
                     vehicle_marker = null,
-                    vehicle_date = item.date.split('-'),
+                    vehicle_date = formatDate(item.date),
                     latLng = item.coordinates.split(',');
                 switch (item.type) {
                     case 'Carro':
@@ -277,7 +278,9 @@
 
 
                 // MARKER
-                vehicle_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: vehicle_icon, data: `${item.brand}<br>${item.model}<br>${item.type}<br>${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}` });
+                console.log(latLng)
+                
+                vehicle_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: vehicle_icon, data: `${item.type}<br>${item.brand} ${item.model}<br>${vehicle_date}`});
                 // ADD THE MARKER TO THE GROUP  
                 group.addObject(vehicle_marker);
             });
@@ -447,7 +450,6 @@
                         return result.json()})
                     .then(data => {
                         vehicleData = [...data.respTemplate];
-                        console.log(`metodo .then parse valor data : ${data}`);
                         // ADD SVG MARKER TO THE MAP
                         addSVGMarkers(map, vehicleData);
                         // ADD ITEMS TO THE LIST
@@ -457,7 +459,6 @@
                         var transaction = db.transaction(["vehicle"], "readwrite");
                         transaction.oncomplete = function (event) {
                             console.log("Sucesso");
-                            console.log(`variavel transaction : ${transaction}`)
                         };
                         transaction.onerror = function (event) {
                             console.error("Erro");
