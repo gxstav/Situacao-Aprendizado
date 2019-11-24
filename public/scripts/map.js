@@ -125,6 +125,7 @@
                 }
             })
         },
+
         formatDate = date => {
             let splitted = date.split('T')
             splitted[0] = splitted[0].split('-').reverse().join('/')
@@ -909,7 +910,7 @@
 
             let time = new Date(),
                 seconds = (time.getSeconds()) < 10 ? "0".concat((time.getSeconds())) : (time.getSeconds()),
-                ipt_date = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}T${time.getHours()}:${time.getMinutes()}:${seconds}.${time.getMilliseconds()}Z`,
+                ipt_date = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${seconds}`,
                 vehicle = {
                     userId: obj_auth.id,
                     brand: obj_vehicle.ipt_brand.value.trim(),
