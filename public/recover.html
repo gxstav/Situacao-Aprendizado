@@ -49,20 +49,20 @@
 <body style="background-color: #eee">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <!-- TOOLBAR -->
-        <header class="mdl-layout__header">
+        <!--<header class="mdl-layout__header">
             <div class="mdl-layout__header-row" style="padding-left: 16px;">
-                <!-- RETURN BUTTON => app_return -->
+
                 <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 24px;">
                     <i class="material-icons" id="app_return">arrow_back</i>
                 </button>
-                <!-- TITLE -->
+
                 <span class="mdl-layout-title">busCAR</span>
                 <div class="mdl-layout-spacer"></div>
-                <!-- HELP BUTTON => app_help -->
+
                 <button class="mdl-button mdl-js-button mdl-button--icon">
                     <i class="material-icons" id="app_help">help</i>
                 </button>
-        </header>
+        </header> -->
         <!-- MAIN CONTENT -->
         <main class="mdl-layout__content">
             <div class="page-content">
@@ -82,10 +82,16 @@
                             <label class="mdl-textfield__label" for="user_email">E-mail</label>
                         </div>
                         <!-- LOGIN BUTTON => app_recover -->
+                        <button class="mdl-button mdl-js-button mdl-button--icon" style="position:relative; display: flex; left: 6%; top:60px;">
+                            <i class="material-icons" id="app_return">arrow_back</i>
+                        </button>
                         <button id="app_recover"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            style="width: 40%; align-self: center; margin-bottom: 20px;color:white;font-weight: border;">
+                            style="width: 40%; align-self: center; top:26px; margin-bottom: 20px;color:white;font-weight: border;">
                             Recuperar
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon" style="position:relative; display:flex; left: 90%; margin-top: 2%; justify-content:right; bottom:40px;">
+                            <i class="material-icons" id="app_help">help</i>
                         </button>
                     </div>
                 </div>

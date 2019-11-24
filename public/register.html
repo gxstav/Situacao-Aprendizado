@@ -52,20 +52,16 @@
 <body style="background-color: #eee">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <!-- TOOLBAR -->
-        <header class="mdl-layout__header">
+        <!--<header class="mdl-layout__header">
             <div class="mdl-layout__header-row" style="padding-left: 16px;">
-                <!-- RETURN BUTTON => app_return -->
-                <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 24px;">
-                    <i class="material-icons" id="app_return">arrow_back</i>
-                </button>
-                <!-- TITLE -->
+            
+                
+                
                 <span class="mdl-layout-title">busCAR</span>
                 <div class="mdl-layout-spacer"></div>
-                <!-- HELP BUTTON => app_help -->
-                <button class="mdl-button mdl-js-button mdl-button--icon">
-                    <i class="material-icons" id="app_help">help</i>
-                </button>
-        </header>
+            
+                
+        </header> -->
         <!-- MAIN CONTENT -->
         <main class="mdl-layout__content">
             <div class="page-content">
@@ -97,14 +93,14 @@
                             <label class="mdl-textfield__label" for="user_email">E-mail *</label>
                         </div>
                         <!-- USER CEP INPUT => app_cep -->
-                        <!--<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%; align-self: center;">
                             <input class="mdl-textfield__input" type="text" inputmode="numeric" id="app_cep"
                                 maxlength="8">
                             <label class="mdl-textfield__label" for="app_cep">CEP</label>
-                        </div> -->
+                        </div>
                         <!-- USER ADDRESS TEXT AREA => user_address -->
-                        <!--<div class="autocomplete" style="width: 70%;  align-self: center;">
+                        <div class="autocomplete" style="width: 70%;  align-self: center;">
                             <div class="mdl-textfield mdl-js-textfield" style="width: 100%;">
                                 <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="user_address"
                                     style="resize: none; height: 25px;"></textarea>
@@ -113,12 +109,34 @@
                             </div>
                             <ul class="autocomplete-items box_shadow">
                             </ul>
-                        </div> -->
+                        </div>
+
+                        
+                        <!-- ADDRESS BY CEP LINK => app_addressByCep -->
+                        <a id="app_addressByCep"
+                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Endereço por CEP
+                        </a>
+                        <!-- ADDRESS BY LOCATION LINK => app_addressByLocation -->
+                        <a id="app_addressByLocation"
+                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Endereço por localização
+                        </a>
+                        
+                    </div>
+                    <!-- LOGIN ACTIONS BORDER -->
+                    <div class="mdl-card__actions mdl-card--border" style="justify-content: center; justify-items: center; display: flex;">
+                        <button class="mdl-button mdl-js-button mdl-button--icon" style="position:relative; display:flex; float:left; top:7px; align-self:flex-start; right: 14%">
+                            <i class="material-icons" id="app_return">arrow_back</i>
+                        </button>
                         <!-- REGISTER BUTTON => app_register -->
                         <button id="app_register"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            style="width: 40%; align-self: center; margin-bottom: 16px;color:white">
+                            style="width: 40%; top: 7px; align-self: center; margin-bottom: 16px;color:white">
                             Cadastrar
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon" style="position:relative; display:flex; left: 15%; margin-top: 2%; justify-content:right;">
+                            <i class="material-icons" id="app_help">help</i>
                         </button>
                     </div>
                 </div>
