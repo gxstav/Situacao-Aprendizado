@@ -125,20 +125,27 @@
                 }
             })
         },
+
+        formatDate = date => {
+            let splitted = date.split('T')
+            splitted[0] = splitted[0].split('-').reverse().join('/')
+            splitted[1] = splitted[1].substr(0,8)
+            return splitted.join(' ')
+        },
         // CREATES THE LIST
         createList = (el_list, data) => {
             el_list.innerHTML = '';
             let template = '';
             data.map(item => {
-                let vehicle_date = item.date.split('-');
+                let vehicle_date = formatDate(item.date);
                 switch (item.type) {
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#546EFD;">directions_car</i>
-                            <span>${item.model}</span>
+                            <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
+                              ${item.type} - ${vehicle_date}
                             </span>
                         </span>
                         </li>`;
@@ -147,9 +154,9 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#FF9800;">motorcycle</i>
-                            <span>${item.model}</span>
+                            <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
+                                ${item.type} - ${vehicle_date}
                             </span>
                         </span>
                         </li>`;
@@ -158,9 +165,9 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#424242;">directions_bus</i>
-                            <span>${item.model}</span>
+                            <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
+                                ${item.type} - ${vehicle_date}
                             </span>
                         </span>
                         </li>`;
@@ -169,9 +176,9 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#121212;">directions_boat</i>
-                            <span>${item.model}</span>
+                            <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                                ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
+                                ${item.type} - ${vehicle_date}
                             </span>
                         </span>
                         </li>`;
