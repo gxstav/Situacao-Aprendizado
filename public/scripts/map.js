@@ -125,12 +125,11 @@
                 }
             })
         },
-
         formatDate = date => {
             let splitted = date.split('T')
             splitted[0] = splitted[0].split('-').reverse().join('/')
             splitted[1] = splitted[1].substr(0,8)
-            return splitted.join(' ')
+            return splitted.join(' - ')
         },
         // CREATES THE LIST
         createList = (el_list, data) => {
