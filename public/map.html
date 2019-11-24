@@ -52,11 +52,11 @@
     </style>
 </head>
 
-<body style="background-color: #eee">
+<body id="stl-body" style="background-color: #eee">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
     mdl-layout--fixed-tabs">
         <!-- TOOLBAR -->
-        <header class="mdl-layout__header">
+        <header id="stl-header"class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- TITLE -->
                 <span class="mdl-layout-title">busCAR</span>
@@ -75,7 +75,7 @@
                 </button>
             </div>
             <!-- TABS -->
-            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <div id="stl-tabs" class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a id="tab_map" href="#fixed-tab-1" class="mdl-layout__tab is-active">Mapa</a>
                 <a id="tab_list" href="#fixed-tab-2" class="mdl-layout__tab">Catálogo</a>
                 <a id="tab_add" href="#fixed-tab-3" class="mdl-layout__tab">Adicionar</a>
@@ -87,9 +87,14 @@
             <span class="mdl-layout-title">MENU</span>
             <!-- ITEMS -->
             <nav class="mdl-navigation">
-                <p class="mdl-navigation__link">Perfil</p>
-                <p class="mdl-navigation__link">Créditos</p>
-                <p class="mdl-navigation__link">Sair</p>
+                <p class="mdl-navigation__link"><i class="material-icons">account_box</i>Perfil</p>
+                <p class="mdl-navigation__link"><i class="material-icons">create</i>Créditos</p>
+                <p class="mdl-navigation__link"><i class="material-icons">call_received</i>Sair</p>   
+                <hr>
+                <p class="mdl-navigation__link"><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
+                        <span class="mdl-switch__label">Modo Noturno</span>
+                    <input type="checkbox" id="switch-2" class="mdl-switch__input">
+                </label></p>
             </nav>
         </div>
         <!-- MAIN CONTENT -->
@@ -348,23 +353,24 @@
                                 <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="vehicle_address" style="resize: none; height: 30px;" disabled></textarea>
                                 <label class="mdl-textfield__label" for="vehicle_address">Endereço</label>
                             </div>
-                            <!-- REGISTER BUTTON => app_register -->
-                            <button id="app_register"
+                            <!-- ADDRESS BY CEP LINK => app_addressByCep -->
+                            <a id="app_addressByCep"
+                                class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                Endereço por CEP
+                            </a>
+                            <!-- ADDRESS BY LOCATION LINK => app_addressByLocation -->
+                            <a id="app_addressByLocation"
+                                class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                Endereço por localização
+                            </a>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <!-- REGISTER BUTTON => app_register -->
+                                <button id="app_register"
                                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                                 style="width: 45%; align-self: center; margin-bottom: 16px;color:white">
-                                Cadastrar
-                            </button>
-                            <div class="mdl-card__actions mdl-card--border">
-                                <!-- ADDRESS BY CEP LINK => app_addressByCep -->
-                                <a id="app_addressByCep"
-                                    class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                    Endereço por CEP
-                                </a>
-                                <!-- ADDRESS BY LOCATION LINK => app_addressByLocation -->
-                                <a id="app_addressByLocation"
-                                    class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                    Endereço por localização
-                                </a>
+                                    Cadastrar
+                                </button>
+                                
                             </div>
                         </div>
                     </div>
