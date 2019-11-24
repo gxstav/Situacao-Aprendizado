@@ -26,7 +26,7 @@ module.exports = app => {
         .put('/data', auth.authenticate, controller.setUserData)
         // CREATE A NEW VEHICLE ? {'title', 'message'} : {'message'}
         .post('/addVehicle', auth.authenticate, controller.createVehicle)
-        // GET PET BY ID ? {{respTemplate}} : {'message'}
+        // GET VEHICLE BY ID ? {{respTemplate}} : {'message'}
         .get('/vehicle/:id', auth.authenticate, controller.getVehicle)
         // GET ALL VEHICLES ? {{respTemplate}} : {'message'}
         .get('/vehicles', auth.authenticate, controller.getVehicles)

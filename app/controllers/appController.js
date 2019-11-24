@@ -77,7 +77,7 @@ module.exports = () => {
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER
+                    // INSERT QUERY => CREATE A NEW USER   0          1             2           3               4           5            0     1     2    3   4         5                                           0               1                   2               3               4     
                     client.query(`INSERT INTO users (user_name, user_password, user_email, user_address, user_coordinates, geom) VALUES($1, MD5($2), $3, $4, $5, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.name, jsonData.password, jsonData.email, jsonData.address, jsonData.coordinates])
                         // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Obrigado por se cadastrar', message: 'Seus dados foram cadastrados com sucesso.' }))
@@ -244,7 +244,7 @@ module.exports = () => {
             // PASSWORD DATA
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
-                latLng = `${_latLng[1]} ${_latLng[0]}`;
+                latLng = `${_latLng[1]}, ${_latLng[0]}`;
             // CONNECTING TO THE DATABASE
             pool.connect()
                 // ON SUCCESS => CONNECTED
@@ -264,18 +264,19 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // CREATE A NEW PET FUNCTION => /addveh => post
+        // CREATE A NEW VEHICLE FUNCTION => /addvehicle => post
         createVehicle(req, res) {
             // USER DATA
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
                 latLng = `${_latLng[1]} ${_latLng[0]}`;
+                console.log(jsonData.date)
             // CONNECTING TO THE DATABASE
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12              13                14                                                                                                                                    0                 1              2                 3             4               5              6               7              8               9              10                 11                12               13                 14
-                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_title, vehicle_picture, vehicle_coordinates) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.title, jsonData.picture, jsonData.coordinates])
+                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12                13                   14      15           0   1   2   3   4   5   6   7   8    9   10   11   12   13   14                15                                   0             1              2                 3             4               5              6               7              8               9              10                 11                   12                      13                 14
+                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_picture, vehicle_coordinates, vehicle_date, geom) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, ST_GeomFromText('POINT(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.picture, jsonData.coordinates, jsonData.date])
                         // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Tudo Certo!', message: 'O veículo foi cadastrado com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
@@ -286,7 +287,7 @@ module.exports = () => {
                 // ON ERROR => RESPONSE BAD REQUEST 400
                 .catch(err => res.status(400).json({ message: err.message }));
         },
-        // GET PET DATA => /veh:id => get
+        // GET VEHICLE DATA => /vehicle:id => get
         getVehicle(req, res) {
             // VEHICLE ID
             let id = req.params.id,
@@ -311,14 +312,14 @@ module.exports = () => {
                                 year: result.rows[0].vehicle_year,
                                 km: result.rows[0].vehicle_km,
                                 fuel: result.rows[0].vehicle_fuel.trim(),
-                                title: result.rows[0].vehicle_title.trim(),
                                 status: result.rows[0].vehicle_status,
                                 description: result.rows[0].vehicle_description.trim(),
                                 address: result.rows[0].vehicle_address.trim(),
                                 coordinates: result.rows[0].vehicle_coordinates.trim(),
                                 date: result.rows[0].vehicle_date,
-                                picture: result.rows[0].vehicle_picture
-                            };
+                                picture: result.rows[0].vehicle_picture,
+                                geom: result.rows[0].geom
+                            }
                             // RESPONSE OK 200
                             res.status(200).json({ respTemplate });
                         })
@@ -344,12 +345,23 @@ module.exports = () => {
                         .then(result => {
                             result.rows.map(item => {
                                 respTemplate.push({
-                                    vehicleId: item.vehicle_id,
-                                    brand: item.vehicle_brand.trim(),
-                                    model: item.vehicle_model.trim(),
-                                    type: item.vehicle_type.trim(),
-                                    coordinates: item.vehicle_coordinates.trim(),
-                                    date: item.vehicle_date
+                                vehcileId: item.vehicle_id,
+                                userId: item.user_id,
+                                brand: item.vehicle_brand.trim(),
+                                model: item.vehicle_model.trim(),
+                                value: item.vehicle_value,
+                                type: item.vehicle_type.trim(),
+                                color: item.vehicle_color.trim(),
+                                year: item.vehicle_year,
+                                km: item.vehicle_km,
+                                fuel: item.vehicle_fuel.trim(),
+                                status: item.vehicle_status,
+                                description: item.vehicle_description.trim(),
+                                address: item.vehicle_address.trim(),
+                                coordinates: item.vehicle_coordinates.trim(),
+                                date: item.vehicle_date,
+                                picture: item.vehicle_picture,
+                                geom: item.geom
                                 });
                             });
                             // RESPONSE OK 200

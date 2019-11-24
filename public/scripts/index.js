@@ -172,4 +172,10 @@
             appShowSnackBar(snackbar, 'Sem internet');
         }
     });
+    
+    document.getElementById('user_password').addEventListener("keyup" , (event) => { 
+        if(event.keyCode === 13){
+            event.preventDefault()
+            btn_login.click()
+        }});
 })();

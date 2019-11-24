@@ -36,7 +36,6 @@
     // VEHICLE OBJECT
     let obj_vehicle = {
         // VEHICLE INPUTS
-        ipt_title: document.getElementById('vehicle_title'),
         ipt_brand: document.getElementById('vehicle_brand'),
         ipt_model: document.getElementById('vehicle_model'),
         ipt_value: document.getElementById('vehicle_value'),
@@ -45,7 +44,6 @@
         ipt_year: document.getElementById('vehicle_year'),
         ipt_km: document.getElementById('vehicle_km'),
         ipt_fuel: document.getElementsByName('vehicle_fuel'),
-        ipt_condition: document.getElementsByName('vehicle_condition'),
         ipt_description: document.getElementById('vehicle_description'),
         ipt_address: document.getElementById('vehicle_address')
     },
@@ -85,7 +83,7 @@
         // FLOAT BUTTON
         btn_float = document.getElementById('app_float'),
         // UL
-        ul_vehicleList = document.querySelector('.vehicle_list'),
+        ul_vehicleList = document.getElementById('vehicle-list'),
         // WINDOW CONTENT FOR MATERIAL DESIGN LITE
         windowContent = document.querySelector('.mdl-layout__content'),
         // GET VEHICLE TYPE
@@ -99,13 +97,22 @@
             return _type;
         },
         getVehicleColor = el_group => {
-            let _color = [];
+            let _color = null;
             [...el_group].map(item => {
                 if (item.checked) {
-                    _color.push(item.value);
+                    _color = item.value;
                 }
             });
             return _color.toString();
+        },
+        getVehicleFuel = el_group => {
+            let _fuel = null;
+            [...el_group].map(item => {
+                if (item.checked) {
+                    _fuel = item.value;
+                }
+            });
+            return _fuel;
         },
         // DISPLAY CONTENT
         displayContent = el_id => {
@@ -123,7 +130,7 @@
             el_list.innerHTML = '';
             let template = '';
             data.map(item => {
-                let vehicle_date = item.date.substr(0, item.date.length - 14).split('-');
+                let vehicle_date = item.date.split('-');
                 switch (item.type) {
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
@@ -151,7 +158,7 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#424242;">directions_bus</i>
-                            <span>${item.nickname}</span>
+                            <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
                               ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
@@ -162,7 +169,7 @@
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
                         <span class="mdl-list__item-primary-content">
                             <i class="material-icons mdl-list__item-icon" style="color:#121212;">directions_boat</i>
-                            <span>${item.nickname}</span>
+                            <span>${item.model}</span>
                             <span class="mdl-list__item-sub-title">
                                 ${item.type} - ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}
                             </span>
@@ -235,7 +242,7 @@
             data.map(item => {
                 let vehicle_icon = null,
                     vehicle_marker = null,
-                    vehicle_date = item.date.substr(0, item.date.length - 14).split('-'),
+                    vehicle_date = item.date.split('-'),
                     latLng = item.coordinates.split(',');
                 switch (item.type) {
                     case 'Carro':
@@ -429,13 +436,15 @@
                         'Authorization': `Bearer ${obj_auth.token}`
                     }
                 })
-                    .then(result => { return result.json() })
+                    .then(result => { 
+                        return result.json()})
                     .then(data => {
                         vehicleData = [...data.respTemplate];
+                        console.log(vehicleData);
                         // ADD SVG MARKER TO THE MAP
-                        addSVGMarkers(map, [...data.respTemplate]);
+                        addSVGMarkers(map, vehicleData);
                         // ADD ITEMS TO THE LIST
-                        createList(ul_vehicleList, [...data.respTemplate]);
+                        createList(ul_vehicleList, vehicleData);
 
                         // INDEXED DB
                         var transaction = db.transaction(["vehicle"], "readwrite");
@@ -567,7 +576,7 @@
                     if (parseInt(dist.innerHTML) > 100 && parseInt(dist.innerHTML) <= 1500) {
                         dist.innerHTML = parseInt(dist.innerHTML) - 50;
                     }
-                });
+                });_
             }
             else {
                 appShowSnackBar(snackbar, 'Sem internet');
@@ -828,10 +837,11 @@
                                 let obj_template = {
                                     street: address.street !== undefined ? `${address.street}, ` : '',
                                     city: address.city !== undefined ? `${address.city}, ` : '',
+                                    neighborhood: address.neighborhood !== undefined ? `${address.neighborhood}, ` : '',
                                     state: address.state !== undefined ? `${address.state}, ` : '',
                                     postalCode: address.postalCode !== undefined ? `${address.postalCode}, ` : ''
                                 },
-                                    str_template = obj_template.street + obj_template.city + obj_template.state + obj_template.postalCode;
+                                    str_template = obj_template.street + obj_template.city + obj_template.neighborhood + obj_template.state + obj_template.postalCode;
                                 com_address.classList.add('is-dirty');
                                 obj_vehicle.ipt_address.value = str_template.substr(0, str_template.length - 2);
                                 appHideLoading(spinner, spinner.children[0]);
@@ -879,47 +889,39 @@
     });
 
     // REGISTER A VEHICLE EVENT
-    btn_register.addEventListener('click', () => {
+    btn_register.addEventListener('click', () =>{ 
         // CHECK USER INPUTS
         let count = 0;
-        if (obj_vehicle.ipt_title.value === '' || obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_address.value === '') {
+        if (obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_address.value === '') {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
             return;
-        }/*
-        [...obj_vehicle.ipt_color].map(item => {
-            if (item.checked) {
-                count++;
-            }
-        });
-        if (count === 0) {
-            appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
-            return;
-        }*/
+        }
         // CHECK ONLINE STATE
         if (navigator.onLine) {
             let str_auth = localStorage.getItem('auth'),
-                obj_auth = JSON.parse(str_auth),
+                obj_auth = JSON.parse(str_auth);
+
+            let time = new Date(),
+                seconds = (time.getSeconds()) < 10 ? "0".concat((time.getSeconds())) : (time.getSeconds()),
+                ipt_date = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}T${time.getHours()}:${time.getMinutes()}:${seconds}.${time.getMilliseconds()}Z`,
                 vehicle = {
                     userId: obj_auth.id,
                     brand: obj_vehicle.ipt_brand.value.trim(),
                     model: obj_vehicle.ipt_model.value.trim(),
-                    value: obj_vehicle.ipt_value,
-                    type: obj_vehicle.ipt_type.value.trim(),
-                    color: obj_vehicle.ipt_color.trim(),
-                    year: obj_vehicle.ipt_year,
-                    km: obj_vehicle.ipt_km,
-                    fuel: obj_vehicle.ipt_fuel.value.trim(),
-                    title: obj_vehicle.ipt_title.value.trim(),
+                    value: obj_vehicle.ipt_value.valueAsNumber,
+                    type: getVehicleType(obj_vehicle.ipt_type),
+                    color: getVehicleColor(obj_vehicle.ipt_color),
+                    year: obj_vehicle.ipt_year.value,
+                    km: obj_vehicle.ipt_km.value,
+                    fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
+                    date: ipt_date,
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
                 };
-
-                /*type: getVehicleType(obj_vehicle.ipt_type),
-                color: getVehicleColor(obj_vehicle.ipt_color),*/
-                
+            console.log(vehicle)
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
             fetch('/addVehicle', {
