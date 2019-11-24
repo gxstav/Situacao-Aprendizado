@@ -447,7 +447,7 @@
                         return result.json()})
                     .then(data => {
                         vehicleData = [...data.respTemplate];
-                        console.log(vehicleData);
+                        console.log(`metodo .then parse valor data : ${data}`);
                         // ADD SVG MARKER TO THE MAP
                         addSVGMarkers(map, vehicleData);
                         // ADD ITEMS TO THE LIST
@@ -457,6 +457,7 @@
                         var transaction = db.transaction(["vehicle"], "readwrite");
                         transaction.oncomplete = function (event) {
                             console.log("Sucesso");
+                            console.log(`variavel transaction : ${transaction}`)
                         };
                         transaction.onerror = function (event) {
                             console.error("Erro");
@@ -758,7 +759,7 @@
         appShowDialog({
             element: dialog,
             title: 'Créditos',
-            message: 'Esta Aplicação foi desenvolvida como trabalho de conclusão do curso superior de tecnologia em geoprocessamento, da faculdade de tecnologia de Jacareí - FATEC Jacareí.\nA aplicação é um piloto para as cidades de Jacareí e São José dos Campos e tem como tema o "Desenvolvimento de uma aplicação para auxiliar a identificação e localização de animais em situação de risco".\nO trabalho foi orientado por Clóvis Lemos Tavares e têm como autores Ana Carolina Pereira e Diego dos Santos Rodrigues.',
+            message: 'Esta Aplicação foi desenvolvida como trabalho de conclusão do curso superior de desenvolvimento de sistemas, do Campus Tecnológico Avançado da Indústria - SENAI/CTAI Florianópolis.\nA aplicação, em sua fase inicial, é um piloto para a Região Metropolitana de Florianópolis e tem como finalidade "Auxiliar na compra e venda de veículos".\nO trabalho foi orientado por Clóvis Lemos Tavares e desenvolvido por Gustavo Barcelos e Matheus Nunes.',
             btn_ok() { appHideDialog(dialog); }
         });
     });
@@ -768,7 +769,7 @@
         appShowDialog({
             element: dialog,
             title: 'Sair',
-            message: 'Você realmente deseja sair da aplicação?',
+            message: 'Você realmente deseja sair da aplicação ?',
             btn_no() { appHideDialog(dialog); },
             btn_yes() {
                 localStorage.removeItem('auth');
@@ -777,14 +778,25 @@
         });
     });
 
-    // DARK THEME EVENT
+    // DARK THEME EVENT 
+    /*let switcher = false; // FALSE = Branco > Preto    TRUE = Preto > Branco
     com_menu.children[4].addEventListener('click', () => {
-        document.getElementById('stl-body').style.backgroundColor = "#121212";
-        document.getElementById('stl-header').style.backgroundColor = "#202124";
-        document.getElementById('stl-drawer').style.backgroundColor = "#121212";
-        document.getElementById('stl-drawer').style.borderColor = "#202124";
-        document.getElementById('stl-tag').style.backgroundColor = "#202124";
-    });
+        if (switcher == false){
+            document.getElementById('stl-body').style.backgroundColor = "#121212";
+            document.getElementById('stl-header').style.backgroundColor = "#202124";
+            document.getElementById('stl-drawer').style.backgroundColor = "#121212";
+            document.getElementById('stl-drawer').style.color =  "#FFF";
+            switcher = true;
+        }
+        else{
+            document.getElementById('stl-body').style.backgroundColor = "#fafafa";
+            document.getElementById('stl-header').style.backgroundColor = "rgb(33,150,243)";
+            document.getElementById('stl-drawer').style.backgroundColor = "#fafafa";
+            document.getElementById('stl-drawer').style.color =  "#424242";
+            switcher = false;
+        }
+        
+    });*/
 
     // DISPLAYS MAP CONTENT
     com_tabs[0].addEventListener('click', event => {

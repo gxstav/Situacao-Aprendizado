@@ -19,6 +19,13 @@
         spinner = document.getElementById('app_loading'),
         vehicle_description = document.getElementById('vehicle_description');
 
+    const formatDate = date => {
+        let splitted = date.split('T')
+        splitted[0] = splitted[0].split('-').reverse().join('/')
+        splitted[1] = splitted[1].substr(0,8)
+        return splitted.join(' - ')
+    }
+
     // WINDOW EVENT TO CHECK AUTHENTICATION
     window.addEventListener('load', () => {
         // CHECK ONLINE STATE
@@ -48,7 +55,7 @@
                 if (localStorage.hasOwnProperty('vehicle')) {
                     let str_vehicle = localStorage.getItem('vehicle'),
                         obj_vehicle = JSON.parse(str_vehicle);
-                        console.log(obj_vehicle)
+                        console.log(localStorage)
                     // NODE.JS API getvehicle
                     fetch(`/vehicle/${obj_vehicle.id}`, {
                         method: 'GET',
@@ -59,8 +66,9 @@
                         .then(result => { return result.json() })
                         .then(data => {
                             // DATA ARRAYBUFFER TO BASE 64 STRING
+                            
                             let base64String = String.fromCharCode.apply(null, new Uint16Array(data.respTemplate.picture.data)),
-                                vehicle_date = data.respTemplate.date.substr(0, data.respTemplate.date.length - 14).split('-'),
+                                vehicle_date = formatDate(data.respTemplate),
                                 template = null,
                                 // CREATES A IMAGE
                                 img = new Image();
@@ -80,11 +88,10 @@
                             Modelo: ${data.respTemplate.model}<br><br>
                             Ano: ${data.respTemplate.year}<br><br>
                             Cores: ${data.respTemplate.color}<br><br>
-                            Data de Cadastro:  ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}<br><br>
+                            Data de Cadastro:  ${(vehicle_date).substr(0,vehicle_date.length - 3)}<br><br>
                             R$ ${data.respTemplate.value}<br><br>
                             Localização: ${data.respTemplate.address}<br>${data.respTemplate.coordinates}<br><br>
                             Descrição: ${data.respTemplate.description}`;
-                            console.log(vehicle_date)
                             vehicle_description.innerHTML = template;
                             appHideLoading(spinner, spinner.children[0]);
 
