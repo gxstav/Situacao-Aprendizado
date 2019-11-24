@@ -125,12 +125,15 @@
                     <div id="add_content" class="app-card-wide mdl-card mdl-shadow--4dp"
                         style="margin: 5%; width: 90%; border-radius: 4px;">
                         <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column; padding-top: 80px;">
-                            <!--Marca-->
+                            
+                            
+
+                            <!-- MARCA -->
                             <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Marca do veículo *
                             </div>
                             
-                            <!--veiculo marca INPUT => veiculo_nome -->
+                            <!-- MARCA INPUT => vehicle_brand -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%; align-self: center;">
                                 <input class="mdl-textfield__input" type="text" id="vehicle_brand" maxlength="25">
@@ -138,12 +141,13 @@
                             </div>
 
 
-                            <!--Modelo-->
+
+                            <!-- MODELO -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Modelo do veículo *
                             </div>
-                            <!--veiculo modelo INPUT => veiculo_nome -->
+                            <!-- MODELO INPUT => vehicle_model -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%; align-self: center;"
                                 style="width: 70%; align-self: center;">
@@ -151,22 +155,14 @@
                                 <label class="mdl-textfield__label" for="vehicle_model">Modelo</label>
                             </div>
 
-                            <!-- Valor do veiculo TEXT -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
-                                Valor do veículo *
-                            </div>
-                            <!-- veiculo valor INPUT => valor_veiculo -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
-                            <input class="mdl-textfield__input" type="number" id="vehicle_value" min="0" max="10000000">
-                            <label class="mdl-textfield__label" for="vehicle_value">R$</label>
-                            </div>
-                            <!-- veiculo TYPE TEXT -->
+
+
+                            <!-- TIPO -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Tipo do veículo *
                             </div>
+                            <!-- TIPO INPUT => vehicle_type -->
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_type1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="vehicle_type1" class="mdl-radio__button" name="vehicle_type"
@@ -191,60 +187,86 @@
                                     value="Outro">
                                 <span class="mdl-radio__label">Outro</span>
                             </label>
-                            <!-- veiculo COLOR TEXT -->
+
+
+
+                            <!-- VALOR (R$) -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0;">
-                                Cor do Veículo *
+                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                Valor do veículo *
                             </div>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color1"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_color1" class="mdl-radio__button" name="vehicle_color"
-                                    value="branco" checked>
-                                <span class="mdl-radio__label">Branco</span>
-                            </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color2"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_color2" class="mdl-radio__button" name="vehicle_color"
-                                    value="preto">
-                                <span class="mdl-radio__label">Preto</span>
-                            </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color3"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_color3" class="mdl-radio__button" name="vehicle_color"
-                                    value="prata">
-                                <span class="mdl-radio__label">Prata</span>
-                            </label>
-                            <!-- ANO DO VEÍCULO -->
+                            <!-- VALOR (R$) INPUT => vehicle_value -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="number" id="vehicle_value" min="0" max="10000000">
+                            <label class="mdl-textfield__label" for="vehicle_value">R$</label>
+                            </div>
+                            
+
+
+                            <!-- ANO -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px;margin-bottom: 0;">
                                 Ano do veículo *
                             </div>
+                            <!-- ANO INPUT => vehicle_year -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%; align-self: center;">
                                 <input class="mdl-textfield__input" type="number" id="vehicle_year" maxlength="4" min="1900">
                                 <label class="mdl-textfield__label" for="vehicle_year">Ano</label> 
                             </div>
+
+
+
+                            <!-- COR -->
+                            <div class="mdl-card__supporting-text"
+                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                Cor do Veículo *
+                            </div>
+                            <!-- COR INPUT => vehicle_color -->
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color1"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_color1" class="mdl-radio__button" name="vehicle_color"
+                                    value="Branco" checked>
+                                <span class="mdl-radio__label">Branco</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color2"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_color2" class="mdl-radio__button" name="vehicle_color"
+                                    value="Preto">
+                                <span class="mdl-radio__label">Preto</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_color3"
+                                style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_color3" class="mdl-radio__button" name="vehicle_color"
+                                    value="Prata">
+                                <span class="mdl-radio__label">Prata</span>
+                            </label>
                             </select>
                             </div>
                            
-                            <!-- QUILOMETRAGEM => auxiliar -->
+
+
+                            <!-- QUILOMETRAGEM -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px">
                                 Quilometragem do veículo *
                             </div>
-
-                            <!-- QUILOMETRAGEM => quilometragem_input -->
+                            <!-- QUILOMETRAGEM INPUT => vehicle_km -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%; align-self: center;">
                                 <input class="mdl-textfield__input" type="number" id="vehicle_km" min="0" max="1000000">
                                 <label class="mdl-textfield__label" for="vehicle_year">Km</label>  
                             </div>
                             
-                            <!-- TIPO DE COMBUSTIVEL -->
+
+                            
+                            <!-- COMBUSTÍVEL -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0;">
                                 Combustível do veículo * 
                             </div>
+                            <!-- COMBUSTÍVEL INPUT => vehicle_fuel -->
                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel1"
                                 style="width: 70%; align-self: center; margin-bottom: 16px;">
                                 <input type="radio" id="vehicle_fuel1" class="mdl-radio__button" name="vehicle_fuel"
@@ -281,24 +303,29 @@
                                     value="eletrico">
                                 <span class="mdl-radio__label">Elétrico</span>
                             </label>
-                            <!-- descrição / pre-->
+
+
+
+                            <!-- DESCRIÇÃO -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
                                 Descrição do seu anuncio
                             </div>
-                            <!-- descrição -->
+                            <!-- DESCRIÇÃO INPUT => vehicle_description -->
                             <div class="mdl-textfield mdl-js-textfield" style="width: 70%; align-self: center;">
                                 <textarea class=" mdl-__input" type="text" maxlength="200" id="vehicle_description"
                                     style="resize: none; height: 169px;width: 100%; border-radius: 4px; border: 2px solid lightgray; display: flex; justify-content: center; padding: 10px;"></textarea>
                                 <label class="mdl-textfield__label" for="vehicle_description"></label>
                             </div>
 
-                            <!-- TEXTO DA FOTO PARA O VEÍCULO -->
+
+
+                            <!-- FOTO  -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0;">
                                 Foto do Veículo *
                             </div>
-                            <!-- FOTO DO VEÍCULO => vehicle_picture -->
+                            <!-- FOTO INPUT => vehicle_picture -->
                             <label for="vehicle_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;"
                                 class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                                 <input type="file" accept="image/*" capture="camera" id="vehicle_picture"
@@ -307,6 +334,9 @@
                             </label>
                             <canvas id="vehicle_frame"
                                 style="width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 2px solid #757575"></canvas>
+
+
+                            
                             <!-- VEHICLE ADDRESS TEXT -->
                             <div class="mdl-card__supporting-text"
                                 style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
@@ -324,6 +354,18 @@
                                 style="width: 45%; align-self: center; margin-bottom: 16px;color:white">
                                 Cadastrar
                             </button>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <!-- ADDRESS BY CEP LINK => app_addressByCep -->
+                                <a id="app_addressByCep"
+                                    class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    Endereço por CEP
+                                </a>
+                                <!-- ADDRESS BY LOCATION LINK => app_addressByLocation -->
+                                <a id="app_addressByLocation"
+                                    class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    Endereço por localização
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -145,7 +145,7 @@
                             <i class="material-icons mdl-list__item-icon" style="color:#546EFD;">directions_car</i>
                             <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                              ${item.type} - ${vehicle_date}
+                              ${item.type} - ${(vehicle_date).substr(0,vehicle_date.length - 3)}
                             </span>
                         </span>
                         </li>`;
@@ -156,7 +156,7 @@
                             <i class="material-icons mdl-list__item-icon" style="color:#FF9800;">motorcycle</i>
                             <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                                ${item.type} - ${vehicle_date}
+                                ${item.type} - ${(vehicle_date).substr(0,vehicle_date.length - 3)}
                             </span>
                         </span>
                         </li>`;
@@ -167,7 +167,7 @@
                             <i class="material-icons mdl-list__item-icon" style="color:#424242;">directions_bus</i>
                             <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                                ${item.type} - ${vehicle_date}
+                                ${item.type} - ${(vehicle_date).substr(0,vehicle_date.length - 3)}
                             </span>
                         </span>
                         </li>`;
@@ -178,7 +178,7 @@
                             <i class="material-icons mdl-list__item-icon" style="color:#121212;">directions_boat</i>
                             <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                                ${item.type} - ${vehicle_date}
+                                ${item.type} - ${(vehicle_date).substr(0,vehicle_date.length - 3)}
                             </span>
                         </span>
                         </li>`;
