@@ -914,7 +914,7 @@
                     fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
-                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}T${time.getHours()}:${time.getMinutes()}:${seconds}.${time.getMilliseconds}Z`,
+                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}T${time.getHours()}:${time.getMinutes()}:${seconds}.${time.getMilliseconds()}Z`,
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
