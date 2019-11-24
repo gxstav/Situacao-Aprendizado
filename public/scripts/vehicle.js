@@ -75,16 +75,16 @@
                             },
                                 img.onerror = err => console.error(err.message);
 
-                            template = `Marca: ${data.respTemplate.brand}<br><br>
+                            template = `Tipo: ${data.respTemplate.type}<br><br>
+                            Marca: ${data.respTemplate.brand}<br><br>
                             Modelo: ${data.respTemplate.model}<br><br>
-                            Tipo: ${data.respTemplate.type}<br><br>
                             Ano: ${data.respTemplate.year}<br><br>
                             Cores: ${data.respTemplate.color}<br><br>
                             Data de Cadastro:  ${vehicle_date[2]}-${vehicle_date[1]}-${vehicle_date[0]}<br><br>
                             R$ ${data.respTemplate.value}<br><br>
                             Localização: ${data.respTemplate.address}<br>${data.respTemplate.coordinates}<br><br>
                             Descrição: ${data.respTemplate.description}`;
-
+                            console.log(vehicle_date)
                             vehicle_description.innerHTML = template;
                             appHideLoading(spinner, spinner.children[0]);
 
