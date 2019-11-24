@@ -899,9 +899,11 @@
         // CHECK ONLINE STATE
         if (navigator.onLine) {
             let str_auth = localStorage.getItem('auth'),
-                obj_auth = JSON.parse(str_auth),
-                time = new Date(),
+                obj_auth = JSON.parse(str_auth);
+
+            let time = new Date(),
                 seconds = (time.getSeconds()) < 10 ? "0".concat((time.getSeconds())) : (time.getSeconds()),
+                ipt_date = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}T${time.getHours()}:${time.getMinutes()}:${seconds}.${time.getMilliseconds()}Z`,
                 vehicle = {
                     userId: obj_auth.id,
                     brand: obj_vehicle.ipt_brand.value.trim(),
@@ -914,11 +916,12 @@
                     fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
                     description: obj_vehicle.ipt_description.value.trim(),
                     address: obj_vehicle.ipt_address.value.trim(),
-                    date: `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}T${time.getHours()}:${time.getMinutes()}:${seconds}.${time.getMilliseconds()}Z`,
+                    date: ipt_date,
                     coordinates: obj_coordinate,
                     picture: binaryString,
                     status: [0, 0]
-                }; 
+                };
+            console.log(vehicle)
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
             fetch('/addVehicle', {

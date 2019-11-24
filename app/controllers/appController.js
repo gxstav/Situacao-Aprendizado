@@ -270,9 +270,7 @@ module.exports = () => {
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
                 latLng = `${_latLng[1]} ${_latLng[0]}`;
-                console.log(jsonData.coordinates)
-                console.log(_latLng)
-                console.log(latLng)
+                console.log(jsonData.date)
             // CONNECTING TO THE DATABASE
             pool.connect()
                 // ON SUCCESS => CONNECTED
