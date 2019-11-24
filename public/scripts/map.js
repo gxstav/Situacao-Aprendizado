@@ -777,6 +777,13 @@
         });
     });
 
+    // DARK THEME EVENT
+    com_menu.children[4].addEventListener('click', () => {
+        document.getElementById('stl-body').style.backgroundColor = "#121212"
+        document.getElementById('stl-header').style.backgroundColor = "#202124"
+        document.getElementById('stl-tags').style.backgroundColor = "#202124"
+    });
+    
     // DISPLAYS MAP CONTENT
     com_tabs[0].addEventListener('click', event => {
         displayContent(event.currentTarget.id);
