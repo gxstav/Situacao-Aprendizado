@@ -51,7 +51,7 @@
     });
 
     // AUTOCOMPLETE ADDRESS EVENT
-    obj_user.ipt_address.addEventListener('keyup', () => {
+    /*obj_user.ipt_address.addEventListener('keyup', () => {
         // CHECK ADDRESS INPUT
         if (obj_user.ipt_address.value !== '') {
             // CHECK ONLINE STATE
@@ -109,7 +109,7 @@
         else {
             ul_autocomplete.innerHTML = '';
         }
-    });
+    });*/
 
     // RETURN EVENT
     btn_return.addEventListener('click', () => {
