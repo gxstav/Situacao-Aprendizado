@@ -54,8 +54,7 @@
                     });
                 if (localStorage.hasOwnProperty('vehicle')) {
                     let str_vehicle = localStorage.getItem('vehicle'),
-                        obj_vehicle = JSON.parse(str_vehicle);
-                        console.log(localStorage)
+                    obj_vehicle = JSON.parse(str_vehicle);
                     // NODE.JS API getvehicle
                     fetch(`/vehicle/${obj_vehicle.id}`, {
                         method: 'GET',
@@ -65,10 +64,10 @@
                     })
                         .then(result => { return result.json() })
                         .then(data => {
+                            console.log(data);
                             // DATA ARRAYBUFFER TO BASE 64 STRING
-                            
                             let base64String = String.fromCharCode.apply(null, new Uint16Array(data.respTemplate.picture.data)),
-                                vehicle_date = formatDate(data.respTemplate),
+                                vehicle_date = formatDate(data.respTemplate.date),
                                 template = null,
                                 // CREATES A IMAGE
                                 img = new Image();
@@ -90,7 +89,7 @@
                             Cores: ${data.respTemplate.color}<br><br>
                             Data de Cadastro:  ${(vehicle_date).substr(0,vehicle_date.length - 3)}<br><br>
                             R$ ${data.respTemplate.value}<br><br>
-                            Localização: ${data.respTemplate.address}<br>${data.respTemplate.coordinates}<br><br>
+                            Localização: ${data.respTemplate.address}<br><br>
                             Descrição: ${data.respTemplate.description}`;
                             vehicle_description.innerHTML = template;
                             appHideLoading(spinner, spinner.children[0]);

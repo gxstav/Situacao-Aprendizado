@@ -138,6 +138,7 @@
             let template = '';
             data.map(item => {
                 let vehicle_date = formatDate(item.date);
+                console.log(item)
                 switch (item.type) {
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
@@ -191,11 +192,12 @@
             [...el_list.children].map(item => {
                 item.addEventListener('click', event => {
                     // CHECK ONLINE STATE
+
                     if (navigator.onLine) {
                         let obj_vehicle = {
                             id: event.currentTarget.id
                         },
-                            str_vehicle = JSON.stringify(obj_vehicle);
+                        str_vehicle = JSON.stringify(obj_vehicle);
                         localStorage.setItem('vehicle', str_vehicle);
                         window.location = 'vehicle.html';
                     }
@@ -246,7 +248,6 @@
         addSVGMarkers = (map, data) => {
             // GROUP TO HOLD MAP BJECTS
             group = new H.map.Group();
-            console.log(data)
             data.map(item => {
                 let vehicle_icon = null,
                     vehicle_marker = null,
@@ -278,8 +279,6 @@
 
 
                 // MARKER
-                console.log(latLng)
-                
                 vehicle_marker = new H.map.Marker({ lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1]) }, { icon: vehicle_icon, data: `${item.type}<br>${item.brand} ${item.model}<br>${vehicle_date}`});
                 // ADD THE MARKER TO THE GROUP  
                 group.addObject(vehicle_marker);
@@ -849,8 +848,8 @@
                 getPosition(locationOptions)
                     .then(response => {
                         let obj_position = {
-                            latitude: response.coords.latitude.toFixed(6),
-                            longitude: response.coords.longitude.toFixed(6)
+                            latitude: response.coords.latitude,
+                            longitude: response.coords.longitude
                         },
                             obj_here = {
                                 prox: `${obj_position.latitude}, ${obj_position.longitude}`, // THE ALTITUDE PARAMETER IS OPTIONAL (y,x,z)

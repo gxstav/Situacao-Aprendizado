@@ -302,7 +302,7 @@ module.exports = () => {
                         // ON SUCCESS
                         .then(result => {
                             respTemplate = {
-                                vehcileId: result.rows[0].vehicle_id,
+                                vehicleId: result.rows[0].vehicle_id,
                                 userId: result.rows[0].user_id,
                                 brand: result.rows[0].vehicle_brand.trim(),
                                 model: result.rows[0].vehicle_model.trim(),
@@ -345,7 +345,7 @@ module.exports = () => {
                         .then(result => {
                             result.rows.map(item => {
                                 respTemplate.push({
-                                vehcileId: item.vehicle_id,
+                                vehicleId: item.vehicle_id,
                                 userId: item.user_id,
                                 brand: item.vehicle_brand.trim(),
                                 model: item.vehicle_model.trim(),
