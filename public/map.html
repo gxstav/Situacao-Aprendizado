@@ -2,8 +2,35 @@
 <html lang="pt-br">
 
 <head>
+        <link rel="manifest" href="manifest.json">
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="busCAR">
+        <meta name="apple-mobile-web-app-title" content="busCAR">
+        <meta name="msapplication-starturl" content="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <link rel="icon" type="image.png" sizes="72x72" href="icon-72x72">
+        <link rel="apple-touch-icon" type="image.png" sizes="72x72" href="icon-72x72">
+        <link rel="icon" type="image.png" sizes="96x96" href="icon-96x96">
+        <link rel="apple-touch-icon" type="image.png" sizes="96x96" href="icon-96x96">
+        <link rel="icon" type="image.png" sizes="128x128" href="icon-128x128">
+        <link rel="apple-touch-icon" type="image.png" sizes="128x128" href="icon-128x128">
+        <link rel="icon" type="image.png" sizes="144x144" href="icon-144x144">
+        <link rel="apple-touch-icon" type="image.png" sizes="144x144" href="icon-144x144">
+        <link rel="icon" type="image.png" sizes="152x152" href="icon-152x152">
+        <link rel="apple-touch-icon" type="image.png" sizes="152x152" href="icon-152x152">
+        <link rel="icon" type="image.png" sizes="192x192" href="icon-192x192">
+        <link rel="apple-touch-icon" type="image.png" sizes="192x192" href="icon-192x192">
+        <link rel="icon" type="image.png" sizes="384x384" href="icon-384x384">
+        <link rel="apple-touch-icon" type="image.png" sizes="384x384" href="icon-384x384">
+        <link rel="icon" type="image.png" sizes="512x512" href="icon-512x512">
+        <link rel="apple-touch-icon" type="image.png" sizes="512x512" href="icon-512x512">
+        <link rel="icon" type="image.png" sizes="512x512" href="logo512x512">
+        <link rel="apple-touch-icon" type="image.png" sizes="512x512" href="logo512x512">
     <!-- TITLE -->
-    <title>APP</title>
+    <title>busCAR</title>
     <!-- ENCODING -->
     <meta charset="utf-8" />
     <!-- DOCUMENT AREA -->
@@ -76,15 +103,15 @@
             </div>
             <!-- TABS -->
             <div id="stl-tab" class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                <a id="tab_map" href="#fixed-tab-1" class="mdl-layout__tab is-active">Mapa</a>
-                <a id="tab_list" href="#fixed-tab-2" class="mdl-layout__tab">Catálogo</a>
-                <a id="tab_add" href="#fixed-tab-3" class="mdl-layout__tab">Adicionar</a>
+                <a id="tab_map" href="#fixed-tab-1" class="mdl-layout__tab is-active"style="color:black">Mapa</a>
+                <a id="tab_list" href="#fixed-tab-2" class="mdl-layout__tab"style="color:black">Catálogo</a>
+                <a id="tab_add" href="#fixed-tab-3" class="mdl-layout__tab"style="color:black">Adicionar</a>
             </div>
         </header>
         <!-- MENU -->
-        <div id="stl-drawer" class="mdl-layout__drawer">
+        <div id="stl-drawer" class="mdl-layout__drawer"style="background-color:#FF9800;>
             <!-- TITLE -->
-            <span class="mdl-layout-title">MENU</span>
+            <span class="mdl-layout-title"></span>
             <!-- ITEMS -->
             <nav class="mdl-navigation">
                 <p class="mdl-navigation__link"><i class="material-icons">account_box</i>Perfil</p>
@@ -98,7 +125,7 @@
             </nav>
         </div>
         <!-- MAIN CONTENT -->
-        <main class="mdl-layout__content">
+        <main class="mdl-layout__content"style="background-image: url('images/fundo.png')">
             <!-- MAP SECTION -->
             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
                 <div class="page-content">
@@ -125,7 +152,8 @@
                 </div>
             </section>
             <!-- ADD CAR SECTION -->
-            <section class="mdl-layout__tab-panel" id="fixed-tab-3" style="display: none;">
+            
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3" style="display: none;background-image: url('images/fundo.png');">
                 <div class=" page-content">
                     <div id="add_content" class="app-card-wide mdl-card mdl-shadow--4dp"
                         style="margin: 5%; width: 90%; border-radius: 4px;">
@@ -134,13 +162,13 @@
                             
 
                             <!-- MARCA -->
-                            <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                            <div class="mdl-card__supporting-text" style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
                                 Marca do veículo *
                             </div>
                             
                             <!-- MARCA INPUT => vehicle_brand -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
+                            style="width: 70%;color:black; align-self: center;">
                                 <input class="mdl-textfield__input" type="text" id="vehicle_brand" maxlength="25">
                                 <label class="mdl-textfield__label" for="vehicle_brand">Marca</label>
                             </div>
@@ -149,12 +177,12 @@
 
                             <!-- MODELO -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
                                 Modelo do veículo *
                             </div>
                             <!-- MODELO INPUT => vehicle_model -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;"
+                            style="width: 70%;color:black; align-self: center;"
                                 style="width: 70%; align-self: center;">
                                 <input class="mdl-textfield__input" type="text" id="vehicle_model" maxlength="25">
                                 <label class="mdl-textfield__label" for="vehicle_model">Modelo</label>
@@ -164,7 +192,7 @@
 
                             <!-- TIPO -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
                                 Tipo do veículo *
                             </div>
                             <!-- TIPO INPUT => vehicle_type -->
@@ -197,7 +225,7 @@
 
                             <!-- VALOR (R$) -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
                                 Valor do veículo *
                             </div>
                             <!-- VALOR (R$) INPUT => vehicle_value -->
@@ -211,12 +239,12 @@
 
                             <!-- ANO -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px;margin-bottom: 0;">
+                                style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;height:0px;margin-bottom: 0;">
                                 Ano do veículo *
                             </div>
                             <!-- ANO INPUT => vehicle_year -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
+                            style="width: 70%;color:black; align-self: center;">
                                 <input class="mdl-textfield__input" type="number" id="vehicle_year" maxlength="4" min="1900">
                                 <label class="mdl-textfield__label" for="vehicle_year">Ano</label> 
                             </div>
@@ -225,7 +253,7 @@
 
                             <!-- COR -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                style="width: 70%; align-self: center;color:black; padding: 16px 0;">
                                 Cor do Veículo *
                             </div>
                             <!-- COR INPUT => vehicle_color -->
@@ -254,7 +282,7 @@
 
                             <!-- QUILOMETRAGEM -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;height:0px">
+                                style="width: 70%; color:black;align-self: center; padding: 16px 0; text-align: justify;height:0px">
                                 Quilometragem do veículo *
                             </div>
                             <!-- QUILOMETRAGEM INPUT => vehicle_km -->
@@ -268,7 +296,7 @@
                             
                             <!-- COMBUSTÍVEL -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                style="width: 70%; color:black;align-self: center; padding: 16px 0;">
                                 Combustível do veículo * 
                             </div>
                             <!-- COMBUSTÍVEL INPUT => vehicle_fuel -->
@@ -313,7 +341,7 @@
 
                             <!-- DESCRIÇÃO -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0; text-align: justify;">
+                                style="width: 70%; align-self: center; color:black;padding: 16px 0; text-align: justify;">
                                 Descrição do seu anuncio
                             </div>
                             <!-- DESCRIÇÃO INPUT => vehicle_description -->
@@ -327,7 +355,7 @@
 
                             <!-- FOTO  -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0;">
+                                style="width: 70%; align-self: center;color:black; padding: 16px 0;">
                                 Foto do Veículo *
                             </div>
                             <!-- FOTO INPUT => vehicle_picture -->
@@ -344,7 +372,7 @@
                             
                             <!-- VEHICLE ADDRESS TEXT -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
+                                style="width: 70%; align-self: center; color:black;padding: 16px 0 0 0; text-align: justify;">
                                 Endereço aproximado (O endereço é preenchido automaticamente)*:
                             </div>
                             <!-- VEHICLE ADDRESS TEXT AREA => vehicle_address -->
