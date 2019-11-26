@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "busCAR",
   "short_name": "busCAR",
   "theme_color": "#424242",
@@ -7,6 +8,17 @@
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "./index.html",
+=======
+  
+    "name": "busCAR",
+    "short_name": "BC",
+    "theme_color": "#7f8991",
+    "background_color": "#151616",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+>>>>>>> temp
   "icons": [
     {
       "src": "images/icon-72x72.png",
