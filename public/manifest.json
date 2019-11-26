@@ -1,12 +1,13 @@
 {
-  "name": "Pet Resgate",
-  "short_name": "Pet Resgate",
-  "theme_color": "#424242",
-  "background_color": "#536dfe",
-  "display": "standalone",
-  "orientation": "portrait",
-  "Scope": "/",
-  "start_url": "./index.html",
+  
+    "name": "busCAR",
+    "short_name": "BC",
+    "theme_color": "#7f8991",
+    "background_color": "#151616",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
   "icons": [
     {
       "src": "images/icon-72x72.png",
