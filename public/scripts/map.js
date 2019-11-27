@@ -584,7 +584,7 @@
                     if (parseInt(dist.innerHTML) > 100 && parseInt(dist.innerHTML) <= 1500) {
                         dist.innerHTML = parseInt(dist.innerHTML) - 50;
                     }
-                });_
+                });
             }
             else {
                 appShowSnackBar(snackbar, 'Sem internet');
