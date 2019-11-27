@@ -19,6 +19,8 @@
         spinner = document.getElementById('app_loading'),
         vehicle_description = document.getElementById('vehicle_description');
 
+    let userIdVehicle;
+
     const formatDate = date => {
         let splitted = date.split('T')
         splitted[0] = splitted[0].split('-').reverse().join('/')
@@ -64,13 +66,13 @@
                     })
                         .then(result => { return result.json() })
                         .then(data => {
-                            console.log(data);
                             // DATA ARRAYBUFFER TO BASE 64 STRING
                             let base64String = String.fromCharCode.apply(null, new Uint16Array(data.respTemplate.picture.data)),
                                 vehicle_date = formatDate(data.respTemplate.date),
                                 template = null,
                                 // CREATES A IMAGE
                                 img = new Image();
+                            userIdVehicle = data.respTemplate.userId;
                             img.src = base64String;
                             // RESIZE THE IMAGE
                             img.onload = () => {
@@ -136,7 +138,7 @@
             appShowDialog({
                 element: dialog,
                 title: 'Resgate',
-                message: 'Por favor prossiga clicando em SIM para informar que você vai resgatar este animal. Realize esta operação somente se você realmente for resgatar o animal, pois ao fazer esta operação, o animal será removido do banco de dados impossibilitando que outras pessoas consigam ajudá-lo.',
+                message: 'Por favor prossiga clicando em SIM para retirar o anúncio. Realize esta operação caso tenha vendido ou não possui mais interesse vender o veículo, pois ao fazer esta operação, o veículo será removido do banco de dados impossibilitando que outras pessoas encontrem-o.',
                 btn_no() { appHideDialog(dialog); },
                 btn_yes() {
                     let str_auth = localStorage.getItem('auth'),
@@ -147,6 +149,7 @@
                             status: [1, obj_auth.id],
                             vehicleId: obj_vehicle.id
                         };
+                if(obj_auth.id == userIdVehicle){
                     appShowLoading(spinner, spinner.children[0]);
                     // NODE.JS API rescue
                     fetch('/rescue', {
@@ -173,6 +176,10 @@
                             appHideLoading(spinner, spinner.children[0]);
                             appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
                         });
+                    }
+                    else {
+                        appShowSnackBar(snackbar, 'Apenas o usuário que criou o anúncio pode excluir!');
+                    }
                 }
             });
         }
