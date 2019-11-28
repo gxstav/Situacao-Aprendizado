@@ -121,7 +121,7 @@
         appShowDialog({
             element: dialog,
             title: 'Ajuda',
-            message: 'Favor verificar as informações do animal e se você for ajudar o mesmo, favor clicar no ícone de coração RESGATAR. Por favor só realize está operação se você realmente for ajudar o animal, pois ao fazer isso o mesmo será removido do banco de dados.',
+            message: 'Você pode visualizar os detalhes do veículo, caso tenha interesse, clique no botão CONTACTAR. Caso você seja o dono do anúncio, você pode retirar-lo aqualquer momento.',
             btn_ok() { appHideDialog(dialog); }
         });
     });
@@ -137,7 +137,7 @@
         if (navigator.onLine) {
             appShowDialog({
                 element: dialog,
-                title: 'Resgate',
+                title: 'Remover Anúncio',
                 message: 'Por favor prossiga clicando em SIM para retirar o anúncio. Realize esta operação caso tenha vendido ou não possui mais interesse vender o veículo, pois ao fazer esta operação, o veículo será removido do banco de dados impossibilitando que outras pessoas encontrem-o.',
                 btn_no() { appHideDialog(dialog); },
                 btn_yes() {

@@ -8,18 +8,8 @@
     <meta charset="utf-8" />
     <!-- DOCUMENT AREA -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- DESCRIPTION -->
-    <meta name=" description"
-        content="Aplicação para auxiliar a identificação e localização de animais em situação de risco">
-    <!-- KEYWORDS -->
-    <meta name="keywords"
-        content="animais, abandonados, aplicativo, ONGs, protetores, identificação, localização, resgate">
     <!-- DEFAULT DOCUMENT -->
     <meta name="robots" content="index, follow">
-    <!-- AUTHOR -->
-    <meta name="author" content="Ana Carolina e Diego">
-    <!-- THEME COLOR -->
-    <meta name="theme-color" content="#424242" />
     <!-- MATERIAL DESIGN LITE FONT -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- ROBOTO FONT -->
@@ -58,10 +48,7 @@
                 <!-- TITLE -->
                 <span class="mdl-layout-title">busCAR</span>
                 <div class="mdl-layout-spacer"></div>
-                <!-- RESCUE BUTTON => app_rescue -->
-                <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 10px;">
-                    <i class="material-icons" id="app_rescue">favorite</i>
-                </button>
+                
                 <!-- HELP BUTTON => app_help -->
                 <button class="mdl-button mdl-js-button mdl-button--icon">
                     <i class="material-icons" id="app_help">help</i>
@@ -74,15 +61,18 @@
                 <div id="app_content" class="app-card-wide mdl-card mdl-shadow--4dp" style="margin: 5%; width: 90%;">
                     <!-- LOGIN TITLE -->
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text" style="font-weight: 500;">busCAR</h2>
+                        <h2 class="mdl-card__title-text" style="font-weight: 500;">Detalhes</h2>
                     </div>
                     <!-- LOGIN ACTIONS -->
-                    <div class="mdl-card__actions"
-                        style="width: 100%; display: flex; flex-direction: column; padding-bottom: 0px;">
+                    <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column; padding-bottom: 0px;">
                         <canvas id="vehicle_frame"
                             style="width: 180px; height: 130px; align-self: center; margin: 16px 0; border: 2px solid #757575"></canvas>
                         <div id="vehicle_description" class="mdl-card__supporting-text" style="align-self: center;">
                         </div>
+                        <!-- RESCUE BUTTON => app_rescue -->
+                        <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 10px;">
+                            <i class="material-icons" id="app_rescue">check_circle</i>
+                        </button>
                     </div>
                 </div>
             </div>

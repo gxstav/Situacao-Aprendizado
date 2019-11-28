@@ -2,51 +2,16 @@
 <html lang="pt-br">
 
 <head>
-        <link rel="manifest" href="manifest.json">
-
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="application-name" content="busCAR">
-        <meta name="apple-mobile-web-app-title" content="busCAR">
-        <meta name="msapplication-starturl" content="/">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <link rel="icon" type="image.png" sizes="72x72" href="icon-72x72">
-        <link rel="apple-touch-icon" type="image.png" sizes="72x72" href="icon-72x72">
-        <link rel="icon" type="image.png" sizes="96x96" href="icon-96x96">
-        <link rel="apple-touch-icon" type="image.png" sizes="96x96" href="icon-96x96">
-        <link rel="icon" type="image.png" sizes="128x128" href="icon-128x128">
-        <link rel="apple-touch-icon" type="image.png" sizes="128x128" href="icon-128x128">
-        <link rel="icon" type="image.png" sizes="144x144" href="icon-144x144">
-        <link rel="apple-touch-icon" type="image.png" sizes="144x144" href="icon-144x144">
-        <link rel="icon" type="image.png" sizes="152x152" href="icon-152x152">
-        <link rel="apple-touch-icon" type="image.png" sizes="152x152" href="icon-152x152">
-        <link rel="icon" type="image.png" sizes="192x192" href="icon-192x192">
-        <link rel="apple-touch-icon" type="image.png" sizes="192x192" href="icon-192x192">
-        <link rel="icon" type="image.png" sizes="384x384" href="icon-384x384">
-        <link rel="apple-touch-icon" type="image.png" sizes="384x384" href="icon-384x384">
-        <link rel="icon" type="image.png" sizes="512x512" href="icon-512x512">
-        <link rel="apple-touch-icon" type="image.png" sizes="512x512" href="icon-512x512">
-        <link rel="icon" type="image.png" sizes="512x512" href="logo512x512">
-        <link rel="apple-touch-icon" type="image.png" sizes="512x512" href="logo512x512">
     <!-- TITLE -->
     <title>busCAR</title>
     <!-- ENCODING -->
     <meta charset="utf-8" />
     <!-- DOCUMENT AREA -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- DESCRIPTION -->
-    <meta name=" description"
-        content="Aplicação para auxiliar a identificação e localização de animais em situação de risco">
-    <!-- KEYWORDS -->
-    <meta name="keywords"
-        content="animais, abandonados, aplicativo, ONGs, protetores, identificação, localização, resgate">
     <!-- DEFAULT DOCUMENT -->
     <meta name="robots" content="index, follow">
-    <!-- AUTHOR -->
-    <meta name="author" content="Ana Carolina e Diego">
-    <!-- THEME COLOR -->
-    <meta name="theme-color" content="#424242" />
+    <!-- AUTHORS -->
+    <meta name="author" content="Gustavo Barcelos e Matheus Nunes">
     <!-- MATERIAL DESIGN LITE FONT -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- ROBOTO FONT -->
@@ -63,6 +28,31 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-clustering.js"></script>
     <!-- ICON -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="busCAR">
+    <meta name="apple-mobile-web-app-title" content="busCAR">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image.png" sizes="72x72" href="icon-72x72">
+    <link rel="apple-touch-icon" type="image.png" sizes="72x72" href="icon-72x72">
+    <link rel="icon" type="image.png" sizes="96x96" href="icon-96x96">
+    <link rel="apple-touch-icon" type="image.png" sizes="96x96" href="icon-96x96">
+    <link rel="icon" type="image.png" sizes="128x128" href="icon-128x128">
+    <link rel="apple-touch-icon" type="image.png" sizes="128x128" href="icon-128x128">
+    <link rel="icon" type="image.png" sizes="144x144" href="icon-144x144">
+    <link rel="apple-touch-icon" type="image.png" sizes="144x144" href="icon-144x144">
+    <link rel="icon" type="image.png" sizes="152x152" href="icon-152x152">
+    <link rel="apple-touch-icon" type="image.png" sizes="152x152" href="icon-152x152">
+    <link rel="icon" type="image.png" sizes="192x192" href="icon-192x192">
+    <link rel="apple-touch-icon" type="image.png" sizes="192x192" href="icon-192x192">
+    <link rel="icon" type="image.png" sizes="384x384" href="icon-384x384">
+    <link rel="apple-touch-icon" type="image.png" sizes="384x384" href="icon-384x384">
+    <link rel="icon" type="image.png" sizes="512x512" href="icon-512x512">
+    <link rel="apple-touch-icon" type="image.png" sizes="512x512" href="icon-512x512">
+    <link rel="icon" type="image.png" sizes="512x512" href="logo512x512">
+    <link rel="apple-touch-icon" type="image.png" sizes="512x512" href="logo512x512">
+    <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" sizes="72x72" href="fav/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png">
@@ -109,7 +99,7 @@
             </div>
         </header>
         <!-- MENU -->
-        <div id="stl-drawer" class="mdl-layout__drawer"style="background-color:#FF9800;">
+        <div id="stl-drawer" class="mdl-layout__drawer"style="background-color:#FF9800;color:#121212;">
             <!-- TITLE -->
             <span class="mdl-layout-title"></span>
             <!-- ITEMS -->

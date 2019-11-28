@@ -521,7 +521,7 @@
         appShowDialog({
             element: dialog,
             title: 'Ajuda',
-            message: 'Na aba MAPA você pode visualizar os locais em que os animais foram cadastrados, adicionar filtros para visualizações específicas, visualizar os locais de maior e menor ocorrência de animais em situação de risco e visualizar um resumo das informações do animal.\nNa aba LISTA você pode visualizar todos os animais cadastrados em nosso banco de dados e informações gerais sobre os mesmos.\nNa aba ADICIONAR você pode cadastrar um novo animal em situação de risco.',
+            message: 'Na aba MAPA você pode visualizar os veículos cadastrados por outros usuários, você pode adicionar filtros para visualizações específicas, visualizar os locais de maior e menor quantidade de veículos anunciados e visualizar os detalhes do veículo anunciado.\nNa aba CATÁLOGO você pode visualizar todos os veículos cadastrados no banco de dados e informações gerais dos mesmos.\nNa aba ADICIONAR você pode cadastrar um novo veículo.',
             btn_ok() { appHideDialog(dialog); }
         });
     });
