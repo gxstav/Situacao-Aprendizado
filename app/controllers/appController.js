@@ -70,16 +70,15 @@ module.exports = () => {
         // CREATE A NEW USER FUNCTION => /register => post
         createUser(req, res) {
             // USER DATA
-            let jsonData = req.body,
-                _latLng = jsonData.coordinates.split(','),
-                latLng = `${_latLng[1]} ${_latLng[0]}`;
+            let jsonData = req.body;
             // CONNECTING TO THE DATABASE
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER   0          1             2           3               4           5            0     1     2    3   4         5                                           0               1                   2               3               4     
-                    client.query(`INSERT INTO users (user_name, user_password, user_email, user_address, user_coordinates, geom) VALUES($1, MD5($2), $3, $4, $5, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.name, jsonData.password, jsonData.email, jsonData.address, jsonData.coordinates])
-                        // ON SUCCESS => RESPONSE OK 200
+                    // INSERT QUERY => CREATE A NEW USER            
+                    client.query(`INSERT INTO users (user_name, user_password, user_email) VALUES($1, MD5($2), $3)`, [jsonData.name, jsonData.password, jsonData.email])
+                    //client.query(`INSERT INTO users (user_name, user_password, user_email, user_address, user_coordinates, geom) VALUES($1, MD5($2), $3, $4, $5, ST_GeomFromText('Point(${latLng})',4326))`, [jsonData.name, jsonData.password, jsonData.email, jsonData.address, jsonData.coordinates]) 
+                    // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Obrigado por se cadastrar', message: 'Seus dados foram cadastrados com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
                         .catch(err => res.status(400).json({ message: err.message }))
