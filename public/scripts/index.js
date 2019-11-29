@@ -88,7 +88,7 @@
         appShowDialog({
             element: dialog,
             title: 'Ajuda',
-            message: 'Favor preencher seu nome de usuário e senha para entrar na aplicação, caso ainda não possua um cadastro favor clicar em CADASTRAR. Se você esqueceu sua senha favor clicar em RECUPERAR CADASTRO.',
+            message: 'Insira seu nome de usuário e senha para acessar o aplicativo, caso ainda não possua um cadastro, clique em CADASTRAR. Se você esqueceu sua senha, use RECUPERAR CADASTRO.',
             btn_ok() { appHideDialog(dialog); }
         });
     });
@@ -128,7 +128,7 @@
             }
         }
         if (count > 0) {
-            appShowSnackBar(snackbar, 'Favor preencher corretamente os campos');
+            appShowSnackBar(snackbar, 'Preencha corretamente os campos!');
             return;
         }
         // CHECK ONLINE STATE
@@ -165,7 +165,7 @@
                 .catch(err => {
                     console.error(err.message);
                     appHideLoading(spinner, spinner.children[0]);
-                    appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
+                    appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente.');
                 })
         }
         else {

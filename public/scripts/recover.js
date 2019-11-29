@@ -29,7 +29,7 @@
         appShowDialog({
             element: dialog,
             title: 'Ajuda',
-            message: 'Favor informar seu e-mail de cadastro e clicar em RECUPERAR para receber um e-mail com seu nome de usuário e senha.',
+            message: 'Informe seu e-mail de cadastro e clique em RECUPERAR para receber um e-mail com seu nome de usuário e senha.',
             btn_ok() { appHideDialog(dialog); }
         });
     });
