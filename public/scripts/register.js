@@ -6,8 +6,7 @@
         // USER INPUTS
         ipt_name: document.getElementById('user_name'),
         ipt_password: document.getElementById('user_password'),
-        ipt_email: document.getElementById('user_email'),
-        ipt_address: 'Florianópolis, SC, 88032-005'
+        ipt_email: document.getElementById('user_email')
     },
         // DIALOG
         dialog = document.getElementById('app_dialog'),
@@ -101,9 +100,7 @@
             let user = {
                 name: obj_user.ipt_name.value.trim(),
                 password: obj_user.ipt_password.value.trim(),
-                email: obj_user.ipt_email.value.trim(),
-                address: obj_user.ipt_address,
-                coordinates: ''
+                email: obj_user.ipt_email.value.trim()
             };
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API isAvailable
@@ -123,54 +120,37 @@
                         appShowSnackBar(snackbar, data.respTemplate[0]);
                         return;
                     }
-                    let obj_here = {
-                        searchText: obj_user.ipt_address,
-                        jsonattributes: 1
-                    };
-                    geocode(platform, obj_here)
-                        .then(location => {
-                            let coord = location.response.view[0].result[0],
-                                position = {
-                                    lat: coord.location.displayPosition.latitude.toFixed(7),
-                                    lng: coord.location.displayPosition.longitude.toFixed(7)
-                                };
-                            user.coordinates = `${position.lat}, ${position.lng}`;
-                            // NODE.JS API createUser
-                            fetch('/register', {
-                                method: 'POST',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(user)
-                            })
-                                .then(result => { return result.json() })
-                                .then(data => {
-                                    appHideLoading(spinner, spinner.children[0]);
-                                    appShowDialog({
-                                        element: dialog,
-                                        title: data.title,
-                                        message: data.message,
-                                        btn_ok() { window.location = 'index.html'; }
-                                    });
-                                })
-                                .catch(err => {
-                                    console.error(err.message);
-                                    appHideLoading(spinner, spinner.children[0]);
-                                    appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
-                                })
+
+                    fetch('/register', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    })
+                        .then(result => { return result.json() })
+                        .then(data => {
+                            appHideLoading(spinner, spinner.children[0]);
+                            appShowDialog({
+                                element: dialog,
+                                title: data.title,
+                                message: data.message,
+                                btn_ok() { window.location = 'index.html'; }
+                            });
+                    
                         })
                         .catch(err => {
                             console.error(err.message);
                             appHideLoading(spinner, spinner.children[0]);
                             appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
                         })
-                })
-                .catch(err => {
-                    console.error(err.message);
-                    appHideLoading(spinner, spinner.children[0]);
-                    appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
-                })
+            })
+            .catch(err => {
+                console.error(err.message);
+                appHideLoading(spinner, spinner.children[0]);
+                appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
+            })
         }
         else {
             appShowSnackBar(snackbar, 'Sem internet');
