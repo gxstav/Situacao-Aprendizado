@@ -48,3 +48,10 @@ address: obj_vehicle.ipt_address.value.trim(),
 coordinates: obj_coordinate,
 picture: binaryString,
 status: [0, 0]
+
+
+
+DARK MODE
+
+class="mdl-layout__tab-bar mdl-js-ripple-effect" >> #202124
+class="mdl-layout__header"						 >> #202124
