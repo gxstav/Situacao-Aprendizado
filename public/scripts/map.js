@@ -226,7 +226,7 @@
         map = new H.Map(target, defaultLayers.normal.map, {
             pixelRatio: pixelRatio,
             center: { lat: -27.597476, lng: -48.549768 },
-            zoom: 15
+            zoom: 5
         }),
         // MAKE THE MAP INTERACTIVE
         behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map)),
@@ -524,6 +524,11 @@
             message: 'Na aba MAPA você pode visualizar os veículos cadastrados por outros usuários, você pode adicionar filtros para visualizações específicas, visualizar os locais de maior e menor quantidade de veículos anunciados e visualizar os detalhes do veículo anunciado.\nNa aba CATÁLOGO você pode visualizar todos os veículos cadastrados no banco de dados e informações gerais dos mesmos.\nNa aba ADICIONAR você pode cadastrar um novo veículo.',
             btn_ok() { appHideDialog(dialog); }
         });
+    });
+
+    document.getElementById('vehicle_phone').addEventListener('input', function (e) {
+        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
     });
 
     // CLUSTER EVENT
