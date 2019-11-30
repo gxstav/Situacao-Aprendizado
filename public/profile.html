@@ -68,11 +68,23 @@
                 <div id="app_content" class="app-card-wide mdl-card mdl-shadow--4dp" style="margin: 5%; width: 90%;">
                     <!-- LOGIN TITLE -->
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text" style="font-weight: 500;">busCAR</h2>
+                        <h2 class="mdl-card__title-text" style="font-weight: 500;">Perfil</h2>
                     </div>
                     <!-- LOGIN ACTIONS -->
                     <div class="mdl-card__actions"
                         style="width: 100%; display: flex; flex-direction: column; padding-bottom: 0px;">
+                        <!-- USER NAME INPUT => user_name -->
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="text" id="user_name" maxlength="15" disabled>
+                            <label class="mdl-textfield__label" for="user_name">Nome de usuário</label>
+                        </div>
+                        <!-- USER E-MAIL INPUT => user_email -->
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                            style="width: 70%; align-self: center;">
+                            <input class="mdl-textfield__input" type="email" id="user_email" maxlength="50" disabled>
+                            <label class="mdl-textfield__label" for="user_email">e-mail</label>
+                        </div>
                         <!-- UPDATE PASSWORD TEXT -->
                         <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; padding: 16px 0;color:white">
                             Atualizar senha:
@@ -86,62 +98,9 @@
                         <!-- UPDATE USER PASSWORD BUTTON => app_updatePassword -->
                         <button id="app_updatePassword"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            style="width: 40%; align-self: center; margin-bottom: 16px;color:white">
+                            style="width: 40%; align-self: center; margin-bottom: 16px;background-color:#FF9800; color:white;font: weight 600;">
                             Atualizar
                         </button>
-                        <!-- USER NAME INPUT => user_name -->
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
-                            <input class="mdl-textfield__input" type="text" id="user_name" maxlength="15" disabled>
-                            <label class="mdl-textfield__label" for="user_name">Nome de usuário</label>
-                        </div>
-                        <!-- USER E-MAIL INPUT => user_email -->
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
-                            <input class="mdl-textfield__input" type="email" id="user_email" maxlength="50" disabled>
-                            <label class="mdl-textfield__label" for="user_email">e-mail</label>
-                        </div>
-                        <!-- UPDATE USER ADDRESS TEXT -->
-                        <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; padding: 16px 0;color:white">
-                            Atualizar endereço:
-                        </div>
-                        <!-- USER CEP INPUT => app_cep -->
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
-                            <input class="mdl-textfield__input" type="text" inputmode="numeric" id="app_cep"
-                                maxlength="8">
-                            <label class="mdl-textfield__label" for="app_cep">CEP</label>
-                        </div>
-                        <!-- USER ADDRESS TEXT AREA => user_address -->
-                        <div class="autocomplete" style="width: 70%;  align-self: center;">
-                            <div class="mdl-textfield mdl-js-textfield" style="width: 100%;">
-                                <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="user_address"
-                                    style="resize: none; height: 80px;"></textarea>
-                                <label class="mdl-textfield__label" for="user_address">Endereço *<br>(Rua, Cidade,
-                                    Estado, CEP)</label>
-                            </div>
-                            <ul class="autocomplete-items box_shadow">
-                            </ul>
-                        </div>
-                        <!-- UPDATE USER INFO BUTTON => app_updateInfo -->
-                        <button id="app_updateInfo"
-                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            style="width: 40%; align-self: center; margin-bottom: 16px;color:white">
-                            Atualizar
-                        </button>
-                    </div>
-                    <!-- LOGIN ACTIONS BORDER -->
-                    <div class="mdl-card__actions mdl-card--border">
-                        <!-- ADDRESS BY CEP LINK => app_addressByCep -->
-                        <a id="app_addressByCep"
-                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Endereço por CEP
-                        </a>
-                        <!-- ADDRESS BY LOCATION LINK => app_addressByLocation -->
-                        <a id="app_addressByLocation"
-                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Endereço por localização
-                        </a>
                     </div>
                 </div>
             </div>
