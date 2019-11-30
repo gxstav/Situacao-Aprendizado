@@ -46,21 +46,6 @@
 
 <body style="background-color: #eee">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <!-- TOOLBAR -->
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row" style="padding-left: 16px;">
-                <!-- RETURN BUTTON => app_return -->
-                <button class="mdl-button mdl-js-button mdl-button--icon" style="margin-right: 24px;">
-                    <i class="material-icons" id="app_return">arrow_back</i>
-                </button>
-                <!-- TITLE -->
-                <span class="mdl-layout-title">busCAR</span>
-                <div class="mdl-layout-spacer"></div>
-                <!-- HELP BUTTON => app_help -->
-                <button class="mdl-button mdl-js-button mdl-button--icon">
-                    <i class="material-icons" id="app_help">help</i>
-                </button>
-        </header>
         <!-- MAIN CONTENT -->
         <main class="mdl-layout__content">
             <div class="page-content">
@@ -71,36 +56,42 @@
                         <h2 class="mdl-card__title-text" style="font-weight: 500;">Perfil</h2>
                     </div>
                     <!-- LOGIN ACTIONS -->
-                    <div class="mdl-card__actions"
-                        style="width: 100%; display: flex; flex-direction: column; padding-bottom: 0px;">
+                    <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column; padding-bottom: 0px;">
+                        
+                        <label class="mdl-textfield__label" for="user_name" style="top: 45%; left: 17%; width: 57px; height: 22px; text-align: right; color: black;">Usuário</label>
                         <!-- USER NAME INPUT => user_name -->
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 60%; margin-top:3%; align-self:center; left: 15%;">
                             <input class="mdl-textfield__input" type="text" id="user_name" maxlength="15" disabled>
-                            <label class="mdl-textfield__label" for="user_name">Nome de usuário</label>
                         </div>
+
+                        <label class="mdl-textfield__label" for="user_email" style="top: 58.9%; left: 17%; width: 57px; height: 22px; text-align: right; color: black;">E-mail</label>
                         <!-- USER E-MAIL INPUT => user_email -->
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 60%; align-self: center;left: 15%;">
                             <input class="mdl-textfield__input" type="email" id="user_email" maxlength="50" disabled>
-                            <label class="mdl-textfield__label" for="user_email">e-mail</label>
                         </div>
-                        <!-- UPDATE PASSWORD TEXT -->
-                        <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; padding: 16px 0;color:white">
-                            Atualizar senha:
-                        </div>
+
+                        <label class="mdl-textfield__label" for="user_password" style="top: 72%; left: 11%; width: 85px; height: 22px; text-align: right; color: black;">Nova senha</label>
                         <!-- USER PASSWORD INPUT => user_password -->
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
-                            <input class="mdl-textfield__input" type="text" id="user_password" maxlength="8">
-                            <label class="mdl-textfield__label" for="user_password">Nova senha *</label>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 60%; align-self: center; margin-bottom: 2%; left: 15%;">
+                            <input class="mdl-textfield__input" type="password" id="user_password" maxlength="12">
                         </div>
-                        <!-- UPDATE USER PASSWORD BUTTON => app_updatePassword -->
-                        <button id="app_updatePassword"
-                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            style="width: 40%; align-self: center; margin-bottom: 16px;background-color:#FF9800; color:white;font: weight 600;">
-                            Atualizar
-                        </button>
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="app_showPassword" style="margin: 0; width: 30%; align-self: flex-end; bottom: 55px; left:7%">
+                            <input type="checkbox" id="app_showPassword" class="mdl-switch__input">
+                            <i class="material-icons" id="icon_showPassword" style="margin-left: 10%;">visibility_off</i>
+                        </label>
+                        
+                        <div class="mdl-card__actions mdl-card--border" style="justify-content: center; justify-items: center; display: flex;">
+                            <button class="mdl-button mdl-js-button mdl-button--icon" style="position:relative; display:flex; float:left; top:3px; align-self:flex-start; right: 20%">
+                                <i class="material-icons" id="app_return">arrow_back</i>
+                            </button>
+                            <!-- UPDATE USER PASSWORD BUTTON => app_updatePassword -->
+                            <button id="app_updatePassword" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width: 40%; align-self: center; margin-bottom: 3px;background-color:#808080; color:white;font: weight 600;" disabled>
+                                Atualizar
+                            </button>
+                            <button class="mdl-button mdl-js-button mdl-button--icon" style="position:relative; display:flex; float:left; top:3px; align-self:flex-start; left: 20%">
+                                <i class="material-icons" id="app_help">help</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
