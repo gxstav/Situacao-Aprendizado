@@ -200,9 +200,7 @@ module.exports = () => {
                         .then(result => {
                             respTemplate = {
                                 name: result.rows[0].user_name.trim(),
-                                email: result.rows[0].user_email.trim(),
-                                address: result.rows[0].user_address.trim(),
-                                coordinates: result.rows[0].user_coordinates.trim()
+                                email: result.rows[0].user_email.trim()
                             };
                             // RESPONSE OK 200
                             res.status(200).json({ respTemplate });
@@ -229,31 +227,6 @@ module.exports = () => {
                         .then(() => {
                             // RESPONSE OK 200
                             res.status(200).json({ title: 'Senha atualizada', message: 'Sua senha foi atualizada com sucesso.' })
-                        })
-                        // ON ERROR => RESPONSE BAD REQUEST 400
-                        .catch(err => res.status(400).json({ message: err.message }))
-                        // DISCONNECTING TO THE DATABASE
-                        .finally(() => client.release());
-                })
-                // ON ERROR => RESPONSE BAD REQUEST 400
-                .catch(err => res.status(400).json({ message: err.message }));
-        },
-        // GET USER DATA => /data:user => get
-        setUserData(req, res) {
-            // PASSWORD DATA
-            let jsonData = req.body,
-                _latLng = jsonData.coordinates.split(','),
-                latLng = `${_latLng[1]}, ${_latLng[0]}`;
-            // CONNECTING TO THE DATABASE
-            pool.connect()
-                // ON SUCCESS => CONNECTED
-                .then(client => {
-                    // UPDATE QUERY
-                    client.query(`UPDATE users SET user_address = $1, user_coordinates = $2, geom = ST_GeomFromText('Point(${latLng})',4326) WHERE user_id = $3`, [jsonData.address, jsonData.coordinates, jsonData.id])
-                        // ON SUCCESS
-                        .then(() => {
-                            // RESPONSE OK 200
-                            res.status(200).json({ title: 'Dados atualizados', message: 'Seus dados foram atualizados com sucesso.' })
                         })
                         // ON ERROR => RESPONSE BAD REQUEST 400
                         .catch(err => res.status(400).json({ message: err.message }))

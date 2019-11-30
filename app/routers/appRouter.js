@@ -22,8 +22,6 @@ module.exports = app => {
         .get('/data/:id', auth.authenticate, controller.getUser)
         // UPDATE THE user_password ? {'title', 'message'} : {'message'}
         .put('/password', auth.authenticate, controller.setUserPassword)
-        // UPDATE THE user_name, user_email AND user_address ? {'title', 'message'} : {'message'}
-        .put('/data', auth.authenticate, controller.setUserData)
         // CREATE A NEW VEHICLE ? {'title', 'message'} : {'message'}
         .post('/addVehicle', auth.authenticate, controller.createVehicle)
         // GET VEHICLE BY ID ? {{respTemplate}} : {'message'}
