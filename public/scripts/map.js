@@ -784,9 +784,9 @@
     });
 
     // DARK THEME EVENT 
-    /*let switcher = false; // FALSE = Branco > Preto    TRUE = Preto > Branco
+    
     com_menu.children[4].addEventListener('click', () => {
-        if (switcher == false){
+        if (!false){
             document.getElementById('stl-body').style.backgroundColor = "#121212";
             document.getElementById('stl-header').style.backgroundColor = "#202124";
             document.getElementById('stl-drawer').style.backgroundColor = "#121212";
@@ -801,7 +801,7 @@
             switcher = false;
         }
         
-    });*/
+    });
 
     // DISPLAYS MAP CONTENT
     com_tabs[0].addEventListener('click', event => {
