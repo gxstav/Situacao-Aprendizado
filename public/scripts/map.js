@@ -38,12 +38,15 @@
         // VEHICLE INPUTS
         ipt_brand: document.getElementById('vehicle_brand'),
         ipt_model: document.getElementById('vehicle_model'),
-        ipt_value: document.getElementById('vehicle_value'),
         ipt_type: document.getElementsByName('vehicle_type'),
-        ipt_color: document.getElementsByName('vehicle_color'),
+        ipt_value: document.getElementById('vehicle_value'),
         ipt_year: document.getElementById('vehicle_year'),
+        ipt_color: document.getElementById('vehicle_color'),
         ipt_km: document.getElementById('vehicle_km'),
         ipt_fuel: document.getElementsByName('vehicle_fuel'),
+        ipt_transmission: document.getElementsByName('vehicle_transmission'),
+        ipt_phone: document.getElementById('vehicle_phone'),
+        ipt_email: document.getElementById('vehicle_email'),
         ipt_description: document.getElementById('vehicle_description'),
         ipt_address: document.getElementById('vehicle_address')
     },
@@ -96,15 +99,17 @@
             });
             return _type;
         },
-        getVehicleColor = el_group => {
-            let _color = null;
+
+        getVehicleTransmission = el_group => {
+            let _transmission = null;
             [...el_group].map(item => {
                 if (item.checked) {
-                    _color = item.value;
+                    _transmission = item.value;
                 }
             });
-            return _color.toString();
+            return _transmission;
         },
+
         getVehicleFuel = el_group => {
             let _fuel = null;
             [...el_group].map(item => {
@@ -126,6 +131,7 @@
             })
         },
 
+        // POSTGRES DATE TO LOCAL DATE (DD/MM/AAAA - hh:mm:ss)
         formatDate = date => {
             let splitted = date.split('T')
             splitted[0] = splitted[0].split('-').reverse().join('/')
@@ -138,7 +144,6 @@
             let template = '';
             data.map(item => {
                 let vehicle_date = formatDate(item.date);
-                console.log(item)
                 switch (item.type) {
                     case 'Carro':
                         template += `<li class="mdl-list__item mdl-list__item--two-line" id="${item.vehicleId}">
@@ -168,7 +173,7 @@
                             <i class="material-icons mdl-list__item-icon" style="color:#424242;">directions_bus</i>
                             <span>${item.brand} ${item.model}</span>
                             <span class="mdl-list__item-sub-title">
-                                ${item.type} - ${(vehicle_date).substr(0,vehicle_date.length - 3)}
+                                ${item.type}/Ônibus - ${(vehicle_date).substr(0,vehicle_date.length - 3)}
                             </span>
                         </span>
                         </li>`;
@@ -192,7 +197,6 @@
             [...el_list.children].map(item => {
                 item.addEventListener('click', event => {
                     // CHECK ONLINE STATE
-
                     if (navigator.onLine) {
                         let obj_vehicle = {
                             id: event.currentTarget.id
@@ -525,12 +529,6 @@
             btn_ok() { appHideDialog(dialog); }
         });
     });
-
-    document.getElementById('vehicle_phone').addEventListener('input', function (e) {
-        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-    });
-
     // CLUSTER EVENT
     btn_cluster.addEventListener('click', () => {
         if (com_tabs[0].classList.contains('is-active')) {
@@ -569,6 +567,32 @@
             appShowSnackBar(snackbar, 'Por favor clique na aba MAPA');
         }
     });
+
+    // INPUT PHONE FORMAT (xx)xxxxx-xxxx
+    obj_vehicle.ipt_phone.addEventListener('input', function (evento) {
+        if(evento.target.value.length < 15){
+            var x = evento.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,4})(\d{0,4})/);
+            evento.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        }else{
+            var x = evento.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            evento.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        }
+        
+    });
+
+    // ONFOCUS INPUT PHONE
+    obj_vehicle.ipt_phone.addEventListener('focus', (evento) =>{
+        if(evento.target.value.length > 0 && evento.target.value.length < 14){
+            evento.target.value = ''
+        }
+    })
+
+    // ONBLUR INPUT PHONE
+    obj_vehicle.ipt_phone.addEventListener('blur', (evento) =>{
+        if(evento.target.value.length > 0 && evento.target.value.length < 14){
+            appShowSnackBar(snackbar, 'Número incompleto.');
+        }
+    })
 
     // FILTER EVENT
     btn_filter.addEventListener('click', () => {
@@ -924,9 +948,12 @@
     // REGISTER A VEHICLE EVENT
     btn_register.addEventListener('click', () =>{ 
         // CHECK USER INPUTS
-        let count = 0;
-        if (obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_address.value === '') {
+        if (obj_vehicle.ipt_brand.value === '' || obj_vehicle.ipt_model.value === '' || obj_vehicle.ipt_value.value === '' || obj_vehicle.ipt_type.value === '' || obj_vehicle.ipt_color.value === '' || obj_vehicle.ipt_year.value === '' || obj_vehicle.ipt_km.value === '' || obj_vehicle.ipt_fuel.value === '' || obj_vehicle.ipt_transmission.value === '' || obj_vehicle.ipt_address.value === '') {
             appShowSnackBar(snackbar, 'Favor preencher os campos obrigatórios (*)');
+            return;
+        } 
+        if (obj_vehicle.ipt_phone.value === '' && obj_vehicle.ipt_email.value === ''){
+            appShowSnackBar(snackbar, 'Insira pelo menos um método de contato! (Recomendado)')
             return;
         }
         // CHECK ONLINE STATE
@@ -941,20 +968,22 @@
                     userId: obj_auth.id,
                     brand: obj_vehicle.ipt_brand.value.trim(),
                     model: obj_vehicle.ipt_model.value.trim(),
-                    value: obj_vehicle.ipt_value.valueAsNumber,
                     type: getVehicleType(obj_vehicle.ipt_type),
-                    color: getVehicleColor(obj_vehicle.ipt_color),
+                    value: obj_vehicle.ipt_value.valueAsNumber,
                     year: obj_vehicle.ipt_year.value,
+                    color: obj_vehicle.ipt_color.value.trim(),
                     km: obj_vehicle.ipt_km.value,
                     fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
+                    transmission: getVehicleTransmission(obj_vehicle.ipt_transmission),
+                    phone: obj_vehicle.ipt_phone.value,
+                    email: obj_vehicle.ipt_email.value,
                     description: obj_vehicle.ipt_description.value.trim(),
-                    address: obj_vehicle.ipt_address.value.trim(),
-                    date: ipt_date,
-                    coordinates: obj_coordinate,
                     picture: binaryString,
+                    address: obj_vehicle.ipt_address.value.trim(),
+                    coordinates: obj_coordinate,
+                    date: ipt_date,
                     status: [0, 0]
                 };
-            console.log(vehicle)
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API createVehicle
             fetch('/addVehicle', {

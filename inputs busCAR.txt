@@ -1,57 +1,64 @@
-	Título - vehicle_title
-	Marca  - vehicle_brand
-	Modelo - vehicle_model
- 	 Valor - vehicle_value
-  	  Tipo - vehicle_type
-   	   Cor - vehicle_color
-   	   Ano - vehicle_year
-    	    Km - vehicle_km
-   Combustível - vehicle_fuel
-     Descrição - vehicle_description
-  *** Telefone - vehicle_contact ***
-          Foto - vehicle_picture
-      Endereço - vehicle_address
+
+*vehicle_brand  		 - Marca
+*vehicle_model  		 - Modelo
+*vehicle_type   		 - Tipo
+*vehicle_value  		 - Valor
+*vehicle_year   		 - Ano
+*vehicle_color  		 - Cor
+*vehicle_km			 - Quilometragem
+*vehicle_fuel  		 - Combustível
+*vehicle_transmission - Câmbio
+*vehicle_phone		 - Telefone 
+*vehicle_email 		 - E-mail
+vehicle_description  - Descrição
+*vehicle_picture		 - Foto
+*vehicle_address		 - Endereço
 
 
 EVENTOS DO MENU LATERAL maps.js:linha 727
 
 REGISTRAR VEÍCULO maps.js:linha 881
 
-
-[jsonData.userId, 		
-jsonData.brand, 		
-jsonData.model, 		
-jsonData.year, 			
-jsonData.color, 		
-jsonData.type, 			
-jsonData.value, 		
-jsonData.status, 		
-jsonData.km, 			
-jsonData.fuel, 			
-jsonData.address, 		
-jsonData.description, 	
-jsonData.coordinates, 	
-jsonData.picture]		
-
-userId: obj_auth.id,
-brand: obj_vehicle.ipt_brand.value.trim(),
-model: obj_vehicle.ipt_model.value.trim(),
-value: obj_vehicle.ipt_value.value,
-type: getVehicleType(obj_vehicle.ipt_type),
-color: getVehicleColor(obj_vehicle.ipt_color),
-year: obj_vehicle.ipt_year.value,
-km: obj_vehicle.ipt_km.value,
-fuel: obj_vehicle.ipt_fuel.value.trim(),
-title: obj_vehicle.ipt_title.trim(),
-description: obj_vehicle.ipt_description.value.trim(),
-address: obj_vehicle.ipt_address.value.trim(),
-coordinates: obj_coordinate,
-picture: binaryString,
-status: [0, 0]
-
-
-
 DARK MODE
 
 class="mdl-layout__tab-bar mdl-js-ripple-effect" >> #202124
 class="mdl-layout__header"						 >> #202124
+
+
+
+vehicle = {
+    userId: obj_auth.id,
+    brand: inicialMaiuscula(obj_vehicle.ipt_brand.value.trim()),
+    model: inicialMaiuscula(obj_vehicle.ipt_model.value.trim()),
+    type: getVehicleType(obj_vehicle.ipt_type),
+    value: obj_vehicle.ipt_value.valueAsNumber,
+    year: obj_vehicle.ipt_year.value,
+    color: inicialMaiuscula(obj_vehicle.ipt_color.trim),
+    km: obj_vehicle.ipt_km.value,
+    fuel: getVehicleFuel(obj_vehicle.ipt_fuel),
+    transmission: obj_vehicle.transmission.value,
+    phone: obj_vehicle.phone.value,
+    email: obj_vehicle.email.value,
+    description: obj_vehicle.ipt_description.value.trim(),
+    picture: binaryString,
+    address: obj_vehicle.ipt_address.value.trim(),
+    coordinates: obj_coordinate,
+    date: ipt_date,
+    status: [0, 0]
+};
+
+(user_id, vehicle_brand, vehicle_model, vehicle_type, vehicle_value, vehicle_year, vehicle_color, vehicle_km, vehicle_fuel, vehicle_transmission, vehicle_phone, vehicle_email, vehicle_description, vehicle_picture, vehicle_address, vehicle_coordinates, vehicle_date, vehicle_status, geom) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, 18, ST_GeomFromText('POINT(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.type, jsonData.value, jsonData.year, jsonData.color, jsonData.km, jsonData.fuel, jsonData.transmission, jsonData.phone, jsonData.email, jsonData.description, jsonData.picture, jsonData.address, jsonData.coordinates, jsonData.date, jsonData.status])
+
+
+
+
+
+//// ID E TOKEN DO USUÁRIO LOGADO ////
+let str_auth = localStorage.getItem('auth'), obj_auth = JSON.parse(str_auth);
+console.log(obj_auth);
+
+
+//// ID DO USUÁRIO DO ANÚNCIO ////
+let str_vehicle = localStorage.getItem('vehicle'), obj_vehicle = JSON.parse(str_vehicle);
+console.log(obj_vehicle);
+

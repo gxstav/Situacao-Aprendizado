@@ -1,6 +1,6 @@
 (() => {
     'use strict'
-
+    
     let com_canvas = document.getElementById('vehicle_frame'),
         ctx = com_canvas.getContext("2d"),
         can_width = 180,
@@ -66,6 +66,10 @@
                     })
                         .then(result => { return result.json() })
                         .then(data => {
+                            let str_auth = localStorage.getItem('auth'), obj_auth = JSON.parse(str_auth);
+                            if(obj_auth.id !== data.respTemplate.userId){
+                                btn_rescue.style.display = 'none';
+                            }
                             // DATA ARRAYBUFFER TO BASE 64 STRING
                             let base64String = String.fromCharCode.apply(null, new Uint16Array(data.respTemplate.picture.data)),
                                 vehicle_date = formatDate(data.respTemplate.date),
@@ -87,12 +91,17 @@
                             template = `Tipo: ${data.respTemplate.type}<br><br>
                             Marca: ${data.respTemplate.brand}<br><br>
                             Modelo: ${data.respTemplate.model}<br><br>
+                            Transmissão: ${data.respTemplate.transmission}<br><br>
                             Ano: ${data.respTemplate.year}<br><br>
                             Cores: ${data.respTemplate.color}<br><br>
                             Data de Cadastro:  ${(vehicle_date).substr(0,vehicle_date.length - 3)}<br><br>
                             R$ ${data.respTemplate.value}<br><br>
                             Localização: ${data.respTemplate.address}<br><br>
+                            Telefone para contato: ${data.respTemplate.phone}<br><br>
+                            Email para contato: ${data.respTemplate.email}<br><br>
                             Descrição: ${data.respTemplate.description}`;
+
+
                             vehicle_description.innerHTML = template;
                             appHideLoading(spinner, spinner.children[0]);
 
@@ -149,7 +158,6 @@
                             status: [1, obj_auth.id],
                             vehicleId: obj_vehicle.id
                         };
-                if(obj_auth.id == userIdVehicle){
                     appShowLoading(spinner, spinner.children[0]);
                     // NODE.JS API rescue
                     fetch('/rescue', {
@@ -176,10 +184,6 @@
                             appHideLoading(spinner, spinner.children[0]);
                             appShowSnackBar(snackbar, 'Ocorreu um erro, por favor tente novamente');
                         });
-                    }
-                    else {
-                        appShowSnackBar(snackbar, 'Apenas o usuário que criou o anúncio pode excluir!');
-                    }
                 }
             });
         }

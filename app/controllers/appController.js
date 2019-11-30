@@ -242,13 +242,12 @@ module.exports = () => {
             let jsonData = req.body,
                 _latLng = jsonData.coordinates.split(','),
                 latLng = `${_latLng[1]} ${_latLng[0]}`;
-                console.log(jsonData.date)
             // CONNECTING TO THE DATABASE
             pool.connect()
                 // ON SUCCESS => CONNECTED
                 .then(client => {
-                    // INSERT QUERY => CREATE A NEW USER  0           1              2              3             4              5             6              7              8            9             10               11                   12                13                   14      15           0   1   2   3   4   5   6   7   8    9   10   11   12   13   14                15                                   0             1              2                 3             4               5              6               7              8               9              10                 11                   12                      13                 14
-                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_year, vehicle_color, vehicle_type, vehicle_value, vehicle_status, vehicle_km, vehicle_fuel, vehicle_address, vehicle_description, vehicle_picture, vehicle_coordinates, vehicle_date, geom) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, ST_GeomFromText('POINT(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.year, jsonData.color, jsonData.type, jsonData.value, jsonData.status, jsonData.km, jsonData.fuel, jsonData.address, jsonData.description, jsonData.picture, jsonData.coordinates, jsonData.date])
+                    // INSERT QUERY => CREATE A NEW VEHICLE
+                    client.query(`INSERT INTO vehicle (user_id, vehicle_brand, vehicle_model, vehicle_type, vehicle_value, vehicle_year, vehicle_color, vehicle_km, vehicle_fuel, vehicle_transmission, vehicle_phone, vehicle_email, vehicle_description, vehicle_picture, vehicle_address, vehicle_coordinates, vehicle_date, vehicle_status, geom) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, ST_GeomFromText('POINT(${latLng})',4326))`, [jsonData.userId, jsonData.brand, jsonData.model, jsonData.type, jsonData.value, jsonData.year, jsonData.color, jsonData.km, jsonData.fuel, jsonData.transmission, jsonData.phone, jsonData.email, jsonData.description, jsonData.picture, jsonData.address, jsonData.coordinates, jsonData.date, jsonData.status])
                         // ON SUCCESS => RESPONSE OK 200
                         .then(() => res.status(200).json({ title: 'Tudo Certo!', message: 'O veículo foi cadastrado com sucesso.' }))
                         // ON ERROR => RESPONSE BAD REQUEST 400
@@ -278,18 +277,21 @@ module.exports = () => {
                                 userId: result.rows[0].user_id,
                                 brand: result.rows[0].vehicle_brand.trim(),
                                 model: result.rows[0].vehicle_model.trim(),
-                                value: result.rows[0].vehicle_value,
                                 type: result.rows[0].vehicle_type.trim(),
-                                color: result.rows[0].vehicle_color.trim(),
+                                value: result.rows[0].vehicle_value,
                                 year: result.rows[0].vehicle_year,
+                                color: result.rows[0].vehicle_color.trim(),
                                 km: result.rows[0].vehicle_km,
                                 fuel: result.rows[0].vehicle_fuel.trim(),
-                                status: result.rows[0].vehicle_status,
+                                transmission: result.rows[0].vehicle_transmission.trim(),
+                                phone: result.rows[0].vehicle_phone,
+                                email: result.rows[0].vehicle_email.trim(),
                                 description: result.rows[0].vehicle_description.trim(),
+                                picture: result.rows[0].vehicle_picture,
                                 address: result.rows[0].vehicle_address.trim(),
                                 coordinates: result.rows[0].vehicle_coordinates.trim(),
                                 date: result.rows[0].vehicle_date,
-                                picture: result.rows[0].vehicle_picture,
+                                status: result.rows[0].vehicle_status,
                                 geom: result.rows[0].geom
                             }
                             // RESPONSE OK 200
@@ -317,24 +319,29 @@ module.exports = () => {
                         .then(result => {
                             result.rows.map(item => {
                                 respTemplate.push({
-                                vehicleId: item.vehicle_id,
-                                userId: item.user_id,
-                                brand: item.vehicle_brand.trim(),
-                                model: item.vehicle_model.trim(),
-                                value: item.vehicle_value,
-                                type: item.vehicle_type.trim(),
-                                color: item.vehicle_color.trim(),
-                                year: item.vehicle_year,
-                                km: item.vehicle_km,
-                                fuel: item.vehicle_fuel.trim(),
-                                status: item.vehicle_status,
-                                description: item.vehicle_description.trim(),
-                                address: item.vehicle_address.trim(),
-                                coordinates: item.vehicle_coordinates.trim(),
-                                date: item.vehicle_date,
-                                picture: item.vehicle_picture,
-                                geom: item.geom
+                                    vehicleId: item.vehicle_id,
+                                    userId: item.user_id,
+                                    brand: item.vehicle_brand.trim(),
+                                    model: item.vehicle_model.trim(),
+                                    type: item.vehicle_type.trim(),
+                                    value: item.vehicle_value,
+                                    year: item.vehicle_year,
+                                    color: item.vehicle_color.trim(),
+                                    km: item.vehicle_km,
+                                    fuel: item.vehicle_fuel.trim(),
+                                    transmission: item,
+                                    phone: item.vehicle_phone,
+                                    email: item.vehicle_email.trim(),
+                                    description: item.vehicle_description.trim(),
+                                    picture: item.vehicle_picture,
+                                    address: item.vehicle_address.trim(),
+                                    coordinates: item.vehicle_coordinates.trim(),
+                                    date: item.vehicle_date,
+                                    status: item.vehicle_status,
+                                    geom: item.geom
                                 });
+
+                                
                             });
                             // RESPONSE OK 200
                             res.status(200).json({ respTemplate });
@@ -360,7 +367,7 @@ module.exports = () => {
                         // ON SUCCESS
                         .then(() => {
                             // RESPONSE OK 200
-                            res.status(200).json({ title: 'Resgate', message: 'O resgate do animal foi registrado com sucesso, muito obrigado por ajudar.' })
+                            res.status(200).json({ title: 'Retirar', message: 'A remoção do anúncio foi feita com sucesso.' })
                         })
                         // ON ERROR => RESPONSE BAD REQUEST 400
                         .catch(err => res.status(400).json({ message: err.message }))
@@ -390,11 +397,25 @@ module.exports = () => {
                             result.rows.map(item => {
                                 respTemplate.push({
                                     vehicleId: item.vehicle_id,
+                                    userId: item.user_id,
                                     brand: item.vehicle_brand.trim(),
                                     model: item.vehicle_model.trim(),
                                     type: item.vehicle_type.trim(),
+                                    value: item.vehicle_value,
+                                    year: item.vehicle_year,
+                                    color: item.vehicle_color.trim(),
+                                    km: item.vehicle_km,
+                                    fuel: item.vehicle_fuel.trim(),
+                                    transmission: item,
+                                    phone: item.vehicle_phone,
+                                    email: item.vehicle_email.trim(),
+                                    description: item.vehicle_description.trim(),
+                                    picture: item.vehicle_picture,
+                                    address: item.vehicle_address.trim(),
                                     coordinates: item.vehicle_coordinates.trim(),
-                                    date: item.vehicle_date
+                                    date: item.vehicle_date,
+                                    status: item.vehicle_status,
+                                    geom: item.geom
                                 });
                             });
                             // RESPONSE OK 200

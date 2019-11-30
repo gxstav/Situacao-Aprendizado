@@ -165,8 +165,7 @@
 
 
                             <!-- MODELO -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
+                            <div class="mdl-card__supporting-text" style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
                                 Modelo do veículo *
                             </div>
                             <!-- MODELO INPUT => vehicle_model -->
@@ -232,7 +231,7 @@
                             <!-- ANO INPUT => vehicle_year -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                             style="width: 70%;color:black; align-self: center;">
-                                <input class="mdl-textfield__input" type="number" id="vehicle_year" maxlength="4" min="1900">
+                                <input class="mdl-textfield__input" type="number" id="vehicle_year" max="3000" min="1900">
                                 <label class="mdl-textfield__label" for="vehicle_year">Ano</label> 
                             </div>
 
@@ -245,7 +244,7 @@
                             </div>
                             <!-- COR INPUT => vehicle_model -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;color:black; align-self: center;">
-                                <input class="mdl-textfield__input" type="text" id="vehicle_model" maxlength="25">
+                                <input class="mdl-textfield__input" type="text" id="vehicle_color" maxlength="25">
                                 <label class="mdl-textfield__label" for="vehicle_model">Prata , Branco , Preto , Azul ...</label>
                             </div>
                            
@@ -266,118 +265,116 @@
 
                             
                             <!-- COMBUSTÍVEL -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%; color:black;align-self: center; padding: 16px 0;">
+                            <div class="mdl-card__supporting-text" style="width: 70%; color:black;align-self: center; padding: 16px 0;">
                                 Combustível do veículo * 
                             </div>
                             <!-- COMBUSTÍVEL INPUT => vehicle_fuel -->
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel1"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_fuel1" class="mdl-radio__button" name="vehicle_fuel"
-                                    value="alcool" checked>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel1" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_fuel1" class="mdl-radio__button" name="vehicle_fuel" value="Alcool" checked>
                                 <span class="mdl-radio__label">Álcool</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel2"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_fuel2" class="mdl-radio__button" name="vehicle_fuel"
-                                    value="gasolina">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel2" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_fuel2" class="mdl-radio__button" name="vehicle_fuel" value="Gasolina">
                                 <span class="mdl-radio__label">Gasolina</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel3"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_fuel3" class="mdl-radio__button" name="vehicle_fuel"
-                                    value="diesel">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel3" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_fuel3" class="mdl-radio__button" name="vehicle_fuel" value="Diesel">
                                 <span class="mdl-radio__label">Diesel</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel4"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_fuel4" class="mdl-radio__button" name="vehicle_fuel"
-                                    value="flex">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel4" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_fuel4" class="mdl-radio__button" name="vehicle_fuel" value="Flex">
                                 <span class="mdl-radio__label">Flex/Híbrido</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel5"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_fuel5" class="mdl-radio__button" name="vehicle_fuel"
-                                    value="GNV">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel5" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_fuel5" class="mdl-radio__button" name="vehicle_fuel" value="GNV">
                                 <span class="mdl-radio__label">GNV</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel6"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_fuel6" class="mdl-radio__button" name="vehicle_fuel"
-                                    value="eletrico">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_fuel6" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_fuel6" class="mdl-radio__button" name="vehicle_fuel" value="Eletrico">
                                 <span class="mdl-radio__label">Elétrico</span>
                             </label>
 
-                            <!-- CÃMBIO/TRANSMISSÃO -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center;color:black; padding: 16px 0;">
-                                Câmbio *
+
+
+                            <!-- TRANSMISSÃO -->
+                            <div class="mdl-card__supporting-text" style="width: 70%; color:black;align-self: center; padding: 16px 0;">
+                                Câmbio * 
                             </div>
-                            <!-- CÃMBIO/TRANSMISSÃO INPUT => vehicle_transmission -->
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_transmission1"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_transmission1" class="mdl-radio__button" name="vehicle_transmission"
-                                    value="Manual" checked>
+                            <!-- TRANSMISSÃO INPUT => vehicle_transmission -->
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_transmission1" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_transmission1" class="mdl-radio__button" name="vehicle_transmission" value="Manual" checked>
                                 <span class="mdl-radio__label">Manual</span>
                             </label>
-                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_transmission2"
-                                style="width: 70%; align-self: center; margin-bottom: 16px;">
-                                <input type="radio" id="vehicle_transmission2" class="mdl-radio__button" name="vehicle_transmission"
-                                    value="Preto">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_transmission2" style="width: 70%; align-self: center; margin-bottom: 16px;">
+                                <input type="radio" id="vehicle_transmission2" class="mdl-radio__button" name="vehicle_transmission" value="Automatico">
                                 <span class="mdl-radio__label">Automático</span>
                             </label>
 
+
+
+                            <!-- TELEFONE CONTATO -->
+                            <div class="mdl-card__supporting-text" style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
+                                Telefone para contato *
+                            </div>
+                            <!-- TELEFONE CONTATO => vehicle_phone -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%; align-self: center;">
+                                <input class="mdl-textfield__input" type="tel" id="vehicle_phone" maxlength="15"> <!--+55[0-9]{2}[0-9]{5}[0-9]{4}--> 
+                                <label class="mdl-textfield__label" for="vehicle_value">Número</label>
+                            </div>
+
+
+
+                            <!-- E-MAIL CONTATO => vehicle_email -->
+                            <div class="mdl-card__supporting-text" style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
+                                E-mail para contato *
+                            </div>
+                            <!-- EMAIL INPUT => vehicle_email -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;color:black; align-self: center;">
+                                <input class="mdl-textfield__input" type="email" id="vehicle_email" maxlength="50">
+                                <label class="mdl-textfield__label" for="vehicle_email">E-mail</label>
+                            </div>
+
+
+
                             <!-- DESCRIÇÃO -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; color:black;padding: 16px 0; text-align: justify;">
+                            <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; color:black;padding: 16px 0; text-align: justify;">
                                 Descrição do seu anuncio
                             </div>
                             <!-- DESCRIÇÃO INPUT => vehicle_description -->
                             <div class="mdl-textfield mdl-js-textfield" style="width: 70%; align-self: center;">
-                                <textarea class=" mdl-__input" type="text" maxlength="200" id="vehicle_description"
-                                    style="resize: none; height: 169px;width: 100%; border-radius: 4px; border: 2px solid lightgray; display: flex; justify-content: center; padding: 10px;"></textarea>
+                                <textarea class=" mdl-__input" type="text" maxlength="200" id="vehicle_description" style="resize: none; height: 169px;width: 100%; border-radius: 4px; border: 2px solid lightgray; display: flex; justify-content: center; padding: 10px;"></textarea>
                                 <label class="mdl-textfield__label" for="vehicle_description"></label>
                             </div>
 
-                            <!-- TELEFONE CONTATO -->
-                            <div class="mdl-card__supporting-text" style="width: 70%;color:black; align-self: center; padding: 16px 0; text-align: justify;">
-                                Telefone para contato
-                            </div>
-                            <!-- TELEFONE CONTATO => vehicle_contact -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-                            style="width: 70%; align-self: center;">
-                            <input class="mdl-textfield__input" type="tel" id="vehicle_phone" pattern="(48)91234-5678"> <!--+55[0-9]{2}[0-9]{5}[0-9]{4}--> 
-                            <label class="mdl-textfield__label" for="vehicle_value">Número</label>
-                            </div>
+
+
 
                             <!-- FOTO  -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center;color:black; padding: 16px 0;">
+                            <div class="mdl-card__supporting-text" style="width: 70%; align-self: center;color:black; padding: 16px 0;">
                                 Foto do Veículo *
                             </div>
                             <!-- FOTO INPUT => vehicle_picture -->
-                            <label for="vehicle_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;background-color:#FF9800; color:white;font: weight 600;"
-                                class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-                                <input type="file" accept="image/*" capture="camera" id="vehicle_picture"
-                                    style="display: none;">
+                            <label for="vehicle_picture" style="margin: 0; align-self: center; margin: 0 0 16px 0;background-color:#FF9800; color:white;font: weight 600;" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                <input type="file" accept="image/*" capture="camera" id="vehicle_picture" style="display: none;">
                                 <i class="material-icons">photo</i>
                             </label>
-                            <canvas id="vehicle_frame"
-                                style="width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 1px solid #757575"></canvas>
+                            <canvas id="vehicle_frame" style="width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 1px solid #757575">
+                            </canvas>
 
 
-                            
+
                             <!-- VEHICLE ADDRESS TEXT -->
-                            <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; color:black;padding: 16px 0 0 0; text-align: justify;">
-                                Endereço aproximado (O endereço é preenchido automaticamente)*:
+                            <div class="mdl-card__supporting-text" style="width: 70%; align-self: center; color:black;padding: 16px 0 0 0; text-align: justify;">
+                                Endereço (Permita o aplicativo usar a localização)*:
                             </div>
                             <!-- VEHICLE ADDRESS TEXT AREA => vehicle_address -->
-                            <div id="div_address" class="mdl-textfield mdl-js-textfield"
-                                style="width: 70%; align-self: center;">
+                            <div id="div_address" class="mdl-textfield mdl-js-textfield" style="width: 70%; align-self: center;">
                                 <textarea class=" mdl-textfield__input" type="text" maxlength="150" id="vehicle_address" style="resize: none; height: 30px;" disabled></textarea>
                                 <label class="mdl-textfield__label" for="vehicle_address">Endereço</label>
                             </div>
+
+
+
                             <!-- ADDRESS BY CEP LINK => app_addressByCep 
                             <a id="app_addressByCep"
                                 class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -388,15 +385,18 @@
                                 class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                                 Endereço por localização
                             </a>-->
+
+
+
                             <div class="mdl-card__actions mdl-card--border" style="display: flex; align-content: center; align-items: center; justify-content: center; padding-top: 15px; padding-bottom: 0;">
                                 <!-- REGISTER BUTTON => app_register -->
-                                <button id="app_register"
-                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                                style="width: 45%; align-self: center; margin-bottom: 16px;background-color:#FF9800; color:white;font: weight 600;">
+                                <button id="app_register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width: 45%; align-self: center; margin-bottom: 16px;background-color:#FF9800; color:white;font: weight 600;">
                                     Cadastrar
                                 </button>
-                                
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
