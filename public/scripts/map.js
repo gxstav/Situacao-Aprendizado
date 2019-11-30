@@ -878,8 +878,8 @@
                 getPosition(locationOptions)
                     .then(response => {
                         let obj_position = {
-                            latitude: response.coords.latitude,
-                            longitude: response.coords.longitude
+                            latitude: response.coords.latitude.toFixed(7),
+                            longitude: response.coords.longitude.toFixed(7)
                         },
                             obj_here = {
                                 prox: `${obj_position.latitude}, ${obj_position.longitude}`, // THE ALTITUDE PARAMETER IS OPTIONAL (y,x,z)
