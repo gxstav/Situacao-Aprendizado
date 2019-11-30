@@ -193,6 +193,7 @@
                         break;
                 };
             });
+
             el_list.innerHTML = template;
             [...el_list.children].map(item => {
                 item.addEventListener('click', event => {
@@ -290,6 +291,7 @@
 
             // EVENT TO SHOW BUBBLE
             group.addEventListener('tap', event => {
+                /// (2 TAPS ABRE DESCRIÇÃO DO VEÍCULO)
                 let currentBubble = ui.getBubbles(),
                     point = event.target.getPosition(),
                     t = event.target,
@@ -601,17 +603,17 @@
             if (navigator.onLine) {
                 appShowFilter(div_filter);
 
-                div_filter.children[0].children[1].children[5].children[0].addEventListener('click', () => {
-                    let dist = div_filter.children[0].children[1].children[5].children[1];
-                    if (parseInt(dist.innerHTML) >= 100 && parseInt(dist.innerHTML) < 1500) {
-                        dist.innerHTML = parseInt(dist.innerHTML) + 50;
+                div_filter.children[0].children[1].children[6].children[0].addEventListener('click', () => {
+                    let dist = div_filter.children[0].children[1].children[6].children[1];
+                    if (dist.value >= 100 && dist.value < 5000) {
+                        dist.value = parseInt(dist.value) + 50;
                     }
                 });
 
-                div_filter.children[0].children[1].children[5].children[2].addEventListener('click', () => {
-                    let dist = div_filter.children[0].children[1].children[5].children[1];
-                    if (parseInt(dist.innerHTML) > 100 && parseInt(dist.innerHTML) <= 1500) {
-                        dist.innerHTML = parseInt(dist.innerHTML) - 50;
+                div_filter.children[0].children[1].children[6].children[2].addEventListener('click', () => {
+                    let dist = div_filter.children[0].children[1].children[6].children[1];
+                    if (dist.value > 100 && dist.value <= 5000) {
+                        dist.value = parseInt(dist.value) - 50;
                     }
                 });
             }
@@ -629,7 +631,6 @@
         // CHECK ONLINE STATE
         if (navigator.onLine) {
             map.removeObject(group);
-
             if (circle) {
                 map.removeObject(circle);
                 circle = null;
@@ -644,11 +645,11 @@
                 getPosition(locationOptions)
                     .then(response => {
                         let obj_position = {
-                            latitude: response.coords.latitude.toFixed(6),
-                            longitude: response.coords.longitude.toFixed(6)
+                            latitude: response.coords.latitude.toFixed(7),
+                            longitude: response.coords.longitude.toFixed(7)
                         };
 
-                        let dist = div_filter.children[0].children[1].children[5].children[1],
+                        let dist = div_filter.children[0].children[1].children[6].children[1],
                             vehicleType = document.getElementsByName('vehicle_typeF');
 
                         let str_auth = localStorage.getItem('auth'),

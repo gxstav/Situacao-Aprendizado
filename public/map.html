@@ -437,7 +437,7 @@
         <div class="flex_box box_shadow">
             <h1 class="unselected">Filtro</h1>
             <div style="height: 230px; display: flex; flex-direction: column;">
-                <p style="margin-bottom: 16px">Tipo de animal:</p>
+                <p style="margin-bottom: 16px">Tipo de veículo:</p>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="vehicle_divType1"
                     style="width: 70%; align-self: center; margin-bottom: 16px;">
                     <input type="radio" id="vehicle_divType1" class="mdl-radio__button" name="vehicle_typeF" value="Carro"
@@ -462,8 +462,8 @@
                 <p style="margin-bottom: 16px">Distância (m):</p>
                 <span style="width: 70%; align-self: center; display: flex; justify-content: center;">
                     <button style="margin: 0 20px; font-size: 1.5em">+</button>
-                    <p>100</p>
-                    <button style="margin: 0 20px; font-size: 1.5em">-</button>
+                    <input type="number" min="0" max="10000" value="100" id="distance" style="text-align: center;"/>
+                    <button style="margin: 0 15px; font-size: 2em">-</button>
                 </span>
 
             </div>
