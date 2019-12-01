@@ -66,6 +66,9 @@
             margin: 5%;
             width: 90%;
         }
+
+
+
     </style>
 </head>
 
@@ -99,16 +102,16 @@
             </div>
         </header>
         <!-- MENU -->
-        <div id="stl-drawer" class="mdl-layout__drawer"style="background-color:#FF9800;color:#121212;">
+        <div id="stl-drawer" class="mdl-layout__drawer"style="background-color:#FF9800;color:#000000;border-right:0;">
             <!-- TITLE -->
-            <span class="mdl-layout-title"></span>
+            <span class="mdl-layout-title">Menu</span>
             <!-- ITEMS -->
             <nav class="mdl-navigation" style="cursor: pointer;">
-                <p class="mdl-navigation__link"><i class="material-icons">account_box</i>Perfil</p>
-                <p class="mdl-navigation__link"><i class="material-icons">create</i>Créditos</p>
-                <p class="mdl-navigation__link"><i class="material-icons">call_received</i>Sair</p>   
+                <p class="mdl-navigation__link" id="dark_mode_nav1"><i class="material-icons">account_box</i>Perfil</p>
+                <p class="mdl-navigation__link" id="dark_mode_nav2"><i class="material-icons">create</i>Créditos</p>
+                <p class="mdl-navigation__link" id="dark_mode_nav3"><i class="material-icons">call_received</i>Sair</p>   
                 <hr>
-                <p class="mdl-navigation__link"><label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
+                <p class="mdl-navigation__link"><label id="dark_mode_switcher" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
                         <span class="mdl-switch__label">Modo Noturno</span>
                     <input type="checkbox" id="switch-2" class="mdl-switch__input">
                 </label></p>
@@ -132,8 +135,8 @@
                         <div class="mdl-card__actions" style="width: 100%; display: flex; flex-direction: column;">
                             <!-- vehicle LIST TEXT -->
                             <div class="mdl-card__supporting-text"
-                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: justify;">
-                                Lista dos veículos da região:
+                                style="width: 70%; align-self: center; padding: 16px 0 0 0; text-align: center;">
+                                Lista dos veículos da região
                             </div>
                             <ul class="vehicle_list mdl-list" id="vehicle-list">
                             </ul>
@@ -473,7 +476,6 @@
             </div>
         </div>
     </div>
-
     <!-- MATERIAL DESIGN LITE SCRIPT -->
     <script src="scripts/material.min.js"></script>
     <!-- APP SCRIPT -->

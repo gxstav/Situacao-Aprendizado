@@ -14,17 +14,31 @@ let appShowSnackBar = (element, msg) => {
         if (obj.hasOwnProperty('btn_ok')) {
             let btn_ok = document.createElement('button');
             btn_ok.innerText = 'OK';
-            btn_ok.style= "color:black";
+
+            btn_ok.style= "background-color: #FFF; color: #000000;";
+
             btn_ok.addEventListener('mouseenter', () => {
                 btn_ok.style= "color: gray";
             });
-
-            btn_ok.addEventListener('mouseleave', () => {
+                btn_ok.addEventListener('mouseleave', () => {
                 btn_ok.style= "color: black";
             })
             btn_ok.addEventListener('click', () => {
                 obj.btn_ok();
             });
+            
+            if(localStorage.hasOwnProperty('dark_mode')){
+                btn_ok.style= "background-color: #121212; color: #cdcdcd;";
+                btn_ok.addEventListener('mouseenter', () => {
+                    btn_ok.style= "background-color: #121212; color: #606060;";
+                });
+                    btn_ok.addEventListener('mouseleave', () => {
+                    btn_ok.style= "background-color: #121212; color: #cdcdcd;";
+                })
+                btn_ok.addEventListener('click', () => {
+                    obj.btn_ok();
+                });
+            } 
             
             // ADD DIALOG BUTTON
             obj.element.children[0].children[2].appendChild(btn_ok);
@@ -38,12 +52,54 @@ let appShowSnackBar = (element, msg) => {
                 btn_yes = document.createElement('button');
             btn_no.innerText = 'NÃO';
             btn_yes.innerText = 'SIM';
+            btn_no.style = "background-color: #FFF; color: #000000;";
+            btn_yes.style = "background-color: #FFF; color: #000000;";
+
+            // BUTTON NO DEFAULT
+            btn_no.addEventListener('mouseenter', () => {
+                btn_no.style= "color: gray";
+            });
+                btn_no.addEventListener('mouseleave', () => {
+                btn_no.style= "color: black";
+            });
+
+            // BUTTON YES DEFAULT
+            btn_yes.addEventListener('mouseenter', () => {
+                btn_yes.style= "color: gray";
+            });
+                btn_yes.addEventListener('mouseleave', () => {
+                btn_yes.style= "color: black";
+            });
+
+
+            if(localStorage.hasOwnProperty('dark_mode')){
+                // BUTTON NO BLACK
+                btn_no.style = "background-color: #121212; color: #cdcdcd;";
+                btn_no.addEventListener('mouseenter', () => {
+                    btn_no.style= "background-color: #121212; color: #606060;";
+                });
+                btn_no.addEventListener('mouseleave', () => {
+                btn_no.style= "background-color: #121212; color: #cdcdcd;";
+                });
+
+                // BUTTON YES BLACK
+                btn_yes.style = "background-color: #121212; color: #cdcdcd;";
+                btn_yes.addEventListener('mouseenter', () => {
+                    btn_yes.style= "background-color: #121212; color: #606060;";
+                });
+                btn_yes.addEventListener('mouseleave', () => {
+                btn_yes.style= "background-color: #121212; color: #cdcdcd;";
+                });
+            }
+
             btn_no.addEventListener('click', () => {
                 obj.btn_no();
             });
+
             btn_yes.addEventListener('click', () => {
                 obj.btn_yes();
             });
+            
             // ADD DIALOG BUTTONS
             obj.element.children[0].children[2].appendChild(btn_no);
             obj.element.children[0].children[2].appendChild(btn_yes);

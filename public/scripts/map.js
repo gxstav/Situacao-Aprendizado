@@ -4,6 +4,7 @@
     // SERVICEWORKER
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
+            listLoop();
             navigator.serviceWorker.register('sw.js').then(registration => {
                 console.log('ServiceWorker registrado com sucesso: ', registration.scope);
             }, function (err) {
@@ -89,6 +90,8 @@
         ul_vehicleList = document.getElementById('vehicle-list'),
         // WINDOW CONTENT FOR MATERIAL DESIGN LITE
         windowContent = document.querySelector('.mdl-layout__content'),
+        // DARK MODE SWITCH
+        dark = document.getElementById('switch-2'),
         // GET VEHICLE TYPE
         getVehicleType = el_group => {
             let _type = null;
@@ -418,8 +421,62 @@
     });
 
     let vehicleData = null;
+
+    const listLoop = () => {
+        let list = document.getElementById('list_content').children[0].children[1].children
+        
+        if(!localStorage.hasOwnProperty('dark_mode')){
+            [...list].map(i =>{
+                i.style = "background-color: #FFF; color: #000000"
+                i.children[0].children[1].style = "background-color: #FFF; color: #000000"
+                i.children[0].children[2].style = "background-color: #FFF; color: #808080"
+            }) 
+        }
+        else{
+            [...list].map(i =>{
+                i.style = "background-color: #202124; color: #FFF"
+                i.children[0].children[1].style = "background-color: #202124; color: #FFF"
+                i.children[0].children[2].style = "background-color: #202124; color: #808080"
+            }) 
+        }
+    }
     // WINDOW EVENT TO CHECK AUTHENTICATION
     window.addEventListener('load', () => {
+        // CHECK LOCALSTORAGE dark_mode
+        listLoop();
+        if (localStorage.hasOwnProperty('dark_mode')) {
+            let str_darkMode = localStorage.getItem('dark_mode'),
+            obj_dark = JSON.parse(str_darkMode);
+            document.getElementById('dark_mode_switcher').classList.add('is-checked');
+            dark.checked = obj_dark.active;
+            // TURNING DARK
+            // SIDE MENU
+            com_menu.style = "background-color: #121212; color: #FF9800";
+            document.getElementById('stl-drawer').style = "background-color: #121212; color:#FF9800;"
+            document.getElementById('stl-drawer').children[0].style = "background-color: #121212; color:#FF9800;"
+            document.getElementById('stl-drawer').children[1].style = "background-color: #121212; color:#FF9800;"
+            document.getElementById('dark_mode_nav1').style = "color:#FF9800;"
+            document.getElementById('dark_mode_nav2').style = "color:#FF9800;"
+            document.getElementById('dark_mode_nav3').style = "color:#FF9800;"
+            document.getElementById('dark_mode_switcher').style = "color:#FF9800;"
+            
+            // TOP MENU
+            com_tabs.style = "background-color: #121212; color:#FF9800";
+            document.getElementById('stl-header').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('tab_map').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('tab_list').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('tab_add').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('stl-header').children[0].style = "color:#FF9800";
+
+            //CATALOG
+            document.getElementById('list_content').style.backgroundColor = "#202124";
+            document.getElementById('list_content').children[0].children[0].style = "text-align: center; color: #FF9800; margin-left: 5%";
+            // CAIXA DE DIÁLOGO
+            dialog.children[0].style = "background-color: #121212;"
+            dialog.children[0].children[0].style = "color: #cdcdcd;"
+            dialog.children[0].children[1].children[0].style = "color: #808080;"
+
+        }
         // CHECK ONLINE STATE
         if (navigator.onLine) {
             // CHECK LOCALSTORAGE auth
@@ -821,24 +878,75 @@
         });
     });
 
-    // DARK THEME EVENT 
-    
-    com_menu.children[4].addEventListener('click', () => {
-        if (!false){
-            document.getElementById('stl-body').style.backgroundColor = "#121212";
-            document.getElementById('stl-header').style.backgroundColor = "#202124";
-            document.getElementById('stl-drawer').style.backgroundColor = "#121212";
-            document.getElementById('stl-drawer').style.color =  "#FFF";
-            switcher = true;
+    // REMEMBER DARK MODE OPTION
+    dark.addEventListener('change', (evento) => {
+        // CHECK REMIND ME CHECKBOX
+        if (!evento.target.checked) {
+            localStorage.clear();
+
+            listLoop();
+            com_menu.style = "background-color: #FF9800; color: #000000";
+            // SIDE MENU
+            com_menu.style = "background-color: #FF9800; color: #000000";
+            document.getElementById('stl-drawer').style = "background-color: #FF9800; color: #000000"
+            document.getElementById('stl-drawer').children[0].style = "background-color: #FF9800; color: #000000"
+            document.getElementById('stl-drawer').children[1].style = "background-color: #FF9800; color: #000000"
+            document.getElementById('dark_mode_nav1').style = "color: #000000"
+            document.getElementById('dark_mode_nav2').style = "color: #000000"
+            document.getElementById('dark_mode_nav3').style = "color: #000000"
+            document.getElementById('dark_mode_switcher').style = "color: #000000"
+            
+            // TOP MENU
+            com_tabs.style = "background-color: #FF9800; color: #000000";
+            document.getElementById('stl-header').style = "background-color: #FF9800; color: #000000";
+            document.getElementById('tab_map').style = "background-color: #FF9800; color: #000000";
+            document.getElementById('tab_list').style = "background-color: #FF9800; color: #000000";
+            document.getElementById('tab_add').style = "background-color: #FF9800; color: #000000";
+            document.getElementById('stl-header').children[0].style = "color: #000000";
+
+            //CATALOG
+            document.getElementById('list_content').style.backgroundColor = "#FFF";
+            document.getElementById('list_content').children[0].children[0].style = "text-align: center; color: #000000; margin-left: 5%";
+
+            // CAIXA DE DIÁLOGO
+            dialog.children[0].style = "background-color: #FFF;"
+            dialog.children[0].children[0].style = "color: #303030;"
+            dialog.children[0].children[1].children[0].style = "color: #000000;"
         }
-        else{
-            document.getElementById('stl-body').style.backgroundColor = "#fafafa";
-            document.getElementById('stl-header').style.backgroundColor = "rgb(33,150,243)";
-            document.getElementById('stl-drawer').style.backgroundColor = "#fafafa";
-            document.getElementById('stl-drawer').style.color =  "#424242";
-            switcher = false;
+        else {
+            listLoop();
+            // SIDE MENU
+            com_menu.style = "background-color: #121212; color: #FF9800";
+            document.getElementById('stl-drawer').style = "background-color: #121212; color:#FF9800;"
+            document.getElementById('stl-drawer').children[0].style = "background-color: #121212; color:#FF9800;"
+            document.getElementById('stl-drawer').children[1].style = "background-color: #121212; color:#FF9800;"
+            document.getElementById('dark_mode_nav1').style = "color:#FF9800;"
+            document.getElementById('dark_mode_nav2').style = "color:#FF9800;"
+            document.getElementById('dark_mode_nav3').style = "color:#FF9800;"
+            document.getElementById('dark_mode_switcher').style = "color:#FF9800;"
+            
+            // TOP MENU
+            com_tabs.style = "background-color: #121212; color:#FF9800";
+            document.getElementById('stl-header').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('tab_map').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('tab_list').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('tab_add').style = "background-color: #121212; color:#FF9800";
+            document.getElementById('stl-header').children[0].style = "color:#FF9800";
+
+            //CATALOG
+            document.getElementById('list_content').style.backgroundColor = "#202124";
+            document.getElementById('list_content').children[0].children[0].style = "text-align: center; color: #FF9800; margin-left: 5%";
+            // CAIXA DE DIÁLOGO
+            dialog.children[0].style = "background-color: #121212;"
+            dialog.children[0].children[0].style = "color: #efefef;"
+            dialog.children[0].children[1].children[0].style = "color: #909090;"
+
+            let obj_darkMode = {
+                active: dark.checked,
+            },
+            str_darkMode = JSON.stringify(obj_darkMode);
+            localStorage.setItem('dark_mode', str_darkMode);
         }
-        
     });
 
     // DISPLAYS MAP CONTENT

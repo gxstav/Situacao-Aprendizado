@@ -51,8 +51,6 @@ vehicle = {
 
 
 
-
-
 //// ID E TOKEN DO USUÁRIO LOGADO ////
 let str_auth = localStorage.getItem('auth'), obj_auth = JSON.parse(str_auth);
 console.log(obj_auth);
