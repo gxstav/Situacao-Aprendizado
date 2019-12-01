@@ -62,3 +62,23 @@ console.log(obj_auth);
 let str_vehicle = localStorage.getItem('vehicle'), obj_vehicle = JSON.parse(str_vehicle);
 console.log(obj_vehicle);
 
+vehicleId,
+userId,
+brand,
+model,
+type,
+value,
+year,
+color,
+km,
+fuel,
+transmission,
+phone,
+email,
+description,
+picture,
+address,
+coordinates,
+date,
+status,
+geom

@@ -596,6 +596,19 @@
         }
     })
 
+    // INPUT CURRENCY FORMAT xx.xxx.xxx
+    obj_vehicle.ipt_value.addEventListener('input', function (evento) {
+            var x = evento.target.value.replace(/\D/g, '').match(/([0-9]{0,2})([0-9]{0,3})([0-9]{0,3})/);
+            let n = [...x[0]]
+            evento.target.value = x[0].length < 4 ? x[0] 
+            : x[0].length == 4 ? `${n[0]}.${n[1]}${n[2]}${n[3]}` 
+            : x[0].length == 5 ? `${n[0]}${n[1]}.${n[2]}${n[3]}${n[4]}`
+            : x[0].length == 6 ? `${n[0]}${n[1]}${n[2]}.${n[3]}${n[4]}${n[5]}`
+            : x[0].length == 7 ? `${n[0]}.${n[1]}${n[2]}${n[3]}.${n[4]}${n[5]}${n[6]}`
+            : x[0].length == 8 ? `${n[0]}${n[1]}.${n[2]}${n[3]}${n[4]}.${n[5]}${n[6]}${n[7]}`
+            : x[0]
+    });
+
     // FILTER EVENT
     btn_filter.addEventListener('click', () => {
         if (com_tabs[0].classList.contains('is-active')) {
@@ -970,7 +983,7 @@
                     brand: obj_vehicle.ipt_brand.value.trim(),
                     model: obj_vehicle.ipt_model.value.trim(),
                     type: getVehicleType(obj_vehicle.ipt_type),
-                    value: obj_vehicle.ipt_value.valueAsNumber,
+                    value: obj_vehicle.ipt_value.value.trim(),
                     year: obj_vehicle.ipt_year.value,
                     color: obj_vehicle.ipt_color.value.trim(),
                     km: obj_vehicle.ipt_km.value,

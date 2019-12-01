@@ -19,7 +19,7 @@
         spinner = document.getElementById('app_loading'),
         vehicle_description = document.getElementById('vehicle_description');
 
-    let userIdVehicle;
+        let userIdVehicle;
 
     const formatDate = date => {
         let splitted = date.split('T')
@@ -87,20 +87,37 @@
                                 ctx.drawImage(img, 0, 0, can_width, can_height);
                             },
                                 img.onerror = err => console.error(err.message);
-
-                            template = `Tipo: ${data.respTemplate.type}<br><br>
-                            Marca: ${data.respTemplate.brand}<br><br>
-                            Modelo: ${data.respTemplate.model}<br><br>
-                            Transmissão: ${data.respTemplate.transmission}<br><br>
-                            Ano: ${data.respTemplate.year}<br><br>
-                            Cores: ${data.respTemplate.color}<br><br>
-                            Data de Cadastro:  ${(vehicle_date).substr(0,vehicle_date.length - 3)}<br><br>
-                            R$ ${data.respTemplate.value}<br><br>
-                            Localização: ${data.respTemplate.address}<br><br>
-                            Telefone para contato: ${data.respTemplate.phone}<br><br>
-                            Email para contato: ${data.respTemplate.email}<br><br>
-                            Descrição: ${data.respTemplate.description}`;
-
+                            let real = data.respTemplate.value;
+                            
+                            template = `<h2 style="text-align:left" margin-top: 0;>${data.respTemplate.brand} ${data.respTemplate.model}</h2>
+                                        <h3 style="color:#FF9800; text-align:left;"> R$ ${data.respTemplate.value}</h3><br>
+                                        <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 237px" class="tg">
+                                            <tr>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:right;vertical-align:top"><i class="material-icons">date_range</i></td>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">${data.respTemplate.year}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:right;vertical-align:top"><i class="material-icons">palette</i></td>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">${data.respTemplate.color}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:right;vertical-align:top"><i class="material-icons">straighten</i></td>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">${data.respTemplate.km} Km</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:right;vertical-align:top"><i class="material-icons">local_gas_station</i></td>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">${data.respTemplate.fuel}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:right;vertical-align:top"><i class="material-icons">settings_applications</i></td>
+                                                <td style="font-family:Arial, sans-serif;font-size:14px;padding:0px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">${data.respTemplate.transmission}</td>
+                                            </tr>
+                                        </table><br>
+                                        <h4>Localização</h4><p>${data.respTemplate.address}</p><br>
+                                        <h4>Telefone para contato</h4> <p>${data.respTemplate.phone}</p><br>
+                                        <h4>Email para contato</h4> <p>${data.respTemplate.email}</p><br>
+                                        <h4>Descrição</h4> <p>${data.respTemplate.description}</p>
+                                        <h4>Data de postagem</h4> <p>${(vehicle_date).substr(0,vehicle_date.length - 3)}</p>`;
 
                             vehicle_description.innerHTML = template;
                             appHideLoading(spinner, spinner.children[0]);
