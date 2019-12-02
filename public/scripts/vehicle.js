@@ -31,6 +31,11 @@
     // WINDOW EVENT TO CHECK AUTHENTICATION
     window.addEventListener('load', () => {
         // CHECK ONLINE STATE
+        if (!localStorage.hasOwnProperty('dark-mode')){
+            document.getElementById('dm-body').style.backgroundColor = "#EEE"
+        }else{
+            document.getElementById('dm-body').style.backgroundColor = "#010101"
+        }
         if (navigator.onLine) {
             // CHECK LOCALSTORAGE auth
             if (localStorage.hasOwnProperty('auth')) {

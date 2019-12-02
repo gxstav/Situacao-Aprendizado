@@ -59,19 +59,17 @@
         let titulos = formulario.filter(item => item.children.length == 0);
         let inputs = formulario.filter(item => item.children.length > 0);
 
-        console.log(titulos)
-        console.log(inputs)
-
         if(!localStorage.hasOwnProperty('dark_mode')){
             document.getElementById('app_register').style.color = '#FFF'
             titulos.map((div , i) => div.style = i != 13 ? "width: 70%;align-self: center; padding: 16px 0; text-align: justify;background-color:#FFF;color: #000000;" : "width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 1px solid #757575")
-            inputs.map((div , i) => div.style.color = i != 21 ? '#909090' : '#FFF')
-            inputs.map((pai , i) => pai.children.map(filho => filho.style = filho.localName != 'input' ? 'color: #' : 'color: #000000' ))
+            inputs.map((div , i) => div.style.color = i != 21 ? '#000000' : '#FFF')
+            inputs.map((pai) => [...pai.children].map(filho => console.log(filho))) //filho.localName == 'input' ?  filho.style.color = "#FFF" : filho.style = filho.style
         }
         else{
             document.getElementById('app_register').style.color = '#000000'
             titulos.map((div , i) => div.style = i != 13 ? "width: 70%; align-self: center; padding: 16px 0; text-align: justify;background-color:#202124;color: #FF9800;" : "width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 1px solid #757575")
-            inputs.map((div , i) => div.style.color = i != 21 ? '#909090' : '#000000')
+            inputs.map((div , i) => div.style.color = i != 21 ? div.type == 'radio' ? '#909090' : '#FFF' : '#000000')
+            inputs.map((pai) => [...pai.children].map(filho => console.log(filho))) //filho.localName == 'input' ? filho.style.color= "#FFF" : filho.style.color = "#909090"
         }
     }
 
@@ -467,6 +465,7 @@
     window.addEventListener('load', () => {
         // CHECK LOCALSTORAGE dark_mode
         listLoop();
+        addLoop();
         if (localStorage.hasOwnProperty('dark_mode')) {
             let str_darkMode = localStorage.getItem('dark_mode'),
             obj_dark = JSON.parse(str_darkMode);
@@ -494,10 +493,17 @@
             //CATALOG
             document.getElementById('list_content').style.backgroundColor = "#202124";
             document.getElementById('list_content').children[0].children[0].style = "text-align: center; color: #FF9800; margin-left: 5%";
+
             // CAIXA DE DIÁLOGO
             dialog.children[0].style = "background-color: #121212;"
             dialog.children[0].children[0].style = "color: #cdcdcd;"
             dialog.children[0].children[1].children[0].style = "color: #808080;"
+
+            // ADICIONAR VEHICLE
+            document.getElementById('add_content').style = "background-color: #202124;"
+            document.getElementById('vehicle_description').style = "resize: none; height: 169px;width: 100%; border-radius: 4px; display: flex; justify-content: center; padding: 10px; background-color: #121212; color: #FFF"
+            document.getElementById('picture_icon').style = "align-self: center; margin: 0px 0px 16px; background-color: rgb(255, 152, 0); color: rgb(0, 0, 0);";
+            document.getElementById('vehicle_picture').style = "display: none";
 
         }
         // CHECK ONLINE STATE
@@ -937,6 +943,9 @@
 
             // ADICIONAR VEHICLE
             document.getElementById('add_content').style = "background-color: #FFF;"
+            document.getElementById('vehicle_description').style = "resize: none; height: 169px;width: 100%; border-radius: 4px; border: 1px solid #909090; display: flex; justify-content: center; padding: 10px;background-color:#FFF"
+            document.getElementById('picture_icon').style = "align-self: center; margin: 0px 0px 16px; background-color: rgb(255, 152, 0); color: rgb(255, 255, 255);";
+            document.getElementById('vehicle_picture').style = "display: none";
         }
         else {
             // TURN BACK TO BLACK
@@ -969,6 +978,9 @@
 
             // ADICIONAR VEHICLE
             document.getElementById('add_content').style = "background-color: #202124;"
+            document.getElementById('vehicle_description').style = "resize: none; height: 169px;width: 100%; border-radius: 4px; display: flex; justify-content: center; padding: 10px; background-color: #121212; color: #FFF"
+            document.getElementById('picture_icon').style = "align-self: center; margin: 0px 0px 16px; background-color: rgb(255, 152, 0); color: rgb(0, 0, 0);";
+            document.getElementById('vehicle_picture').style = "display: none";
 
             let obj_darkMode = {
                 active: dark.checked,
