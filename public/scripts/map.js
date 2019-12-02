@@ -727,7 +727,7 @@
                             filter = {
                                 coordinates: `${obj_position.latitude}, ${obj_position.longitude}`,
                                 type: getVehicleType(vehicleType),
-                                distance: (parseInt(dist.innerHTML) / 1000) / 111.12
+                                distance: (parseInt(dist.value) / 1000) / 111.12
                             };
 
                         // NODE.JS API filter
@@ -751,7 +751,7 @@
                                 // ADD ITEMS TO THE LIST
                                 createList(ul_vehicleList, [...data.respTemplate]);
 
-                                addCircleToMap(map, { lat: obj_position.latitude, lng: obj_position.longitude }, parseInt(dist.innerHTML))
+                                addCircleToMap(map, { lat: obj_position.latitude, lng: obj_position.longitude }, parseInt(dist.value))
 
                                 appHideLoading(spinner, spinner.children[0]);
                             })
@@ -814,7 +814,7 @@
                 obj_auth = JSON.parse(str_auth);
             appShowLoading(spinner, spinner.children[0]);
             // NODE.JS API getVehicle
-            fetch('/vehicle', {
+            fetch('/vehicles', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${obj_auth.token}`
