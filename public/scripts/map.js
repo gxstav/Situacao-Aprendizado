@@ -34,6 +34,47 @@
         }
     }
 
+    const listLoop = () => {
+        let list = [...document.getElementById('list_content').children[0].children[1].children]
+        
+        if(!localStorage.hasOwnProperty('dark_mode')){
+            list.map(i =>{
+                i.style = "background-color: #FFF; color: #000000"
+                i.children[0].children[1].style = "background-color: #FFF; color: #000000"
+                i.children[0].children[2].style = "background-color: #FFF; color: #808080"
+            }) 
+        }
+        else{
+            list.map(i =>{
+                i.style = "background-color: #202124; color: #FFF"
+                i.children[0].children[1].style = "background-color: #202124; color: #FFF"
+                i.children[0].children[2].style = "background-color: #202124; color: #808080"
+            }) 
+        }
+    }
+
+    const addLoop = () => {
+        // Spans , Inputs , Labels
+        let formulario = [...document.getElementById('add_content').children[0].children];
+        let titulos = formulario.filter(item => item.children.length == 0);
+        let inputs = formulario.filter(item => item.children.length > 0);
+
+        console.log(titulos)
+        console.log(inputs)
+
+        if(!localStorage.hasOwnProperty('dark_mode')){
+            document.getElementById('app_register').style.color = '#FFF'
+            titulos.map((div , i) => div.style = i != 13 ? "width: 70%;align-self: center; padding: 16px 0; text-align: justify;background-color:#FFF;color: #000000;" : "width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 1px solid #757575")
+            inputs.map((div , i) => div.style.color = i != 21 ? '#909090' : '#FFF')
+            inputs.map((pai , i) => pai.children.map(filho => filho.style = filho.localName != 'input' ? 'color: #' : 'color: #000000' ))
+        }
+        else{
+            document.getElementById('app_register').style.color = '#000000'
+            titulos.map((div , i) => div.style = i != 13 ? "width: 70%; align-self: center; padding: 16px 0; text-align: justify;background-color:#202124;color: #FF9800;" : "width: 180px; height: 130px; align-self: center; margin-bottom: 16px; border: 1px solid #757575")
+            inputs.map((div , i) => div.style.color = i != 21 ? '#909090' : '#000000')
+        }
+    }
+
     // VEHICLE OBJECT
     let obj_vehicle = {
         // VEHICLE INPUTS
@@ -422,24 +463,6 @@
 
     let vehicleData = null;
 
-    const listLoop = () => {
-        let list = document.getElementById('list_content').children[0].children[1].children
-        
-        if(!localStorage.hasOwnProperty('dark_mode')){
-            [...list].map(i =>{
-                i.style = "background-color: #FFF; color: #000000"
-                i.children[0].children[1].style = "background-color: #FFF; color: #000000"
-                i.children[0].children[2].style = "background-color: #FFF; color: #808080"
-            }) 
-        }
-        else{
-            [...list].map(i =>{
-                i.style = "background-color: #202124; color: #FFF"
-                i.children[0].children[1].style = "background-color: #202124; color: #FFF"
-                i.children[0].children[2].style = "background-color: #202124; color: #808080"
-            }) 
-        }
-    }
     // WINDOW EVENT TO CHECK AUTHENTICATION
     window.addEventListener('load', () => {
         // CHECK LOCALSTORAGE dark_mode
@@ -882,9 +905,8 @@
     dark.addEventListener('change', (evento) => {
         // CHECK REMIND ME CHECKBOX
         if (!evento.target.checked) {
+            // TURN BACK TO WHITE
             localStorage.clear();
-
-            listLoop();
             com_menu.style = "background-color: #FF9800; color: #000000";
             // SIDE MENU
             com_menu.style = "background-color: #FF9800; color: #000000";
@@ -912,9 +934,12 @@
             dialog.children[0].style = "background-color: #FFF;"
             dialog.children[0].children[0].style = "color: #303030;"
             dialog.children[0].children[1].children[0].style = "color: #000000;"
+
+            // ADICIONAR VEHICLE
+            document.getElementById('add_content').style = "background-color: #FFF;"
         }
         else {
-            listLoop();
+            // TURN BACK TO BLACK
             // SIDE MENU
             com_menu.style = "background-color: #121212; color: #FF9800";
             document.getElementById('stl-drawer').style = "background-color: #121212; color:#FF9800;"
@@ -933,13 +958,17 @@
             document.getElementById('tab_add').style = "background-color: #121212; color:#FF9800";
             document.getElementById('stl-header').children[0].style = "color:#FF9800";
 
-            //CATALOG
+            // CATALOG
             document.getElementById('list_content').style.backgroundColor = "#202124";
             document.getElementById('list_content').children[0].children[0].style = "text-align: center; color: #FF9800; margin-left: 5%";
+            
             // CAIXA DE DIÁLOGO
             dialog.children[0].style = "background-color: #121212;"
             dialog.children[0].children[0].style = "color: #efefef;"
             dialog.children[0].children[1].children[0].style = "color: #909090;"
+
+            // ADICIONAR VEHICLE
+            document.getElementById('add_content').style = "background-color: #202124;"
 
             let obj_darkMode = {
                 active: dark.checked,
@@ -947,6 +976,8 @@
             str_darkMode = JSON.stringify(obj_darkMode);
             localStorage.setItem('dark_mode', str_darkMode);
         }
+        listLoop();
+        addLoop();
     });
 
     // DISPLAYS MAP CONTENT
@@ -959,12 +990,14 @@
     com_tabs[1].addEventListener('click', event => {
         displayContent(event.currentTarget.id);
         btn_float.style.display = 'flex';
+        listLoop();
     });
 
     // DISPLAYS ADD NEW VEHICLE CONTENT
     com_tabs[2].addEventListener('click', event => {
         displayContent(event.currentTarget.id);
         btn_float.style.display = 'none';
+        addLoop();
     });
 
     // TAKE A PICTURE EVENT
